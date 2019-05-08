@@ -36,6 +36,7 @@ const PWADevServer = {
     async configure(config) {
         debug('configure() invoked', config);
         const {
+
             devServer = {},
             customOrigin = {},
             imageService = {},

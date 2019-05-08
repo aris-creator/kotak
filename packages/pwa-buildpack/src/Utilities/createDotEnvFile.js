@@ -73,6 +73,10 @@ module.exports = function printEnvFile(
         }
         contents += endSection;
     }
+    if (error) {
+        log.warn(
+            `The current environment is not yet valid; please edit the .env file and provide any missing variables to build the project.`
+        );
 
     return contents;
 };

@@ -10,6 +10,7 @@ const {
 } = require('@magento/pwa-buildpack');
 
 const projectConfig = loadEnvironment(__dirname);
+const projectEnv = projectConfig.all();
 
 const path = require('path');
 const webpack = require('webpack');

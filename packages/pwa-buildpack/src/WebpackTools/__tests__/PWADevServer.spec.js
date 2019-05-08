@@ -19,7 +19,17 @@ const { PWADevServer } = require('../');
 
 portscanner.findAPortNotInUse.mockResolvedValue(10001);
 
+beforeEach(() => {
+    playgroundMiddleware.mockReset();
+});
+
 const simulate = {
+    customOriginEnabled(enabled) {
+        fakeConfigSection.customOrigin.mockReturnValueOnce({
+            enabled
+        });
+        return simulate;
+    },
     uniqueHostProvided(
         hostname = 'bork.bork.bork',
         port = 8001,
@@ -95,7 +105,10 @@ test('.configure() logs that a custom origin has not yet been created', async ()
 });
 
 test('.configure() creates a project-unique host if customOrigin config set in env', async () => {
-    simulate.uniqueHostProvided().portIsFree();
+    simulate
+        .uniqueHostProvided()
+        .portIsFree()
+        .customOriginEnabled(true);
     const server = await PWADevServer.configure({
         publicPath: 'bork',
         customOrigin: {
@@ -141,7 +154,10 @@ test('.configure() lets devServer.host override customOrigin.host', async () => 
     );
 });
 test('.configure() falls back to an open port if desired port is not available, and warns', async () => {
-    simulate.uniqueHostProvided().portIsInUse();
+    simulate
+        .uniqueHostProvided()
+        .portIsInUse()
+        .customOriginEnabled(true);
     const server = await PWADevServer.configure({
         publicPath: 'bork',
         customOrigin: {
@@ -164,6 +180,10 @@ test('.configure() falls back to an open port if desired port is not available, 
 
 test('.configure() allows customization of provided host', async () => {
     simulate.uniqueHostProvided().portIsFree();
+    fakeConfigSection.customOrigin.mockReturnValueOnce({
+        enabled: true,
+        exactDomain: 'flippy.bird'
+    });
     await PWADevServer.configure({
         publicPath: 'bork',
         customOrigin: {
