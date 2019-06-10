@@ -1,7 +1,7 @@
 ---
 name: Feature Request
 about: Suggest a new feature!
-title: "[feature]: A short, simple sentence describing the feature"
+title: '[feature]: A short, simple sentence describing the feature'
 labels: enhancement
 assignees: ''
 ---
@@ -31,12 +31,13 @@ A clear and concise description of any alternative solutions or features you've 
 Add any other context or screenshots about the feature request here.
 
 **Please let us know what packages this feature is in regards to:**
-- [ ] `create-pwa`
-- [ ] `graphql-cli-validate-magento2-queries`
-- [ ] `pwa-buildpack`
-- [ ] `peregrine`
-- [ ] `pwa-devdocs`
-- [ ] `upward-js`
-- [ ] `upward-spec`
-- [ ] `venia-concept`
-- [ ] `venia-library`
+
+-   [ ] `create-pwa`
+-   [ ] `graphql-cli-validate-magento-pwa-queries`
+-   [ ] `pwa-buildpack`
+-   [ ] `peregrine`
+-   [ ] `pwa-devdocs`
+-   [ ] `upward-js`
+-   [ ] `upward-spec`
+-   [ ] `venia-concept`
+-   [ ] `venia-library`

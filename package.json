@@ -5,7 +5,7 @@
   "workspaces": [
     "packages/babel-preset-peregrine",
     "packages/create-pwa",
-    "packages/graphql-cli-validate-magento2-queries",
+    "packages/graphql-cli-validate-magento-pwa-queries",
     "packages/peregrine",
     "packages/pwa-buildpack",
     "packages/upward-js",

@@ -1,14 +1,13 @@
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest) [![jest](https://jestjs.io/img/jest-badge.svg)](https://github.com/facebook/jest)
 
-
-# graphql-cli-validate-magento2-queries
+# graphql-cli-validate-magento-pwa-queries
 
 Validate your project's GraphQL queries against a schema.
 
 ## Installation
 
 ```
-yarn add graphql-cli graphql-cli-validate-magento2-queries
+yarn add graphql-cli graphql-cli-validate-magento-pwa-queries
 ```
 
 ## Summary
@@ -34,14 +33,17 @@ Given the following `.graphqlconfig`:
 }
 ```
 
-The command 
+The command
+
 ```
 graphql-cli get-schema --project myApp
 ```
+
 will [download the GraphQL schema](https://oss.prisma.io/content/graphql-cli/06-schema-handling)
 from `https://myEndpoint.com/graphql` and store it in `mySchema.json`.
 
-Then the command 
+Then the command
+
 ```
 graphql-cli validate-magento-pwa-queries --project myApp
 ```
@@ -66,9 +68,7 @@ You can also specifiy the following options in your `.graphqlconfig`:
 
 ## Further Reading
 
-* [graphql-config](https://github.com/prisma/graphql-config)
-* [graphql-cli](https://github.com/graphql-cli/graphql-cli)
-* [eslint-plugin-graphql](https://github.com/apollographql/eslint-plugin-graphql)
-* [graphql/no-deprecated-fields rule](https://github.com/apollographql/eslint-plugin-graphql#no-deprecated-fields-validation-rule)
-
-
+-   [graphql-config](https://github.com/prisma/graphql-config)
+-   [graphql-cli](https://github.com/graphql-cli/graphql-cli)
+-   [eslint-plugin-graphql](https://github.com/apollographql/eslint-plugin-graphql)
+-   [graphql/no-deprecated-fields rule](https://github.com/apollographql/eslint-plugin-graphql#no-deprecated-fields-validation-rule)
