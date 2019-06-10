@@ -11,9 +11,11 @@ RUN apk --no-cache --virtual add \
     python \
     make \
     g++ \
-    yarn 
+    yarn
 
 # copy just the dependency files and configs needed for install
+COPY packages/babel-preset-peregrine/package.json ./packages/babel-preset-peregrine/package.json
+COPY packages/graphql-cli-validate-magento-pwa-queries/package.json ./packages/graphql-cli-validate-magento-pwa-queries/package.json
 COPY packages/peregrine/package.json ./packages/peregrine/package.json
 COPY packages/pwa-buildpack/package.json ./packages/pwa-buildpack/package.json
 COPY packages/upward-js/package.json ./packages/upward-js/package.json
@@ -36,7 +38,7 @@ COPY ${ENVFILEPATH} ./packages/venia-concept/.env
 RUN yarn install --frozen-lockfile
 
 # build the app
-RUN yarn run build 
+RUN yarn run build
 
 # MULTI-STAGE BUILD
 FROM node:10.14.1-alpine

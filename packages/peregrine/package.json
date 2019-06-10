@@ -5,7 +5,7 @@
     "access": "public"
   },
   "description": "The core runtime of Magento PWA",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "build": " ",
     "build:ci": " ",
@@ -44,8 +44,8 @@
     "node": "8.10.0 || >=10.7.0",
     "yarn": ">=1.12.0"
   },
-  "module": "src/index.js",
-  "jsnext:main": "src/index.js",
-  "es2015": "src/index.js",
+  "module": "lib/index.js",
+  "jsnext:main": "lib/index.js",
+  "es2015": "lib/index.js",
   "sideEffects": false
 }

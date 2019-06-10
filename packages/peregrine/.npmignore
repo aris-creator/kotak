@@ -1,4 +1,4 @@
 .eslintrc.js
 .storybook
-/{dist,src}/**/__{docs,helpers,mocks,stories,tests}__/**
+/lib/**/__{docs,helpers,mocks,stories,tests}__/**
 /scripts

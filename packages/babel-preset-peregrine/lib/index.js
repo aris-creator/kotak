@@ -68,7 +68,6 @@ const config = (api, opts = {}) => {
             ]
         }
     };
-    console.log('babel env', api.env());
     return envConfigs[api.env() || 'development'];
 };
 
