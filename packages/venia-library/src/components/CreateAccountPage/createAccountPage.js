@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'src/drivers';
+import { withRouter } from '../../drivers';
 import { compose } from 'redux';
-import CreateAccountForm from 'src/components/CreateAccount';
-import classify from 'src/classify';
+import CreateAccountForm from '../../components/CreateAccount';
+import classify from '../../classify';
 import defaultClasses from './createAccountPage.css';
 import { getCreateAccountInitialValues } from './helpers';
 

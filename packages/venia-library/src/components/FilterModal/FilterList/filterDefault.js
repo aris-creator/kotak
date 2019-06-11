@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Icon from 'src/components/Icon';
+import Icon from '../../../components/Icon';
 import Checkmark from 'react-feather/dist/icons/check';
-import classify from 'src/classify';
+import classify from '../../../classify';
 import defaultClasses from './filterDefault.css';
 
 class FilterDefault extends Component {

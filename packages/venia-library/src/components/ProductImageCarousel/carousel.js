@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import memoize from 'memoize-one';
 
-import { resourceUrl } from 'src/drivers';
-import Icon from 'src/components/Icon';
+import { resourceUrl } from '../../drivers';
+import Icon from '../../components/Icon';
 import ChevronLeftIcon from 'react-feather/dist/icons/chevron-left';
 import ChevronRightIcon from 'react-feather/dist/icons/chevron-right';
-import classify from 'src/classify';
+import classify from '../../classify';
 import ThumbnailList from './thumbnailList';
 import defaultClasses from './carousel.css';
-import { transparentPlaceholder } from 'src/shared/images';
+import { transparentPlaceholder } from '../../shared/images';
 
 const ChevronIcons = {
     left: ChevronLeftIcon,

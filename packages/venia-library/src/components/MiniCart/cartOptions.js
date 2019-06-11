@@ -3,13 +3,13 @@ import { array, bool, func, number, shape, string } from 'prop-types';
 import { Form } from 'informed';
 import { Price } from '@magento/peregrine';
 
-import LoadingIndicator from 'src/components/LoadingIndicator';
-import classify from 'src/classify';
+import LoadingIndicator from '../../components/LoadingIndicator';
+import classify from '../../classify';
 import defaultClasses from './cartOptions.css';
-import Button from 'src/components/Button';
-import Quantity from 'src/components/ProductQuantity';
-import appendOptionsToPayload from 'src/util/appendOptionsToPayload';
-import isProductConfigurable from 'src/util/isProductConfigurable';
+import Button from '../../components/Button';
+import Quantity from '../../components/ProductQuantity';
+import appendOptionsToPayload from '../../util/appendOptionsToPayload';
+import isProductConfigurable from '../../util/isProductConfigurable';
 
 // TODO: get real currencyCode for cartItem
 const currencyCode = 'USD';

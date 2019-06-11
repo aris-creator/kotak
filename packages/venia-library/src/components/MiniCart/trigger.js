@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'src/drivers';
+import { connect } from '../../drivers';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
 
-import classify from 'src/classify';
-import { closeDrawer } from 'src/actions/app';
+import classify from '../../classify';
+import { closeDrawer } from '../../actions/app';
 import defaultClasses from './trigger.css';
 
 class Trigger extends Component {

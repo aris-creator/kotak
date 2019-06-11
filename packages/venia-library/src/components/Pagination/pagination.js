@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { func, number, object, shape, string } from 'prop-types';
-import { withRouter } from 'src/drivers';
+import { withRouter } from '../../drivers';
 import { compose } from 'redux';
 
-import classify from 'src/classify';
-import getQueryParameterValue from 'src/util/getQueryParameterValue';
+import classify from '../../classify';
+import getQueryParameterValue from '../../util/getQueryParameterValue';
 import defaultClasses from './pagination.css';
 import NavButton from './navButton';
 import { navButtons } from './constants';

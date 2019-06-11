@@ -1,11 +1,11 @@
-import { closeDrawer } from 'src/actions/app';
-import { getAllCategories } from 'src/actions/catalog';
+import { closeDrawer } from '../../../actions/app';
+import { getAllCategories } from '../../../actions/catalog';
 import {
     completePasswordReset,
     createAccount,
     getUserDetails,
     resetPassword
-} from 'src/actions/user';
+} from '../../../actions/user';
 import Container from '../container';
 import Navigation from '../navigation';
 

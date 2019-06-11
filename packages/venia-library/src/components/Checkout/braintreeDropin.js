@@ -14,7 +14,7 @@ import { bool, func, shape, string } from 'prop-types';
 import { Util } from '@magento/peregrine';
 
 import defaultClasses from './braintreeDropin.css';
-import classify from 'src/classify';
+import classify from '../../classify';
 
 const { BrowserPersistence } = Util;
 const storage = new BrowserPersistence();

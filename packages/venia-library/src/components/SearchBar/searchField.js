@@ -5,9 +5,9 @@ import ClearIcon from 'react-feather/dist/icons/x';
 import SearchIcon from 'react-feather/dist/icons/search';
 import { useSearchParam } from '@magento/peregrine';
 
-import Icon from 'src/components/Icon';
-import TextInput from 'src/components/TextInput';
-import Trigger from 'src/components/Trigger';
+import Icon from '../../components/Icon';
+import TextInput from '../../components/TextInput';
+import Trigger from '../../components/Trigger';
 
 const clearIcon = <Icon src={ClearIcon} size={18} />;
 const searchIcon = <Icon src={SearchIcon} size={18} />;

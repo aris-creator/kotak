@@ -1,29 +1,29 @@
 import React, { Component, Fragment, Suspense } from 'react';
 import { compose } from 'redux';
-import { connect } from 'src/drivers';
+import { connect } from '../../drivers';
 import { bool, func, object, shape, string } from 'prop-types';
 import { Price } from '@magento/peregrine';
-import classify from 'src/classify';
+import classify from '../../classify';
 import {
     getCartDetails,
     updateItemInCart,
     removeItemFromCart,
     openOptionsDrawer,
     closeOptionsDrawer
-} from 'src/actions/cart';
-import { cancelCheckout } from 'src/actions/checkout';
-import Icon from 'src/components/Icon';
+} from '../../actions/cart';
+import { cancelCheckout } from '../../actions/checkout';
+import Icon from '../../components/Icon';
 import CloseIcon from 'react-feather/dist/icons/x';
-import CheckoutButton from 'src/components/Checkout/checkoutButton';
+import CheckoutButton from '../../components/Checkout/checkoutButton';
 import EmptyMiniCart from './emptyMiniCart';
 import Mask from './mask';
 import ProductList from './productList';
 import Trigger from './trigger';
 import defaultClasses from './miniCart.css';
-import { isEmptyCartVisible, isMiniCartMaskOpen } from 'src/selectors/cart';
+import { isEmptyCartVisible, isMiniCartMaskOpen } from '../../selectors/cart';
 import CartOptions from './cartOptions';
 import getProductDetailByName from '../../queries/getProductDetailByName.graphql';
-import { loadingIndicator } from 'src/components/LoadingIndicator';
+import { loadingIndicator } from '../../components/LoadingIndicator';
 import { Query } from 'react-apollo';
 
 const Checkout = React.lazy(() => import('src/components/Checkout'));

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { func } from 'prop-types';
 
-import Button from 'src/components/Button';
+import Button from '../../components/Button';
 
 class ResetButton extends Component {
     static propTypes = {

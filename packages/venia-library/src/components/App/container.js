@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'src/drivers';
+import { connect } from '../../drivers';
 
-import appActions, { closeDrawer } from 'src/actions/app';
+import appActions, { closeDrawer } from '../../actions/app';
 import App from './app';
 
 class AppContainer extends Component {

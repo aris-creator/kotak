@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bool, node, shape, string } from 'prop-types';
 
-import classify from 'src/classify';
+import classify from '../../classify';
 import defaultClasses from './label.css';
 
 class Label extends Component {

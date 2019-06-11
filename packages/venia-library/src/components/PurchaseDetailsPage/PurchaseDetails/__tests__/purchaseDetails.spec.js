@@ -1,7 +1,7 @@
 import React from 'react';
 import TestRenderer from 'react-test-renderer';
 
-import LoadingIndicator from 'src/components/LoadingIndicator';
+import LoadingIndicator from '../../../../components/LoadingIndicator';
 import PurchaseDetails from '../purchaseDetails';
 
 jest.mock('src/components/LoadingIndicator');

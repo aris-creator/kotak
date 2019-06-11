@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { connect } from 'src/drivers';
+import { connect } from '../../drivers';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
 
-import { toggleCart } from 'src/actions/cart';
+import { toggleCart } from '../../actions/cart';
 import CartCounter from './cartCounter';
 
-import Icon from 'src/components/Icon';
+import Icon from '../../components/Icon';
 import ShoppingCartIcon from 'react-feather/dist/icons/shopping-cart';
-import classify from 'src/classify';
+import classify from '../../classify';
 import defaultClasses from './cartTrigger.css';
 
 export class Trigger extends Component {

@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import { number, shape, string } from 'prop-types';
 import { usePagination, useQuery } from '@magento/peregrine';
 
-import { toggleDrawer } from 'src/actions/app';
-import catalogActions from 'src/actions/catalog';
-import { mergeClasses } from 'src/classify';
-import { loadingIndicator } from 'src/components/LoadingIndicator';
-import { connect } from 'src/drivers';
-import categoryQuery from 'src/queries/getCategory.graphql';
-import isObjectEmpty from 'src/util/isObjectEmpty';
-import { getFilterParams } from 'src/util/getFilterParamsFromUrl';
+import { toggleDrawer } from '../../actions/app';
+import catalogActions from '../../actions/catalog';
+import { mergeClasses } from '../../classify';
+import { loadingIndicator } from '../../components/LoadingIndicator';
+import { connect } from '../../drivers';
+import categoryQuery from '../../queries/getCategory.graphql';
+import isObjectEmpty from '../../util/isObjectEmpty';
+import { getFilterParams } from '../../util/getFilterParamsFromUrl';
 import CategoryContent from './categoryContent';
 import defaultClasses from './category.css';
 

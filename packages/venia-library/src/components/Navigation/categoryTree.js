@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { func, number, objectOf, shape, string } from 'prop-types';
 
-import { Query } from 'src/drivers';
-import classify from 'src/classify';
-import { loadingIndicator } from 'src/components/LoadingIndicator';
+import { Query } from '../../drivers';
+import classify from '../../classify';
+import { loadingIndicator } from '../../components/LoadingIndicator';
 import Branch from './categoryBranch';
 import Leaf from './categoryLeaf';
 import CategoryTree from './categoryTree';

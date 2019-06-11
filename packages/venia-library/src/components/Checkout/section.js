@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { bool, node, shape, string } from 'prop-types';
 import EditIcon from 'react-feather/dist/icons/edit-2';
 
-import classify from 'src/classify';
-import Icon from 'src/components/Icon';
+import classify from '../../classify';
+import Icon from '../../components/Icon';
 import defaultClasses from './section.css';
 
 // TODO: move these attributes to CSS.

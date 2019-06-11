@@ -1,5 +1,5 @@
-import { connect } from 'src/drivers';
-import { getUserInformation } from 'src/selectors/user';
+import { connect } from '../../../drivers';
+import { getUserInformation } from '../../../selectors/user';
 import MyAccountMenuTrigger from './myAccountMenuTrigger';
 
 export default connect(state => ({

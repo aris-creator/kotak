@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { string, number, shape } from 'prop-types';
-import { Query } from 'src/drivers';
-import classify from 'src/classify';
-import { loadingIndicator } from 'src/components/LoadingIndicator';
+import { Query } from '../../drivers';
+import classify from '../../classify';
+import { loadingIndicator } from '../../components/LoadingIndicator';
 import defaultClasses from './categoryList.css';
 import CategoryTile from './categoryTile';
 import categoryListQuery from '../../queries/getCategoryList.graphql';

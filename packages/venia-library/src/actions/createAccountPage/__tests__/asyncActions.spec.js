@@ -1,4 +1,4 @@
-import { dispatch, getState } from 'src/store';
+import { dispatch, getState } from '../../../store';
 jest.mock('src/store');
 const thunkArgs = [dispatch, getState];
 

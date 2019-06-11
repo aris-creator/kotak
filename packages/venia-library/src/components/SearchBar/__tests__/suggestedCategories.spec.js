@@ -1,7 +1,7 @@
 import React from 'react';
 import { createTestInstance } from '@magento/peregrine';
 
-import { Link } from 'src/drivers';
+import { Link } from '../../../drivers';
 import SuggestedCategories from '../suggestedCategories';
 
 jest.mock('src/drivers', () => ({

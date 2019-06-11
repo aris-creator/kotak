@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { bool, shape, string } from 'prop-types';
 
-import classify from 'src/classify';
-import Footer from 'src/components/Footer';
-import Header from 'src/components/Header';
+import classify from '../../classify';
+import Footer from '../../components/Footer';
+import Header from '../../components/Header';
 import defaultClasses from './main.css';
 
 class Main extends Component {

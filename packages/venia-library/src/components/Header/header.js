@@ -3,16 +3,16 @@ import { bool, func, shape, string } from 'prop-types';
 import MenuIcon from 'react-feather/dist/icons/menu';
 import SearchIcon from 'react-feather/dist/icons/search';
 
-import Icon from 'src/components/Icon';
-import Logo from 'src/components/Logo';
-import { Link, resourceUrl, Route } from 'src/drivers';
+import Icon from '../../components/Icon';
+import Logo from '../../components/Logo';
+import { Link, resourceUrl, Route } from '../../drivers';
 
 import CartTrigger from './cartTrigger';
 import NavTrigger from './navTrigger';
 import SearchTrigger from './searchTrigger';
-import OnlineIndicator from 'src/components/OnlineIndicator';
+import OnlineIndicator from '../../components/OnlineIndicator';
 
-import { mergeClasses } from 'src/classify';
+import { mergeClasses } from '../../classify';
 import defaultClasses from './header.css';
 
 const SearchBar = React.lazy(() => import('src/components/SearchBar'));

@@ -8,8 +8,8 @@ import Section from './section';
 import ShippingForm from './shippingForm';
 import SubmitButton from './submitButton';
 
-import classify from 'src/classify';
-import Button from 'src/components/Button';
+import classify from '../../classify';
+import Button from '../../components/Button';
 import defaultClasses from './form.css';
 
 class Form extends Component {

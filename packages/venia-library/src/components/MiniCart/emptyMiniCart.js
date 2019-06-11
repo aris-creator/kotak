@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { string, shape } from 'prop-types';
 
-import classify from 'src/classify';
+import classify from '../../classify';
 import Trigger from './trigger';
 import defaultClasses from './emptyMiniCart.css';
 

@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import { shape, string } from 'prop-types';
-import Icon from 'src/components/Icon';
-import classify from 'src/classify';
+import Icon from '../../components/Icon';
+import classify from '../../classify';
 import defaultClasses from './kebab.css';
 
 import MoreVerticalIcon from 'react-feather/dist/icons/more-vertical';

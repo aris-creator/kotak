@@ -4,17 +4,17 @@ import { Form } from 'informed';
 import { Price } from '@magento/peregrine';
 
 import defaultClasses from './productFullDetail.css';
-import { mergeClasses } from 'src/classify';
+import { mergeClasses } from '../../classify';
 
-import Button from 'src/components/Button';
-import { loadingIndicator } from 'src/components/LoadingIndicator';
-import Carousel from 'src/components/ProductImageCarousel';
-import Quantity from 'src/components/ProductQuantity';
-import RichText from 'src/components/RichText';
+import Button from '../../components/Button';
+import { loadingIndicator } from '../../components/LoadingIndicator';
+import Carousel from '../../components/ProductImageCarousel';
+import Quantity from '../../components/ProductQuantity';
+import RichText from '../../components/RichText';
 
-import appendOptionsToPayload from 'src/util/appendOptionsToPayload';
-import findMatchingVariant from 'src/util/findMatchingProductVariant';
-import isProductConfigurable from 'src/util/isProductConfigurable';
+import appendOptionsToPayload from '../../util/appendOptionsToPayload';
+import findMatchingVariant from '../../util/findMatchingProductVariant';
+import isProductConfigurable from '../../util/isProductConfigurable';
 
 const Options = React.lazy(() => import('../ProductOptions'));
 

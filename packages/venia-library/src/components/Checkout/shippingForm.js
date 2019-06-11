@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Form } from 'informed';
 import { array, bool, func, shape, string } from 'prop-types';
 
-import Button from 'src/components/Button';
+import Button from '../../components/Button';
 import Label from './label';
-import Select from 'src/components/Select';
+import Select from '../../components/Select';
 
-import classify from 'src/classify';
+import classify from '../../classify';
 import defaultClasses from './shippingForm.css';
 
 class ShippingForm extends Component {

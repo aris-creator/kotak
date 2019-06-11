@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { any, array, bool, func, shape, string } from 'prop-types';
 
-import classify from 'src/classify';
-import Button from 'src/components/Button';
-import { loadingIndicator } from 'src/components/LoadingIndicator';
+import classify from '../../../classify';
+import Button from '../../../components/Button';
+import { loadingIndicator } from '../../../components/LoadingIndicator';
 import OrderItem from '../OrderItem';
 import OrderItemsList from '../OrderItemsList';
 import DetailsBlock from '../DetailsBlock';

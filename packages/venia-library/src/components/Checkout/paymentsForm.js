@@ -3,20 +3,20 @@ import { Form } from 'informed';
 import { array, bool, func, shape, string } from 'prop-types';
 
 import BraintreeDropin from './braintreeDropin';
-import Button from 'src/components/Button';
-import Checkbox from 'src/components/Checkbox';
-import Field from 'src/components/Field';
-import TextInput from 'src/components/TextInput';
-import classify from 'src/classify';
+import Button from '../../components/Button';
+import Checkbox from '../../components/Checkbox';
+import Field from '../../components/Field';
+import TextInput from '../../components/TextInput';
+import classify from '../../classify';
 
 import defaultClasses from './paymentsForm.css';
-import isObjectEmpty from 'src/util/isObjectEmpty';
+import isObjectEmpty from '../../util/isObjectEmpty';
 import {
     isRequired,
     hasLengthExactly,
     validateRegionCode
-} from 'src/util/formValidators';
-import combine from 'src/util/combineValidators';
+} from '../../util/formValidators';
+import combine from '../../util/combineValidators';
 
 const DEFAULT_FORM_VALUES = {
     addresses_same: true

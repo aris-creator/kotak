@@ -4,7 +4,7 @@ import TestRenderer from 'react-test-renderer';
 import { MemoryRouter } from 'react-router-dom';
 import { MockedProvider } from 'react-apollo/test-utils';
 
-import LoadingIndicator from 'src/components/LoadingIndicator';
+import LoadingIndicator from '../../../components/LoadingIndicator';
 import CategoryTile from '../categoryTile';
 import CategoryList from '../categoryList';
 import getCategoryList from '../../../queries/getCategoryList.graphql';

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bool, func, shape, string } from 'prop-types';
 
-import classify from 'src/classify';
+import classify from '../../classify';
 import CheckoutButton from './checkoutButton';
 import defaultClasses from './cart.css';
 

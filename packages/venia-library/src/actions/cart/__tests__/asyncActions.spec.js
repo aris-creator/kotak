@@ -1,7 +1,7 @@
 import { RestApi } from '@magento/peregrine';
 
-import { dispatch, getState } from 'src/store';
-import checkoutActions from 'src/actions/checkout';
+import { dispatch, getState } from '../../../store';
+import checkoutActions from '../../../actions/checkout';
 import {
     mockGetItem,
     mockSetItem,

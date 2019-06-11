@@ -9,7 +9,7 @@ import {
     submitOrder,
     submitPaymentMethodAndBillingAddress,
     submitShippingMethod
-} from 'src/actions/checkout';
+} from '../../../actions/checkout';
 import ConnectedCheckoutWrapper from '../index';
 import { CheckoutWrapper } from '../wrapper';
 import Flow from '../flow';

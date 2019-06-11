@@ -1,10 +1,10 @@
 import { RestApi, Util } from '@magento/peregrine';
 
-import { closeDrawer } from 'src/actions/app';
-import { clearCartId, createCart } from 'src/actions/cart';
-import { getCountries } from 'src/actions/directory';
-import { getAccountInformation } from 'src/selectors/checkoutReceipt';
-import checkoutReceiptActions from 'src/actions/checkoutReceipt';
+import { closeDrawer } from '../../actions/app';
+import { clearCartId, createCart } from '../../actions/cart';
+import { getCountries } from '../../actions/directory';
+import { getAccountInformation } from '../../selectors/checkoutReceipt';
+import checkoutReceiptActions from '../../actions/checkoutReceipt';
 import actions from './actions';
 
 const { request } = RestApi.Magento2;

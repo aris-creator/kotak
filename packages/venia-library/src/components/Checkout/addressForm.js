@@ -3,18 +3,18 @@ import { Form } from 'informed';
 import memoize from 'memoize-one';
 import { bool, func, shape, string, array } from 'prop-types';
 
-import classify from 'src/classify';
-import Button from 'src/components/Button';
+import classify from '../../classify';
+import Button from '../../components/Button';
 import defaultClasses from './addressForm.css';
 import {
     validateEmail,
     isRequired,
     hasLengthExactly,
     validateRegionCode
-} from 'src/util/formValidators';
-import combine from 'src/util/combineValidators';
-import TextInput from 'src/components/TextInput';
-import Field from 'src/components/Field';
+} from '../../util/formValidators';
+import combine from '../../util/combineValidators';
+import TextInput from '../../components/TextInput';
+import Field from '../../components/Field';
 
 const fields = [
     'city',

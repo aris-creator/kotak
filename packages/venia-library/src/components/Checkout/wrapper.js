@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'src/drivers';
+import { connect } from '../../drivers';
 import { array, bool, func, object, oneOf, shape, string } from 'prop-types';
 
 import {
@@ -10,7 +10,7 @@ import {
     submitOrder,
     submitPaymentMethodAndBillingAddress,
     submitShippingMethod
-} from 'src/actions/checkout';
+} from '../../actions/checkout';
 
 import Flow from './flow';
 

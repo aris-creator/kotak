@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'src/drivers';
+import { Link } from '../../drivers';
 
 import './notFound.css';
 

@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { arrayOf, func, number, shape, string } from 'prop-types';
 import { Price } from '@magento/peregrine';
-import { resourceUrl } from 'src/drivers';
+import { resourceUrl } from '../../drivers';
 import Kebab from './kebab';
 import Section from './section';
-import classify from 'src/classify';
+import classify from '../../classify';
 import defaultClasses from './product.css';
 
 const imageWidth = 80;

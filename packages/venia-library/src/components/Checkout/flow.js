@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { array, bool, func, object, oneOf, shape, string } from 'prop-types';
 
-import classify from 'src/classify';
+import classify from '../../classify';
 import Cart from './cart';
 import Form from './form';
 import Receipt from './Receipt';

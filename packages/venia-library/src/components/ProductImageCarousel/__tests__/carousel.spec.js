@@ -1,5 +1,5 @@
 import React from 'react';
-import { transparentPlaceholder } from 'src/shared/images';
+import { transparentPlaceholder } from '../../../shared/images';
 import Carousel from '../carousel';
 import {
     WindowSizeContextProvider,

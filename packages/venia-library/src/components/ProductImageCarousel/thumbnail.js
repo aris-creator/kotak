@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 
-import { resourceUrl } from 'src/drivers';
-import { mergeClasses } from 'src/classify';
+import { resourceUrl } from '../../drivers';
+import { mergeClasses } from '../../classify';
 import defaultClasses from './thumbnail.css';
-import { transparentPlaceholder } from 'src/shared/images';
+import { transparentPlaceholder } from '../../shared/images';
 import { useWindowSize } from '@magento/peregrine';
 
 function Thumbnail(props) {

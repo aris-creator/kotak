@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { func, object, oneOf, shape, string } from 'prop-types';
-import Icon from 'src/components/Icon';
+import Icon from '../../components/Icon';
 import HeartIcon from 'react-feather/dist/icons/heart';
 import Edit2Icon from 'react-feather/dist/icons/edit-2';
 import TrashIcon from 'react-feather/dist/icons/trash';
-import classify from 'src/classify';
+import classify from '../../classify';
 import defaultClasses from './section.css';
 
 const SectionIcons = {

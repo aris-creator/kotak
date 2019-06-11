@@ -1,6 +1,6 @@
 import { RestApi } from '@magento/peregrine';
 
-import { dispatch, getState } from 'src/store';
+import { dispatch, getState } from '../../../store';
 import {
     mockGetItem,
     mockSetItem,
