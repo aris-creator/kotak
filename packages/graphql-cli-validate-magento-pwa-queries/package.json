@@ -1,6 +1,6 @@
 {
   "name": "graphql-cli-validate-magento-pwa-queries",
-  "version": "3.0.0-alpha.4",
+  "version": "2.1.0",
   "description": "graphql-cli plugin for validating all queries in a Magento 2 PWA project",
   "main": "index.js",
   "scripts": {

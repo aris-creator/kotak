@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { setContext } from 'apollo-link-context';
 import { Util, WindowSizeContextProvider } from '@magento/peregrine';
-import { Adapter } from '@magento/venia-library/drivers';
+import { Adapter } from '@magento/venia-library/src/drivers';
 import store from 'src/store';
-import app from '@magento/venia-library/actions/app';
-import App from '@magento/venia-library/components/App';
+import app from '@magento/venia-library/src/actions/app';
+import App from '@magento/venia-library/src/components/App';
 import './index.css';
 import { ToastContextProvider } from '@magento/peregrine';
 

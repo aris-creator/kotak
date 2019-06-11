@@ -39,7 +39,7 @@ services:
       - ./packages/venia-concept/static:/usr/src/app/packages/venia-concept/static:rw
       - ./packages/venia-concept/templates:/usr/src/app/packages/venia-concept/templates:rw
       - ./packages/venia-library/.storybook:/usr/src/app/packages/venia-library/.storybook:rw
-      - ./packages/venia-library/esm:/usr/src/app/packages/venia-library/esm:rw
+      - ./packages/venia-library/src:/usr/src/app/packages/venia-library/src:rw
     links:
       - nginx-proxy
     environment:

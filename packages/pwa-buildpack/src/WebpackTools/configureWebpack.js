@@ -5,7 +5,7 @@ const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 
-const configureEnvironment = require('../Utilities/configureEnvironment');
+const loadEnvironment = require('../Utilities/loadEnvironment');
 const makeMagentoRootComponentsPlugin = require('./plugins/makeMagentoRootComponentsPlugin');
 const ServiceWorkerPlugin = require('./plugins/ServiceWorkerPlugin');
 const UpwardPlugin = require('./plugins/UpwardPlugin');
@@ -38,15 +38,10 @@ async function validateRoot(appRoot) {
     }
 }
 
-async function configureWebpack({
-    context,
-    rootComponentPaths,
-    webpackCliEnv
-}) {
+async function configureWebpack({ context, rootComponentPaths, env }) {
     await validateRoot(context);
 
-    const projectConfig = configureEnvironment(context);
-    const projectEnv = projectConfig.all();
+    const projectConfig = loadEnvironment(context);
 
     const paths = {
         src: path.resolve(context, 'src'),
@@ -72,9 +67,7 @@ async function configureWebpack({
     ];
 
     const mode =
-        (webpackCliEnv && webpackCliEnv.mode) ||
-        process.env.NODE_ENV ||
-        'development';
+        env.mode || (projectConfig.isProd ? 'production' : 'development');
 
     const config = {
         mode,
@@ -93,6 +86,7 @@ async function configureWebpack({
             rules: [
                 {
                     test: /\.graphql$/,
+                    exclude: /node_modules/,
                     use: [
                         {
                             loader: 'graphql-tag/loader'
@@ -100,14 +94,13 @@ async function configureWebpack({
                     ]
                 },
                 {
-                    include: [paths.src, /\/esm\//],
+                    include: [paths.src, /(peregrine|venia)/],
                     test: /\.(mjs|js)$/,
                     sideEffects: false,
                     use: [
                         {
                             loader: 'babel-loader',
                             options: {
-                                cacheDirectory: mode === 'development',
                                 envName: mode,
                                 rootMode: 'upward'
                             }
@@ -116,6 +109,7 @@ async function configureWebpack({
                 },
                 {
                     test: /\.css$/,
+                    exclude: /node_modules/,
                     use: [
                         'style-loader',
                         {
@@ -124,6 +118,20 @@ async function configureWebpack({
                                 localIdentName:
                                     '[name]-[local]-[hash:base64:3]',
                                 modules: true
+                            }
+                        }
+                    ]
+                },
+                {
+                    test: /\.css$/,
+                    include: /node_modules/,
+                    use: [
+                        'style-loader',
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                importLoaders: 1,
+                                modules: false
                             }
                         }
                     ]
@@ -149,10 +157,10 @@ async function configureWebpack({
                 rootComponentsDirs: rootComponentPaths,
                 context
             }),
-            new webpack.EnvironmentPlugin(projectEnv),
+            new webpack.EnvironmentPlugin(projectConfig.env),
             new ServiceWorkerPlugin({
                 mode,
-                paths: paths,
+                paths,
                 injectManifest: true,
                 injectManifestConfig: {
                     include: [/\.js$/],
@@ -198,12 +206,17 @@ async function configureWebpack({
     };
     if (mode === 'development') {
         config.devtool = 'eval-source-map';
+
         config.devServer = await PWADevServer.configure({
             publicPath: config.output.publicPath,
             graphqlPlayground: true,
-            projectConfig
+            ...projectConfig.sections(
+                'devServer',
+                'imageService',
+                'customOrigin'
+            ),
+            ...projectConfig.section('magento')
         });
-
         // A DevServer generates its own unique output path at startup. It needs
         // to assign the main outputPath to this value as well.
 
@@ -213,8 +226,11 @@ async function configureWebpack({
             new webpack.HotModuleReplacementPlugin(),
             new UpwardPlugin(
                 config.devServer,
-                process.env,
-                path.resolve(context, projectEnv.upwardJsUpwardPath)
+                projectConfig.env,
+                path.resolve(
+                    __dirname,
+                    projectConfig.section('upwardJs').upwardPath
+                )
             )
         );
     } else if (mode === 'production') {

@@ -10,20 +10,17 @@
     "@magento/venia-drivers": "src/drivers"
   },
   "files": [
-    "{esm,src}/*",
-    "{esm,src}/**/*",
+    "src/*",
+    "src/**/*",
     "CHANGELOG.md",
     "LICENSE_AFL.txt",
     "LICENSE.txt"
   ],
   "scripts": {
-    "build": "yarn run -s build:esm",
-    "build:ci": "yarn run -s build:esm",
+    "build": " ",
+    "build:ci": " ",
     "build:dev": " ",
-    "build:esm": "BABEL_ENV=development babel src --out-dir esm --root-mode 'upward' --source-maps --copy-files",
-    "clean": "rimraf esm",
-    "prebuild": "yarn run -s clean",
-    "prepublishOnly": "yarn run build",
+    "clean": " ",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "storybook:build": "build-storybook -c .storybook -o storybook-dist"
   },
@@ -86,7 +83,7 @@
     "react-router-dom": "^5.0.0",
     "redux": "^4.0.1"
   },
-  "module": "esm/index.js",
+  "module": "src/index.js",
   "es2015": "src/index.js",
   "esnext": "src/index.js"
 }

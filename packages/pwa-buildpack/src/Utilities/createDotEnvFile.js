@@ -77,6 +77,6 @@ module.exports = function printEnvFile(
         log.warn(
             `The current environment is not yet valid; please edit the .env file and provide any missing variables to build the project.`
         );
-
+    }
     return contents;
 };
