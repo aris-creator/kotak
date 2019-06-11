@@ -2,7 +2,7 @@ import React from 'react';
 import testRenderer from 'react-test-renderer';
 
 import Swatch from '../swatch';
-import Icon from '../../../components/Icon';
+import Icon from '../../Icon';
 
 jest.mock('src/classify');
 jest.mock('src/util/getRandomColor');

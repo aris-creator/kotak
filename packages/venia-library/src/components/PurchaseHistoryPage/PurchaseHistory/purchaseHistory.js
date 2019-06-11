@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { arrayOf, bool, func, number, shape, string } from 'prop-types';
 import { List } from '@magento/peregrine';
-import Filter from '../../../components/PurchaseHistoryPage/Filter';
+import Filter from '../../PurchaseHistoryPage/Filter';
 import classify from '../../../classify';
 import PurchaseHistoryItem from '../PurchaseHistoryItem';
 import defaultClasses from './purchaseHistory.css';

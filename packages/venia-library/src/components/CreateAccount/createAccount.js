@@ -3,10 +3,10 @@ import { func, shape, string } from 'prop-types';
 import { Form } from 'informed';
 
 import classify from '../../classify';
-import Button from '../../components/Button';
-import Checkbox from '../../components/Checkbox';
-import Field from '../../components/Field';
-import TextInput from '../../components/TextInput';
+import Button from '../Button';
+import Checkbox from '../Checkbox';
+import Field from '../Field';
+import TextInput from '../TextInput';
 
 import combine from '../../util/combineValidators';
 import {

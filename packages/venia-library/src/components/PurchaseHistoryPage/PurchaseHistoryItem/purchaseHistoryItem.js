@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { number, oneOfType, shape, string } from 'prop-types';
 import { Link, resourceUrl } from '../../../drivers';
 
-import Icon from '../../../components/Icon';
+import Icon from '../../Icon';
 import ChevronRightIcon from 'react-feather/dist/icons/chevron-right';
 
 import classify from '../../../classify';

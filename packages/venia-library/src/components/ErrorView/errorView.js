@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { loadingIndicator } from '../../components/LoadingIndicator';
+import { loadingIndicator } from '../LoadingIndicator';
 
 const messages = new Map()
     .set('loading', loadingIndicator)

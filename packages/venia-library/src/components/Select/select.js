@@ -4,10 +4,10 @@ import { BasicSelect, Option, asField } from 'informed';
 import { compose } from 'redux';
 
 import classify from '../../classify';
-import { FieldIcons, Message } from '../../components/Field';
+import { FieldIcons, Message } from '../Field';
 import defaultClasses from './select.css';
 
-import Icon from '../../components/Icon';
+import Icon from '../Icon';
 import ChevronDownIcon from 'react-feather/dist/icons/chevron-down';
 
 const arrow = <Icon src={ChevronDownIcon} size={18} />;

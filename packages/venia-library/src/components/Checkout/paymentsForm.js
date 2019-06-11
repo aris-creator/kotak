@@ -3,10 +3,10 @@ import { Form } from 'informed';
 import { array, bool, func, shape, string } from 'prop-types';
 
 import BraintreeDropin from './braintreeDropin';
-import Button from '../../components/Button';
-import Checkbox from '../../components/Checkbox';
-import Field from '../../components/Field';
-import TextInput from '../../components/TextInput';
+import Button from '../Button';
+import Checkbox from '../Checkbox';
+import Field from '../Field';
+import TextInput from '../TextInput';
 import classify from '../../classify';
 
 import defaultClasses from './paymentsForm.css';

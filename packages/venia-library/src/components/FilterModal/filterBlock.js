@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classify from '../../classify';
 import FilterList from './FilterList';
-import Icon from '../../components/Icon';
+import Icon from '../Icon';
 import { filterModes, filterRenderOptions, filterLayouts } from './constants';
 import ArrowDown from 'react-feather/dist/icons/chevron-down';
 import ArrowUp from 'react-feather/dist/icons/chevron-up';

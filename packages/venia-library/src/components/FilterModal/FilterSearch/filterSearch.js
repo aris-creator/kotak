@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import TextInput from '../../../components/TextInput';
-import Trigger from '../../../components/Trigger';
+import TextInput from '../../TextInput';
+import Trigger from '../../Trigger';
 import { Form } from 'informed';
-import Icon from '../../../components/Icon';
+import Icon from '../../Icon';
 import ClearIcon from 'react-feather/dist/icons/x';
 import SearchIcon from 'react-feather/dist/icons/search';
 import classify from '../../../classify';

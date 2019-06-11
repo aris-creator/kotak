@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { string, number, shape } from 'prop-types';
 import { Query } from '../../drivers';
 import classify from '../../classify';
-import { loadingIndicator } from '../../components/LoadingIndicator';
+import { loadingIndicator } from '../LoadingIndicator';
 import defaultClasses from './categoryList.css';
 import CategoryTile from './categoryTile';
 import categoryListQuery from '../../queries/getCategoryList.graphql';

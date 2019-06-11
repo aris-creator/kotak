@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { arrayOf, number, shape, string } from 'prop-types';
 
 import classify from '../../classify';
-import Select from '../../components/Select';
+import Select from '../Select';
 import mockData from './mockData';
 import defaultClasses from './quantity.css';
 

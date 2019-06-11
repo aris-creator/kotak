@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bool, number, object, oneOfType, shape, string } from 'prop-types';
 
 import classify from '../../classify';
-import Icon from '../../components/Icon';
+import Icon from '../Icon';
 import Tooltip from './toolTip';
 import CheckIcon from 'react-feather/dist/icons/check';
 

@@ -4,7 +4,7 @@ import { createTestInstance } from '@magento/peregrine';
 import { shallow } from 'enzyme';
 
 import Receipt from '../receipt';
-import Button from '../../../../components/Button';
+import Button from '../../../Button';
 
 const classes = {
     header: 'header',

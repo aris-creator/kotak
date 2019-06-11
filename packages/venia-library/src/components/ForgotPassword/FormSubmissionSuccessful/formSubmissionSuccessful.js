@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import classify from '../../../classify';
-import Button from '../../../components/Button';
+import Button from '../../Button';
 import defaultClasses from './formSubmissionSuccessful.css';
 
 class FormSubmissionSuccessful extends Component {

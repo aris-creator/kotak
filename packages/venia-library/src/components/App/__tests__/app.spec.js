@@ -1,10 +1,10 @@
 import React from 'react';
 import { createTestInstance, ToastContextProvider } from '@magento/peregrine';
 
-import Main from '../../../components/Main';
-import Mask from '../../../components/Mask';
-import MiniCart from '../../../components/MiniCart';
-import Navigation from '../../../components/Navigation';
+import Main from '../../Main';
+import Mask from '../../Mask';
+import MiniCart from '../../MiniCart';
+import Navigation from '../../Navigation';
 
 jest.mock('src/components/Main', () => 'Main');
 jest.mock('src/components/MiniCart', () => 'MiniCart');

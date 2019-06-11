@@ -4,7 +4,7 @@ import { bool, shape, string } from 'prop-types';
 import CloudOffIcon from 'react-feather/dist/icons/cloud-off';
 import { mergeClasses } from '../../classify';
 
-import Icon from '../../components/Icon';
+import Icon from '../Icon';
 import defaultClasses from './onlineIndicator.css';
 
 /**

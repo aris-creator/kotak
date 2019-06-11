@@ -3,19 +3,19 @@ import { bool, func, shape, string } from 'prop-types';
 import MenuIcon from 'react-feather/dist/icons/menu';
 import SearchIcon from 'react-feather/dist/icons/search';
 
-import Icon from '../../components/Icon';
-import Logo from '../../components/Logo';
+import Icon from '../Icon';
+import Logo from '../Logo';
 import { Link, resourceUrl, Route } from '../../drivers';
 
 import CartTrigger from './cartTrigger';
 import NavTrigger from './navTrigger';
 import SearchTrigger from './searchTrigger';
-import OnlineIndicator from '../../components/OnlineIndicator';
+import OnlineIndicator from '../OnlineIndicator';
 
 import { mergeClasses } from '../../classify';
 import defaultClasses from './header.css';
 
-const SearchBar = React.lazy(() => import('src/components/SearchBar'));
+const SearchBar = React.lazy(() => import('../SearchBar'));
 
 const Header = props => {
     const { hasBeenOffline, isOnline, searchOpen, toggleSearch } = props;

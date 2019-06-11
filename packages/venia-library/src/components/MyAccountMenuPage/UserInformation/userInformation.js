@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classify from '../../../classify';
-import Icon from '../../../components/Icon';
+import Icon from '../../Icon';
 import UserIcon from 'react-feather/dist/icons/user';
 import defaultClasses from './userInformation.css';
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bool, func } from 'prop-types';
 
-import Button from '../../components/Button';
+import Button from '../Button';
 
 const isDisabled = (busy, valid) => busy || !valid;
 

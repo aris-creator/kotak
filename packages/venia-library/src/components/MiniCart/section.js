@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { func, object, oneOf, shape, string } from 'prop-types';
-import Icon from '../../components/Icon';
+import Icon from '../Icon';
 import HeartIcon from 'react-feather/dist/icons/heart';
 import Edit2Icon from 'react-feather/dist/icons/edit-2';
 import TrashIcon from 'react-feather/dist/icons/trash';

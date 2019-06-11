@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { bool, func, object, shape, string } from 'prop-types';
 import { Form } from 'informed';
 
-import Button from '../../components/Button';
-import Field from '../../components/Field';
-import LoadingIndicator from '../../components/LoadingIndicator';
-import TextInput from '../../components/TextInput';
+import Button from '../Button';
+import Field from '../Field';
+import LoadingIndicator from '../LoadingIndicator';
+import TextInput from '../TextInput';
 
 import { isRequired } from '../../util/formValidators';
 

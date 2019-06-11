@@ -4,7 +4,7 @@ import { BasicRadioGroup, asField } from 'informed';
 import { compose } from 'redux';
 
 import classify from '../../classify';
-import { Message } from '../../components/Field';
+import { Message } from '../Field';
 import Radio from './radio';
 import defaultClasses from './radioGroup.css';
 

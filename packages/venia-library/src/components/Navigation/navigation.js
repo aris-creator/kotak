@@ -2,10 +2,10 @@ import React, { PureComponent } from 'react';
 import { bool, func, object, shape, string } from 'prop-types';
 
 import classify from '../../classify';
-import Button from '../../components/Button';
-import CreateAccount from '../../components/CreateAccount';
-import SignIn from '../../components/SignIn';
-import ForgotPassword from '../../components/ForgotPassword';
+import Button from '../Button';
+import CreateAccount from '../CreateAccount';
+import SignIn from '../SignIn';
+import ForgotPassword from '../ForgotPassword';
 import CategoryTree from './categoryTree';
 import NavHeader from './navHeader';
 import defaultClasses from './navigation.css';

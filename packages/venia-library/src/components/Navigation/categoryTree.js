@@ -3,7 +3,7 @@ import { func, number, objectOf, shape, string } from 'prop-types';
 
 import { Query } from '../../drivers';
 import classify from '../../classify';
-import { loadingIndicator } from '../../components/LoadingIndicator';
+import { loadingIndicator } from '../LoadingIndicator';
 import Branch from './categoryBranch';
 import Leaf from './categoryLeaf';
 import CategoryTree from './categoryTree';

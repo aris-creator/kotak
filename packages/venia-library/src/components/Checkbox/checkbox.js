@@ -4,8 +4,8 @@ import { BasicCheckbox, asField } from 'informed';
 import { compose } from 'redux';
 
 import classify from '../../classify';
-import { Message } from '../../components/Field';
-import Icon from '../../components/Icon';
+import { Message } from '../Field';
+import Icon from '../Icon';
 import CheckIcon from 'react-feather/dist/icons/check';
 import defaultClasses from './checkbox.css';
 

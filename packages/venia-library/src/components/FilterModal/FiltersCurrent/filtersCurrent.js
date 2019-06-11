@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
-import Icon from '../../../components/Icon';
+import Icon from '../../Icon';
 import Remove from 'react-feather/dist/icons/x';
 import classify from '../../../classify';
 import { withRouter } from 'react-router-dom';

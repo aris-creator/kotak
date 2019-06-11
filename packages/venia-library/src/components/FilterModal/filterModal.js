@@ -5,10 +5,10 @@ import { List } from '@magento/peregrine';
 import { FiltersCurrent } from './FiltersCurrent';
 import classify from '../../classify';
 import CloseIcon from 'react-feather/dist/icons/x';
-import Icon from '../../components/Icon';
+import Icon from '../Icon';
 import FilterBlock from './filterBlock';
 import defaultClasses from './filterModal.css';
-import { Modal } from '../../components/Modal';
+import { Modal } from '../Modal';
 
 class FilterModal extends Component {
     static propTypes = {

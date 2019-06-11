@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { shape, string } from 'prop-types';
 
-import Icon from '../../../components/Icon';
+import Icon from '../../Icon';
 import FilterIcon from 'react-feather/dist/icons/filter';
 import classify from '../../../classify';
 import defaultClasses from './filter.css';

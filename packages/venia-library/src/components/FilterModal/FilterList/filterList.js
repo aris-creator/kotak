@@ -7,8 +7,8 @@ import { withRouter } from 'react-router-dom';
 import defaultClasses from './filterList.css';
 import { List } from '@magento/peregrine';
 import FilterDefault from './filterDefault';
-import Swatch from '../../../components/ProductOptions/swatch';
-import { WithFilterSearch } from '../../../components/FilterModal/FilterSearch';
+import Swatch from '../../ProductOptions/swatch';
+import { WithFilterSearch } from '../../FilterModal/FilterSearch';
 
 class FilterList extends Component {
     static propTypes = {

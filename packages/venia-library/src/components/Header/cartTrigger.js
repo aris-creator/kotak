@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { toggleCart } from '../../actions/cart';
 import CartCounter from './cartCounter';
 
-import Icon from '../../components/Icon';
+import Icon from '../Icon';
 import ShoppingCartIcon from 'react-feather/dist/icons/shopping-cart';
 import classify from '../../classify';
 import defaultClasses from './cartTrigger.css';

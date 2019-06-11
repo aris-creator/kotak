@@ -9,7 +9,7 @@ import ShippingForm from './shippingForm';
 import SubmitButton from './submitButton';
 
 import classify from '../../classify';
-import Button from '../../components/Button';
+import Button from '../Button';
 import defaultClasses from './form.css';
 
 class Form extends Component {

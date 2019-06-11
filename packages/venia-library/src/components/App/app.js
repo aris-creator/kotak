@@ -1,14 +1,14 @@
 import React, { Fragment, useCallback, useEffect, useMemo } from 'react';
 import { array, bool, func, shape, string } from 'prop-types';
 
-import Main from '../../components/Main';
-import Mask from '../../components/Mask';
-import MiniCart from '../../components/MiniCart';
-import Navigation from '../../components/Navigation';
+import Main from '../Main';
+import Mask from '../Mask';
+import MiniCart from '../MiniCart';
+import Navigation from '../Navigation';
 import renderRoutes from './renderRoutes';
 import errorRecord from '../../util/createErrorRecord';
-import ToastContainer from '../../components/ToastContainer';
-import Icon from '../../components/Icon';
+import ToastContainer from '../ToastContainer';
+import Icon from '../Icon';
 
 import { getToastId, useToasts } from '@magento/peregrine';
 

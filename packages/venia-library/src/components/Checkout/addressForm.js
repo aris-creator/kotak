@@ -4,7 +4,7 @@ import memoize from 'memoize-one';
 import { bool, func, shape, string, array } from 'prop-types';
 
 import classify from '../../classify';
-import Button from '../../components/Button';
+import Button from '../Button';
 import defaultClasses from './addressForm.css';
 import {
     validateEmail,
@@ -13,8 +13,8 @@ import {
     validateRegionCode
 } from '../../util/formValidators';
 import combine from '../../util/combineValidators';
-import TextInput from '../../components/TextInput';
-import Field from '../../components/Field';
+import TextInput from '../TextInput';
+import Field from '../Field';
 
 const fields = [
     'city',

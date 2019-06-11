@@ -6,8 +6,8 @@ import ShoppingCartIcon from 'react-feather/dist/icons/shopping-cart';
 import Share2Icon from 'react-feather/dist/icons/share-2';
 
 import classify from '../../../classify';
-import ButtonGroup from '../../../components/ButtonGroup';
-import Icon from '../../../components/Icon';
+import ButtonGroup from '../../ButtonGroup';
+import Icon from '../../Icon';
 import defaultClasses from './orderItem.css';
 
 const noop = () => {};

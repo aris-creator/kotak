@@ -4,7 +4,7 @@ import { BasicTextArea, asField } from 'informed';
 import { compose } from 'redux';
 
 import classify from '../../classify';
-import { Message } from '../../components/Field';
+import { Message } from '../Field';
 import defaultClasses from './textArea.css';
 
 export class TextArea extends Component {

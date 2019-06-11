@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route } from '../../drivers';
 import { Page } from '@magento/peregrine';
-import ErrorView from '../../components/ErrorView/index';
-import CreateAccountPage from '../../components/CreateAccountPage/index';
+import ErrorView from '../ErrorView/index';
+import CreateAccountPage from '../CreateAccountPage/index';
 import Search from '../../RootComponents/Search';
 
 const renderRoutingError = props => <ErrorView {...props} />;

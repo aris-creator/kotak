@@ -6,11 +6,11 @@ import { Price } from '@magento/peregrine';
 import defaultClasses from './productFullDetail.css';
 import { mergeClasses } from '../../classify';
 
-import Button from '../../components/Button';
-import { loadingIndicator } from '../../components/LoadingIndicator';
-import Carousel from '../../components/ProductImageCarousel';
-import Quantity from '../../components/ProductQuantity';
-import RichText from '../../components/RichText';
+import Button from '../Button';
+import { loadingIndicator } from '../LoadingIndicator';
+import Carousel from '../ProductImageCarousel';
+import Quantity from '../ProductQuantity';
+import RichText from '../RichText';
 
 import appendOptionsToPayload from '../../util/appendOptionsToPayload';
 import findMatchingVariant from '../../util/findMatchingProductVariant';

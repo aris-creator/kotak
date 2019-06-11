@@ -3,7 +3,7 @@ import { Form } from 'informed';
 import { act } from 'react-test-renderer';
 import { createTestInstance } from '@magento/peregrine';
 
-import Trigger from '../../../components/Trigger';
+import Trigger from '../../Trigger';
 import SearchField from '../searchField';
 
 jest.mock('src/classify');

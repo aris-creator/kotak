@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Form } from 'informed';
 import { array, bool, func, shape, string } from 'prop-types';
 
-import Button from '../../components/Button';
+import Button from '../Button';
 import Label from './label';
-import Select from '../../components/Select';
+import Select from '../Select';
 
 import classify from '../../classify';
 import defaultClasses from './shippingForm.css';

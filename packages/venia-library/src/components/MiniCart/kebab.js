@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 import { shape, string } from 'prop-types';
-import Icon from '../../components/Icon';
+import Icon from '../Icon';
 import classify from '../../classify';
 import defaultClasses from './kebab.css';
 

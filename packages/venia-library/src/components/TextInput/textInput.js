@@ -4,7 +4,7 @@ import { BasicText, asField } from 'informed';
 import { compose } from 'redux';
 
 import classify from '../../classify';
-import { FieldIcons, Message } from '../../components/Field';
+import { FieldIcons, Message } from '../Field';
 import defaultClasses from './textInput.css';
 
 export class TextInput extends Component {

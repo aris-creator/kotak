@@ -12,9 +12,9 @@ import {
     closeOptionsDrawer
 } from '../../actions/cart';
 import { cancelCheckout } from '../../actions/checkout';
-import Icon from '../../components/Icon';
+import Icon from '../Icon';
 import CloseIcon from 'react-feather/dist/icons/x';
-import CheckoutButton from '../../components/Checkout/checkoutButton';
+import CheckoutButton from '../Checkout/checkoutButton';
 import EmptyMiniCart from './emptyMiniCart';
 import Mask from './mask';
 import ProductList from './productList';
@@ -23,10 +23,10 @@ import defaultClasses from './miniCart.css';
 import { isEmptyCartVisible, isMiniCartMaskOpen } from '../../selectors/cart';
 import CartOptions from './cartOptions';
 import getProductDetailByName from '../../queries/getProductDetailByName.graphql';
-import { loadingIndicator } from '../../components/LoadingIndicator';
+import { loadingIndicator } from '../LoadingIndicator';
 import { Query } from 'react-apollo';
 
-const Checkout = React.lazy(() => import('src/components/Checkout'));
+const Checkout = React.lazy(() => import('../Checkout'));
 
 class MiniCart extends Component {
     static propTypes = {

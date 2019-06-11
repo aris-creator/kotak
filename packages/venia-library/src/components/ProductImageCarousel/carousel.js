@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import memoize from 'memoize-one';
 
 import { resourceUrl } from '../../drivers';
-import Icon from '../../components/Icon';
+import Icon from '../Icon';
 import ChevronLeftIcon from 'react-feather/dist/icons/chevron-left';
 import ChevronRightIcon from 'react-feather/dist/icons/chevron-right';
 import classify from '../../classify';

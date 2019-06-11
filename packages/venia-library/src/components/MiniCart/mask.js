@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bool, func, shape, string } from 'prop-types';
 
-import Mask from '../../components/Mask';
+import Mask from '../Mask';
 
 import classify from '../../classify';
 import defaultClasses from './mask.css';
