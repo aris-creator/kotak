@@ -6,8 +6,8 @@ const tar = require('tar');
 const camelspace = require('camelspace');
 const fse = require('fs-extra');
 const prettyLogger = require('../util/pretty-logger');
+const chalk = require('chalk');
 const createProject = require('../Utilities/createProject');
-const { handler: initCustomOrigin } = require('./init-custom-origin');
 const { handler: createEnvFile } = require('./create-env-file');
 const execa = require('execa');
 
@@ -97,39 +97,34 @@ async function findTemplateDir(templateName) {
 
 module.exports.sampleBackends = require('../../sampleBackends.json');
 
-module.exports.command = 'init-project <template> <directory>';
+module.exports.command = 'create-project <directory>';
 
 module.exports.describe =
-    'Create a PWA project in <directory> based on <template>.';
+    'Create a PWA project in <directory> based on template.';
 
 module.exports.builder = yargs =>
     yargs
         .version()
         .showHelpOnFail(false)
-        .positional('template', {
-            describe:
-                'Name of a "template" to clone and customize. Currently the "venia-starter" template is supported: `buildpack init-project venia-starter <directory>',
-            choices: ['venia-starter']
-        })
         .positional('directory', {
             describe:
                 'Name or path to a directory to create and fill with the project files. This directory will be the project root.',
             normalize: true
         })
-        .group(['backendUrl', 'customOrigin'], 'Project configuration:')
+        .group(['template', 'backendUrl'], 'Project configuration:')
         .options({
+            template: {
+                describe:
+                    'Name of a "template" to clone and customize. Currently only the "venia-starter" template is supported: `buildpack create-project --template venia-starter`',
+                choices: ['venia-starter']
+            },
             backendUrl: {
                 alias: 'b',
                 describe:
                     'URL of the Magento 2.3 instance to use as a backend. Will be added to `.env` file.'
-            },
-            customOrigin: {
-                boolean: true,
-                describe:
-                    'Create a custom secure host and certificate for this project. Required for full PWA functionality. Requires administrator privileges.',
-                default: true
             }
         })
+        // .demandOption('template')
         .group(['name', 'author'], 'Metadata:')
         .options({
             name: {
@@ -168,7 +163,6 @@ module.exports.handler = async function buildpackCli(argv) {
     await fse.ensureDir(directory);
     prettyLogger.info(`Creating a new PWA project '${name}' in ${directory}`);
     await createProject(params);
-    prettyLogger.success(`Created new PWA project ${directory}`);
 
     if (params.backendUrl) {
         const magentoNS = camelspace('magento');
@@ -190,12 +184,6 @@ module.exports.handler = async function buildpackCli(argv) {
     }
 
     createEnvFile({ directory });
-    if (params.customOrigin) {
-        await initCustomOrigin({ directory });
-        prettyLogger.success(
-            `Created custom secure domain for '${name}' project`
-        );
-    }
     if (params.install) {
         await execa.shell(`${params.npmClient} install`, {
             cwd: directory,
@@ -203,4 +191,16 @@ module.exports.handler = async function buildpackCli(argv) {
         });
         prettyLogger.success(`Installed dependencies for '${name}' project`);
     }
+    prettyLogger.success(`Created new PWA project ${directory}`);
+    const buildpackPrefix =
+        params.npmClient === 'yarn' ? 'yarn buildpack' : 'npm run buildpack --';
+    let createCustomOriginCmd = buildpackPrefix + ' create-custom-origin ./';
+    if (process.cwd() !== resolve(directory)) {
+        createCustomOriginCmd = `cd ${directory} && ${createCustomOriginCmd}`;
+    }
+    prettyLogger.warn(
+        `For the best PWA development experience, consider creating a custom domain for this project by running: \n\t${chalk.whiteBright(
+            createCustomOriginCmd
+        )}`
+    );
 };

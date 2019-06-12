@@ -19,14 +19,17 @@
   "author": "Adobe, Inc",
   "license": "MIT",
   "dependencies": {
-    "eslint": "~5.15.1",
-    "eslint-plugin-graphql": "~3.0.3"
-  },
-  "devDependencies": {
     "babel-eslint": "~10.0.1",
     "chalk": "~2.4.2",
-    "jest": "~24.5.0",
-    "rimraf": "~2.6.3",
+    "eslint": "~5.15.1",
+    "eslint-plugin-graphql": "~3.0.3",
     "semver": "~5.6.0"
+  },
+  "devDependencies": {
+    "jest": "~24.5.0",
+    "rimraf": "~2.6.3"
+  },
+  "peerDependencies": {
+    "graphql-cli": "^3"
   }
 }

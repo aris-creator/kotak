@@ -10,7 +10,7 @@ const isValidNpmName = require('is-valid-npm-name');
 const pkg = require('./package.json');
 const {
     sampleBackends
-} = require('@magento/pwa-buildpack/dist/cli/init-project');
+} = require('@magento/pwa-buildpack/dist/cli/create-project');
 
 module.exports = async () => {
     console.log(chalk.greenBright(`${pkg.name} v${pkg.version}`));
@@ -87,14 +87,8 @@ module.exports = async () => {
             when: ({ backendUrl }) => !backendUrl
         },
         {
-            name: 'customOrigin',
-            message:
-                'Create a custom secure host and certificate for this project (requires administrator privileges)',
-            type: 'confirm',
-            default: true
-        },
-        {
             name: 'npmClient',
+            type: 'list',
             message: 'NPM package management client to use',
             choices: ['npm', 'yarn'],
             default: isYarn ? 'yarn' : 'npm'
@@ -116,13 +110,10 @@ module.exports = async () => {
     answers.backendUrl = answers.backendUrl || answers.customBackendUrl;
     const args = questions.reduce(
         (args, q) => {
-            if (q.name === 'customBackendUrl') {
+            if (q.name === 'customBackendUrl' || q.name === 'directory') {
                 return args;
             }
             const answer = answers[q.name];
-            if (q.name === 'directory') {
-                return [...args, answer];
-            }
             const option = changeCase.paramCase(q.name);
             if (q.type === 'confirm') {
                 if (answer !== q.default) {
@@ -132,12 +123,15 @@ module.exports = async () => {
             }
             return [...args, `--${option}`, `"${answer}"`];
         },
-        ['init-project', 'venia-starter']
+        ['create-project', answers.directory, '--template', '"venia-starter"']
     );
 
     const argsString = args.join(' ');
 
-    console.log('Running' + chalk.white(`buildpack ${argsString}`));
+    console.log(
+        '\nRunning command: \n\n' +
+            chalk.whiteBright(`buildpack ${argsString}\n\n`)
+    );
 
     const buildpackBinLoc = resolve(
         require.resolve('@magento/pwa-buildpack'),

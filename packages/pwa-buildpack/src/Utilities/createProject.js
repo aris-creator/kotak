@@ -21,7 +21,7 @@ function createProject(options) {
     const { template, directory } = options;
 
     const instructions = getBuildpackInstructions(template);
-    const { visitor } = instructions.create(fse);
+    const { after, visitor } = instructions.create(fse);
 
     const copyGlobs = Object.keys(visitor);
     const visit = ({ stats, path }) => {
@@ -60,7 +60,16 @@ function createProject(options) {
             }
         });
         copyStream.on('error', fail);
-        copyStream.on('end', succeed);
+        copyStream.on('end', async () => {
+            if (after) {
+                try {
+                    await after({ options });
+                } catch (e) {
+                    fail(e);
+                }
+                succeed();
+            }
+        });
     });
 }
 

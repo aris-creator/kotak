@@ -18,6 +18,7 @@ function createProjectFromVenia(fse) {
         'build',
         'build:analyze',
         'build:prod',
+        'buildpack',
         'clean',
         'download-schema',
         'lint',
@@ -31,6 +32,13 @@ function createProjectFromVenia(fse) {
         'watch'
     ];
     return {
+        after({ options }) {
+            fse.writeFileSync(
+                resolve(options.directory, 'babel.config.js'),
+                "module.exports = { presets: ['@magento/peregrine'] };\n",
+                'utf8'
+            );
+        },
         visitor: {
             'package.json': ({
                 path,
@@ -61,6 +69,44 @@ function createProjectFromVenia(fse) {
                 scriptsToCopy.forEach(name => {
                     pkg.scripts[name] = toPackageScript(name);
                 });
+
+                if (process.env.DEBUG_PROJECT_CREATION) {
+                    console.warn(
+                        'process.env.DEBUG_PROJECT_CREATION is true, so we will assume we are inside the pwa-studio repo and replace those package dependency declarations with local file paths.'
+                    );
+                    const workspaceDir = resolve(__dirname, '../../');
+                    fse.readdirSync(workspaceDir).forEach(packageDir => {
+                        const packagePath = resolve(workspaceDir, packageDir);
+                        if (!fse.statSync(packagePath).isDirectory()) {
+                            return;
+                        }
+                        let name;
+                        try {
+                            name = fse.readJsonSync(
+                                resolve(packagePath, 'package.json')
+                            ).name;
+                        } catch (e) {}
+                        if (!name) {
+                            return;
+                        }
+                        [
+                            'dependencies',
+                            'devDependencies',
+                            'optionalDependencies'
+                        ].forEach(depType => {
+                            if (pkg[depType][name]) {
+                                const localDep = `file://${resolve(
+                                    packagePath
+                                )}`;
+                                pkg[depType][name] = localDep;
+                                if (!pkg.resolutions) {
+                                    pkg.resolutions = {};
+                                }
+                                pkg.resolutions[name] = localDep;
+                            }
+                        });
+                    });
+                }
 
                 fse.writeJsonSync(targetPath, pkg, {
                     spaces: 2

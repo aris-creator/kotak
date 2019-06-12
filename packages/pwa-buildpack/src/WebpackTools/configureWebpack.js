@@ -38,8 +38,18 @@ async function validateRoot(appRoot) {
     }
 }
 
+async function checkForBabelConfig(appRoot) {
+    try {
+        await stat(path.resolve(appRoot, 'babel.config.js'));
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
 async function configureWebpack({ context, rootComponentPaths, env }) {
     await validateRoot(context);
+    const babelConfigPresent = await checkForBabelConfig(context);
 
     const projectConfig = loadEnvironment(context);
 
@@ -86,7 +96,7 @@ async function configureWebpack({ context, rootComponentPaths, env }) {
             rules: [
                 {
                     test: /\.graphql$/,
-                    exclude: /node_modules/,
+                    exclude: () => false,
                     use: [
                         {
                             loader: 'graphql-tag/loader'
@@ -94,15 +104,15 @@ async function configureWebpack({ context, rootComponentPaths, env }) {
                     ]
                 },
                 {
-                    include: [paths.src, /(peregrine|venia)/],
                     test: /\.(mjs|js)$/,
+                    include: [paths.src, /(peregrine|venia)/],
                     sideEffects: false,
                     use: [
                         {
                             loader: 'babel-loader',
                             options: {
                                 envName: mode,
-                                rootMode: 'upward'
+                                rootMode: babelConfigPresent ? 'root' : 'upward'
                             }
                         }
                     ]
@@ -228,7 +238,7 @@ async function configureWebpack({ context, rootComponentPaths, env }) {
                 config.devServer,
                 projectConfig.env,
                 path.resolve(
-                    __dirname,
+                    context,
                     projectConfig.section('upwardJs').upwardPath
                 )
             )
