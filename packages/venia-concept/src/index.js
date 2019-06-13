@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { setContext } from 'apollo-link-context';
-import { Util, WindowSizeContextProvider } from '@magento/peregrine';
+import {
+    ToastContextProvider,
+    Util,
+    WindowSizeContextProvider
+} from '@magento/peregrine';
 import { Adapter } from '@magento/venia-library/src/drivers';
 import store from 'src/store';
 import app from '@magento/venia-library/src/actions/app';
 import App from '@magento/venia-library/src/components/App';
 import './index.css';
-import { ToastContextProvider } from '@magento/peregrine';
 
 const { BrowserPersistence } = Util;
 const apiBase = new URL('/graphql', location.origin).toString();

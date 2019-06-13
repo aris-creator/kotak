@@ -90,7 +90,7 @@ const jestConfig = {
         configureProject('upward-js', 'Upward JS', () => ({
             testEnvironment: 'node'
         })),
-        configureProject('venia-library', 'Venia Concept', inPackage => ({
+        configureProject('venia-library', 'Venia Library', inPackage => ({
             // Expose jsdom to tests.
             browser: true,
             moduleNameMapper: {

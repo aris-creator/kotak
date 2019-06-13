@@ -48,18 +48,24 @@ function createProjectFromVenia(fse) {
                 const pkgTpt = fse.readJsonSync(path);
                 const pkg = {
                     name,
+                    private: true,
                     version: '0.0.1',
                     description:
                         'A new project based on @magento/venia-concept',
                     author,
+                    license: 'UNLICENSED',
                     scripts: {}
                 };
                 toCopyFromPackageJson.forEach(prop => {
                     pkg[prop] = pkgTpt[prop];
                 });
 
+                const npmCli = process.env.DEBUG_PROJECT_CREATION
+                    ? 'yarn'
+                    : npmClient;
+
                 const toPackageScript =
-                    npmClient === 'yarn'
+                    npmCli === 'yarn'
                         ? name => pkgTpt.scripts[name]
                         : name =>
                               pkgTpt.scripts[name].replace(
@@ -89,14 +95,21 @@ function createProjectFromVenia(fse) {
                         if (!name) {
                             return;
                         }
+                        const [{ filename }] = JSON.parse(
+                            require('child_process').execSync(
+                                'npm pack --json',
+                                { cwd: packagePath }
+                            )
+                        );
                         [
                             'dependencies',
                             'devDependencies',
                             'optionalDependencies'
                         ].forEach(depType => {
-                            if (pkg[depType][name]) {
+                            if (pkg[depType] && pkg[depType][name]) {
                                 const localDep = `file://${resolve(
-                                    packagePath
+                                    packagePath,
+                                    filename
                                 )}`;
                                 pkg[depType][name] = localDep;
                                 if (!pkg.resolutions) {
@@ -117,11 +130,17 @@ function createProjectFromVenia(fse) {
                 targetPath,
                 options: { npmClient }
             }) => {
-                if (npmClient === 'npm') {
+                const npmCli = process.env.DEBUG_PROJECT_CREATION
+                    ? 'yarn'
+                    : npmClient;
+                if (npmCli === 'npm') {
                     fse.copyFileSync(path, targetPath);
                 }
             },
             'yarn.lock': ({ path, targetPath, options: { npmClient } }) => {
+                const npmCli = process.env.DEBUG_PROJECT_CREATION
+                    ? 'yarn'
+                    : npmClient;
                 if (npmClient === 'yarn') {
                     fse.copyFileSync(path, targetPath);
                 }

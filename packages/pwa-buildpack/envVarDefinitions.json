@@ -150,6 +150,17 @@
                     "default": "sandbox_8yrzsvtm_s2bg8fs563crhqzk"
                 }
             ]
+        },
+        {
+            "name": "Developer settings",
+            "variables": [
+                {
+                    "name": "DEVELOPER_DEBUG_BUNDLES",
+                    "type": "bool",
+                    "desc": "Build developer-mode bundles without adding hot reloading or launching the dev server. Disables minification and enables all Webpack debug settings for maximum code readability.",
+                    "default": false
+                }
+            ]
         }
     ],
     "changes": [

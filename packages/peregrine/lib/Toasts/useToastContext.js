@@ -59,7 +59,8 @@ const reducer = (prevState = initialState, action = {}) => {
     }
 };
 
-const ToastContext = createContext();
+const ToastContext =
+    window.__ToastContext || (window.__ToastContext = createContext());
 
 /**
  * A context provider that provides the toast state object and the dispatch

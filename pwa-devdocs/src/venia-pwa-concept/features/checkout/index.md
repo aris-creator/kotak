@@ -70,10 +70,10 @@ Authenticated (signed in) customers follow the same steps but may call different
 | [`guest-carts/<cartId>/totals`][] | Get information about cart totals                                     |
 {:style="table-layout:auto"}
 
-| Filename                             | Importance                                                                                                  |
-| ------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| Filename                             | Importance                                                                                             |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------ |
 | [src/actions/cart/asyncActions.js][] | Contains asynchronous functions for cart-related actions such as `addItemToCart()` and `createCart()`. |
-| [src/actions/app/asyncActions.js][]  | Contains the `toggleDrawer()` function                                                                      |
+| [src/actions/app/asyncActions.js][]  | Contains the `toggleDrawer()` function                                                                 |
 
 ### Gathering payment and shipping information
 
@@ -120,14 +120,14 @@ After a form is saved, each of the submit functions dispatches an action that re
 | [`guest-carts/<cartId>/shipping-information`][]      | Updates the shipping method information on the order |
 {:style="table-layout:auto"}
 
-| Filename                                  | Importance                                                                                                                 |
-| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Filename                                  | Importance                                                                                                                |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | [src/actions/checkout/asyncActions.js][]  | Contains asynchronous functions for checkout-related actions such as `beginCheckout()` and the order form submit methods. |
-| [src/reducers/checkout.js][]              | Reducer functions for checkout-related actions.                                                                            |
-| [src/actions/cart/asyncActions.js][]      | Contains the definition for the `getShippingMethods()` function.                                                           |
-| [src/actions/directory/asyncActions.js][] | Contains the definition for the `getCountries()` function.                                                                 |
-| [src/components/Checkout/flow.js][]       | _Flow_ component that determines the content of the shopping cart drawer.                                                  |
-| [src/components/Checkout/form.js][]       | _Form_ component which shows the checkout forms or a summary of the checkout information provided by the shopper           |
+| [src/reducers/checkout.js][]              | Reducer functions for checkout-related actions.                                                                           |
+| [src/actions/cart/asyncActions.js][]      | Contains the definition for the `getShippingMethods()` function.                                                          |
+| [src/actions/directory/asyncActions.js][] | Contains the definition for the `getCountries()` function.                                                                |
+| [src/components/Checkout/flow.js][]       | _Flow_ component that determines the content of the shopping cart drawer.                                                 |
+| [src/components/Checkout/form.js][]       | _Form_ component which shows the checkout forms or a summary of the checkout information provided by the shopper          |
 
 ### Submitting the order
 

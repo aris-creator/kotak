@@ -12,24 +12,24 @@ The PWA Studio project welcomes all codebase and documentation contributions.
 We would like to recognize the following community members for their efforts on improving the PWA Studio project:
 
 | [![mage2pratik-image]][mage2pratik] | [![vdiachenko-image]][vdiachenko] | [![jissereitsma-image]][jissereitsma] | [![rossmc-image]][rossmc] |
-| :---:                               | :---:                             | :---:                                 | :---:                     |
-| [mage2pratik][]                     | [vdiachenko][]                    | [jissereitsma][]                      | [rossmc][]                |
+| :---------------------------------: | :-------------------------------: | :-----------------------------------: | :-----------------------: |
+|           [mage2pratik][]           |          [vdiachenko][]           |           [jissereitsma][]            |        [rossmc][]         |
 
 | [![bobmotor-image]][bobmotor] | [<img src="https://avatars1.githubusercontent.com/u/12770320?s=60&v=4" width="120px"/>][gavin2point0] | [![neeta-wagento-image]][neeta-wagento] | [![mtbottens-image]][mtbottens] |
-| :---:                         | :---:                                 | :---:                                   | :---:                           |
-| [bobmotor][]                  | [gavin2point0][]                      | [neeta-wagento][]                       | [mtbottens][]                   |
+| :---------------------------: | :---------------------------------------------------------------------------------------------------: | :-------------------------------------: | :-----------------------------: |
+|         [bobmotor][]          |                                           [gavin2point0][]                                            |            [neeta-wagento][]            |          [mtbottens][]          |
 
 | [![Jakhotiya-image]][Jakhotiya] | [![JStein92-image]][JStein92] | [![bgkavinga-image]][bgkavinga] | [![philwinkle-image]][philwinkle] |
-| :---:                           | :---:                         | :---:                           | :---:                             |
-| [Jakhotiya][]                   | [JStein92][]                  | [bgkavinga][]                   | [philwinkle][]                    |
+| :-----------------------------: | :---------------------------: | :-----------------------------: | :-------------------------------: |
+|          [Jakhotiya][]          |         [JStein92][]          |          [bgkavinga][]          |          [philwinkle][]           |
 
 | [![bobbyshaw-image]][bobbyshaw] | [![matthewhaworth-image]][matthewhaworth] | [![shakyShane-image]][shakyShane] | [![Igloczek-image]][Igloczek] |
-| :---:                           | :---:                                     | :---:                             | :---:                         |
-| [bobbyshaw][]                   | [matthewhaworth][]                        | [shakyShane][]                    | [Igloczek][]                  |
+| :-----------------------------: | :---------------------------------------: | :-------------------------------: | :---------------------------: |
+|          [bobbyshaw][]          |            [matthewhaworth][]             |          [shakyShane][]           |         [Igloczek][]          |
 
 | [![mhhansen-image]][mhhansen] | [![rowan-m-image]][rowan-m] | [![artKozinets-image]][artKozinets] | [![camdixon-image]][camdixon] |
-| :---:                         | :---:                       | :---:                               | :---:                         |
-| [mhhansen][]                  | [rowan-m][]                 | [artKozinets][]                     | [camdixon][]                  |
+| :---------------------------: | :-------------------------: | :---------------------------------: | :---------------------------: |
+|         [mhhansen][]          |         [rowan-m][]         |           [artKozinets][]           |         [camdixon][]          |
 
 For more information about contributing to this repository, see the [Contribution guide][].
 

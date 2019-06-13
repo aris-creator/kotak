@@ -47,8 +47,25 @@ async function checkForBabelConfig(appRoot) {
     }
 }
 
-async function configureWebpack({ context, rootComponentPaths, env }) {
+function getMode(cliEnv = {}, projectConfig) {
+    if (cliEnv.mode) {
+        return cliEnv.mode;
+    }
+    if (projectConfig.isProd) {
+        return 'production';
+    }
+    return 'development';
+}
+
+async function configureWebpack({
+    context,
+    common = [],
+    usesPeregrine = [],
+    rootComponentPaths,
+    env
+}) {
     await validateRoot(context);
+
     const babelConfigPresent = await checkForBabelConfig(context);
 
     const projectConfig = loadEnvironment(context);
@@ -58,26 +75,19 @@ async function configureWebpack({ context, rootComponentPaths, env }) {
         output: path.resolve(context, 'dist')
     };
 
-    const libs = [
-        'apollo-cache-inmemory',
-        'apollo-cache-persist',
-        'apollo-client',
-        'apollo-link-context',
-        'apollo-link-http',
-        'informed',
-        'react',
-        'react-apollo',
-        'react-dom',
-        'react-feather',
-        'react-redux',
-        'react-router-dom',
-        'redux',
-        'redux-actions',
-        'redux-thunk'
-    ];
+    const peregrineModules = [paths.src, '/peregrine/'].concat(usesPeregrine);
+    const isPeregrineModule = resource => {
+        return peregrineModules.some(name => resource.includes(name));
+    };
 
-    const mode =
-        env.mode || (projectConfig.isProd ? 'production' : 'development');
+    let mode = getMode(env, projectConfig);
+
+    const { debugBundles } = projectConfig.section('developer');
+
+    if (debugBundles) {
+        mode = 'development';
+        projectConfig.env.NODE_ENV = 'development';
+    }
 
     const config = {
         mode,
@@ -96,7 +106,7 @@ async function configureWebpack({ context, rootComponentPaths, env }) {
             rules: [
                 {
                     test: /\.graphql$/,
-                    exclude: () => false,
+                    include: isPeregrineModule,
                     use: [
                         {
                             loader: 'graphql-tag/loader'
@@ -105,7 +115,7 @@ async function configureWebpack({ context, rootComponentPaths, env }) {
                 },
                 {
                     test: /\.(mjs|js)$/,
-                    include: [paths.src, /(peregrine|venia)/],
+                    include: isPeregrineModule,
                     sideEffects: false,
                     use: [
                         {
@@ -119,30 +129,32 @@ async function configureWebpack({ context, rootComponentPaths, env }) {
                 },
                 {
                     test: /\.css$/,
-                    exclude: /node_modules/,
-                    use: [
-                        'style-loader',
+                    oneOf: [
                         {
-                            loader: 'css-loader',
-                            options: {
-                                localIdentName:
-                                    '[name]-[local]-[hash:base64:3]',
-                                modules: true
-                            }
-                        }
-                    ]
-                },
-                {
-                    test: /\.css$/,
-                    include: /node_modules/,
-                    use: [
-                        'style-loader',
+                            test: isPeregrineModule,
+                            use: [
+                                'style-loader',
+                                {
+                                    loader: 'css-loader',
+                                    options: {
+                                        localIdentName:
+                                            '[name]-[local]-[hash:base64:3]',
+                                        modules: true
+                                    }
+                                }
+                            ]
+                        },
                         {
-                            loader: 'css-loader',
-                            options: {
-                                importLoaders: 1,
-                                modules: false
-                            }
+                            include: /node_modules/,
+                            use: [
+                                'style-loader',
+                                {
+                                    loader: 'css-loader',
+                                    options: {
+                                        modules: false
+                                    }
+                                }
+                            ]
                         }
                     ]
                 },
@@ -200,21 +212,31 @@ async function configureWebpack({ context, rootComponentPaths, env }) {
                     });
                 }
             })
-        ],
-        optimization: {
-            splitChunks: {
-                cacheGroups: {
-                    vendor: {
-                        test: new RegExp(
-                            `[\\\/]node_modules[\\\/](${libs.join('|')})[\\\/]`
-                        ),
-                        chunks: 'all'
-                    }
+        ]
+    };
+    let vendorTest = '[\\/]node_modules[\\/]';
+    if (common.length > 0) {
+        vendorTest += `(${common.join('|')})[\\\/]`;
+    }
+    config.optimization = {
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    test: vendorTest
                 }
             }
         }
     };
-    if (mode === 'development') {
+    if (debugBundles) {
+        Object.assign(config.optimization, {
+            moduleIds: 'named',
+            nodeEnv: 'development',
+            occurrenceOrder: true,
+            usedExports: true,
+            concatenateModules: true,
+            sideEffects: true
+        });
+    } else if (mode === 'development') {
         config.devtool = 'eval-source-map';
 
         config.devServer = await PWADevServer.configure({
@@ -248,49 +270,26 @@ async function configureWebpack({ context, rootComponentPaths, env }) {
             hints: 'warning'
         };
         config.devtool = 'source-map';
-        if (!process.env.DEBUG_BEAUTIFY) {
-            config.optimization.minimizer = [
-                new TerserPlugin({
-                    parallel: true,
-                    cache: true,
-                    terserOptions: {
+        config.optimization.minimizer = [
+            new TerserPlugin({
+                parallel: true,
+                sourceMap: true,
+                terserOptions: {
+                    ecma: 8,
+                    parse: {
+                        ecma: 8
+                    },
+                    compress: false,
+                    mangle: false,
+                    output: {
+                        beautify: true,
+                        comments: false,
                         ecma: 8,
-                        parse: {
-                            ecma: 8
-                        },
-                        compress: {
-                            drop_console: true
-                        },
-                        output: {
-                            ecma: 7,
-                            semicolons: false
-                        },
-                        keep_fnames: true
+                        indent_level: 2
                     }
-                })
-            ];
-        } else {
-            config.optimization.minimizer = [
-                new TerserPlugin({
-                    parallel: true,
-                    sourceMap: true,
-                    terserOptions: {
-                        ecma: 8,
-                        parse: {
-                            ecma: 8
-                        },
-                        compress: false,
-                        mangle: false,
-                        output: {
-                            beautify: true,
-                            comments: false,
-                            ecma: 8,
-                            indent_level: 2
-                        }
-                    }
-                })
-            ];
-        }
+                }
+            })
+        ];
     } else {
         throw Error(`Unsupported environment mode in webpack config: ${mode}`);
     }

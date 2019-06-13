@@ -1,67 +1,67 @@
 {
-    "version": 2,
-    "name": "venia",
-    "alias": [
-        "magento-venia-develop"
-    ],
-    "scope": "magento-research",
+  "version": 2,
+  "name": "venia",
+  "alias": [
+    "magento-venia-develop"
+  ],
+  "scope": "magento-research",
+  "env": {
+    "UPWARD_JS_BIND_LOCAL": "false",
+    "IMAGE_OPTIMIZING_ORIGIN": "backend",
+    "MAGENTO_BACKEND_URL": "https://master-7rqtwti-xjmpcdjpe6kzm.us-4.magentosite.cloud/",
+    "NODE_ENV": "production"
+  },
+  "build": {
     "env": {
-        "UPWARD_JS_BIND_LOCAL": "false",
-        "IMAGE_OPTIMIZING_ORIGIN": "backend",
-        "MAGENTO_BACKEND_URL": "https://master-7rqtwti-xjmpcdjpe6kzm.us-4.magentosite.cloud/",
-        "NODE_ENV": "production"
+      "MAGENTO_BACKEND_URL": "https://master-7rqtwti-xjmpcdjpe6kzm.us-4.magentosite.cloud/"
+    }
+  },
+  "builds": [
+    {
+      "src": "packages/venia-concept/package.json",
+      "use": "@now/static-build"
     },
-    "build": {
-        "env": {
-            "MAGENTO_BACKEND_URL": "https://master-7rqtwti-xjmpcdjpe6kzm.us-4.magentosite.cloud/"
-        }
+    {
+      "config": {
+        "includeFiles": [
+          "package.json",
+          ".env",
+          "venia-upward.yml",
+          "node_modules/@magento/venia-library/src/queries/*",
+          "static/*",
+          "templates/*"
+        ],
+        "maxLambdaSize": "20mb"
+      },
+      "src": "packages/venia-concept/server-lambda.js",
+      "use": "@now/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "^/([0-9A-Fa-e]\\.svg)",
+      "dest": "packages/venia-concept/$1"
     },
-    "builds": [
-        {
-            "src": "packages/venia-concept/package.json",
-            "use": "@now/static-build"
-        },
-        {
-            "config": {
-                "includeFiles": [
-                    "package.json",
-                    ".env",
-                    "venia-upward.yml",
-                    "node_modules/@magento/venia-library/src/queries/*",
-                    "static/*",
-                    "templates/*"
-                ],
-                "maxLambdaSize": "20mb"
-            },
-            "src": "packages/venia-concept/server-lambda.js",
-            "use": "@now/node"
-        }
-    ],
-    "routes": [
-        {
-            "src": "^/([0-9A-Fa-e]\\.svg)",
-            "dest": "packages/venia-concept/$1"
-        },
-        {
-            "src": "^/(precache-manifest.*\\.js)",
-            "dest": "packages/venia-concept/$1"
-        },
-        {
-            "src": "^/(sw\\.js)",
-            "dest": "packages/venia-concept/$1"
-        },
-        {
-            "src": "^/(js/.*\\.js)",
-            "dest": "packages/venia-concept/$1"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "packages/venia-concept/server-lambda.js"
-        }
-    ],
-    "regions": [
-        "sfo1",
-        "bru"
-    ],
-    "public": true
+    {
+      "src": "^/(precache-manifest.*\\.js)",
+      "dest": "packages/venia-concept/$1"
+    },
+    {
+      "src": "^/(sw\\.js)",
+      "dest": "packages/venia-concept/$1"
+    },
+    {
+      "src": "^/(js/.*\\.js)",
+      "dest": "packages/venia-concept/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "packages/venia-concept/server-lambda.js"
+    }
+  ],
+  "regions": [
+    "sfo1",
+    "bru"
+  ],
+  "public": true
 }
