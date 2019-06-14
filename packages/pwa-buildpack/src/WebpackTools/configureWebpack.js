@@ -2,6 +2,7 @@ const { promisify } = require('util');
 const stat = promisify(require('fs').stat);
 const path = require('path');
 const webpack = require('webpack');
+const pkgDir = require('pkg-dir');
 const TerserPlugin = require('terser-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 
@@ -57,11 +58,17 @@ function getMode(cliEnv = {}, projectConfig) {
     return 'development';
 }
 
+const getPackagePaths = packageNames =>
+    Promise.all(
+        packageNames.map(packageName =>
+            pkgDir(path.dirname(require.resolve(packageName)))
+        )
+    );
+
 async function configureWebpack({
     context,
     common = [],
     usesPeregrine = [],
-    rootComponentPaths,
     env
 }) {
     await validateRoot(context);
@@ -75,7 +82,12 @@ async function configureWebpack({
         output: path.resolve(context, 'dist')
     };
 
-    const peregrineModules = [paths.src, '/peregrine/'].concat(usesPeregrine);
+    const peregrineDeps = await getPackagePaths([
+        '@magento/peregrine',
+        ...usesPeregrine
+    ]);
+
+    const peregrineModules = [paths.src, ...peregrineDeps];
     const isPeregrineModule = resource => {
         return peregrineModules.some(name => resource.includes(name));
     };
@@ -176,7 +188,14 @@ async function configureWebpack({
         }),
         plugins: [
             await makeMagentoRootComponentsPlugin({
-                rootComponentsDirs: rootComponentPaths,
+                rootComponentsDirs: peregrineModules.reduce(
+                    (searchPaths, moduleDir) => [
+                        ...searchPaths,
+                        path.join(moduleDir, 'RootComponents'),
+                        path.join(moduleDir, 'src', 'RootComponents')
+                    ],
+                    []
+                ),
                 context
             }),
             new webpack.EnvironmentPlugin(projectConfig.env),

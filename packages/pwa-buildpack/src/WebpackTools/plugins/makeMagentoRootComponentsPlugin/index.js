@@ -7,6 +7,8 @@ const directiveParser = require('@magento/directive-parser');
 const VirtualModulePlugin = require('virtual-module-webpack-plugin');
 const { isAbsolute, join, relative } = require('path');
 
+const prettyLogger = require('../../../util/pretty-logger');
+
 const toRootComponentMapKey = (type, variant = 'default') =>
     `RootCmp_${type}__${variant}`;
 
@@ -50,11 +52,24 @@ class MagentoRootComponentsPlugin {
             async (importersPromise, rootComponentDir) => {
                 debug('gathering files from %s', rootComponentDir);
                 const importerSources = await importersPromise;
-                const rootComponentFiles = await readdir(rootComponentDir, {
-                    basePath: rootComponentDir,
-                    deep: true,
-                    filter: /m?[jt]s$/
-                });
+                let rootComponentFiles;
+                try {
+                    rootComponentFiles = await readdir(rootComponentDir, {
+                        basePath: rootComponentDir,
+                        deep: true,
+                        filter: /m?[jt]s$/
+                    });
+                } catch (e) {
+                    debug(
+                        'it did not work out to readdir("%s"), %s',
+                        rootComponentDir,
+                        e.message
+                    );
+                    if (e.code !== 'ENOENT') {
+                        throw e;
+                    }
+                    return importersPromise;
+                }
                 debug(
                     'files from %s: %J',
                     rootComponentDir,
@@ -138,11 +153,19 @@ class MagentoRootComponentsPlugin {
             Promise.resolve({})
         );
 
+        const rootComponentEntries = Object.entries(rootComponentImporters);
+
+        if (rootComponentEntries.length === 0) {
+            prettyLogger.error(
+                `No RootComponents were found in any of these directories: \n - ${rootComponentsDirsAbs.join(
+                    '\n - '
+                )}.\n\nThe MagentoRouter will not be able to load SEO URLs.`
+            );
+        }
+
         this.contents = `
             const rootComponentsMap = {
-            ${Object.entries(rootComponentImporters)
-                .map(entry => entry.join(':'))
-                .join(',\n')}
+            ${rootComponentEntries.map(entry => entry.join(':')).join(',\n')}
             };
             const key = ${toRootComponentMapKey.toString()};
             export default function fetchRootComponent(type, variant = 'default') {

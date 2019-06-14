@@ -1,9 +1,5 @@
 const { configureWebpack } = require('@magento/pwa-buildpack');
 
-const path = require('path');
-const veniaLibRoot = path.dirname(require.resolve('@magento/venia-library'));
-const veniaRootComponents = path.resolve(veniaLibRoot, 'RootComponents');
-
 module.exports = async env => {
     process.env.NODE_ENV = 'development';
     const config = await configureWebpack({
@@ -25,12 +21,9 @@ module.exports = async env => {
             'redux-actions',
             'redux-thunk'
         ],
-        usesPeregrine: ['/venia-library/'],
-        env,
-        rootComponentPaths: [veniaRootComponents]
+        usesPeregrine: ['@magento/venia-library'],
+        env
     });
-
-    console.log(require('util').inspect(config.module.rules));
 
     config.module.noParse = [/braintree\-web\-drop\-in/];
 
