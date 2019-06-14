@@ -7,7 +7,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 
 const loadEnvironment = require('../Utilities/loadEnvironment');
-const makeMagentoRootComponentsPlugin = require('./plugins/makeMagentoRootComponentsPlugin');
+const RootComponentsPlugin = require('./plugins/RootComponentsPlugin');
 const ServiceWorkerPlugin = require('./plugins/ServiceWorkerPlugin');
 const UpwardPlugin = require('./plugins/UpwardPlugin');
 const PWADevServer = require('./PWADevServer');
@@ -187,7 +187,7 @@ async function configureWebpack({
             }
         }),
         plugins: [
-            await makeMagentoRootComponentsPlugin({
+            new RootComponentsPlugin({
                 rootComponentsDirs: peregrineModules.reduce(
                     (searchPaths, moduleDir) => [
                         ...searchPaths,

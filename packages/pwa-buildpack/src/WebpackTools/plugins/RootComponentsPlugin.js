@@ -1,4 +1,4 @@
-const debug = require('../../../util/debug').makeFileLogger(__dirname);
+const debug = require('../../util/debug').makeFileLogger(__dirname);
 const { readFile: fsReadFile } = require('fs');
 const readFile = require('util').promisify(fsReadFile);
 const { ProvidePlugin } = require('webpack');
@@ -7,7 +7,7 @@ const directiveParser = require('@magento/directive-parser');
 const VirtualModulePlugin = require('virtual-module-webpack-plugin');
 const { isAbsolute, join, relative } = require('path');
 
-const prettyLogger = require('../../../util/pretty-logger');
+const prettyLogger = require('../../util/pretty-logger');
 
 const toRootComponentMapKey = (type, variant = 'default') =>
     `RootCmp_${type}__${variant}`;
@@ -17,7 +17,7 @@ const toRootComponentMapKey = (type, variant = 'default') =>
  * individual RootComponent in a provided array of directories, and produces a
  * file which imports each one as a separate chunk.
  */
-class MagentoRootComponentsPlugin {
+class RootComponentsPlugin {
     /**
      * @param {object} opts
      * @param {string[]} opts.rootComponentsDirs All directories to be searched for RootComponents
@@ -29,13 +29,19 @@ class MagentoRootComponentsPlugin {
     apply(compiler) {
         // Provide `fetchRootComponent` as a global: Expose the source as a
         // module, and then use a ProvidePlugin to inline it.
-        new VirtualModulePlugin({
-            moduleName: 'FETCH_ROOT_COMPONENT',
-            contents: this.contents
-        }).apply(compiler);
-        new ProvidePlugin({
-            fetchRootComponent: 'FETCH_ROOT_COMPONENT'
-        }).apply(compiler);
+        compiler.hooks.beforeRun.tapPromise(
+            'RootComponentsPlugin',
+            async () => {
+                await this.buildFetchModule();
+                new VirtualModulePlugin({
+                    moduleName: 'FETCH_ROOT_COMPONENT',
+                    contents: this.contents
+                }).apply(compiler);
+                new ProvidePlugin({
+                    fetchRootComponent: 'FETCH_ROOT_COMPONENT'
+                }).apply(compiler);
+            }
+        );
     }
 
     async buildFetchModule() {
@@ -175,10 +181,4 @@ class MagentoRootComponentsPlugin {
     }
 }
 
-async function makeRootComponentsPlugin(opts) {
-    const plugin = new MagentoRootComponentsPlugin(opts);
-    await plugin.buildFetchModule();
-    return plugin;
-}
-
-module.exports = makeRootComponentsPlugin;
+module.exports = RootComponentsPlugin;

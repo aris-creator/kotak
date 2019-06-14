@@ -1,6 +1,6 @@
 module.exports = {
     configureWebpack: require('./configureWebpack'),
-    makeMagentoRootComponentsPlugin: require('./plugins/makeMagentoRootComponentsPlugin'),
+    RootComponentsPlugin: require('./plugins/RootComponentsPlugin'),
     ServiceWorkerPlugin: require('./plugins/ServiceWorkerPlugin'),
     MagentoResolver: require('./MagentoResolver'),
     PWADevServer: require('./PWADevServer'),
