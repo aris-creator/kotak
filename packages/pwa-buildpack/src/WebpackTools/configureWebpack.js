@@ -222,7 +222,7 @@ async function configureWebpack({
                         prefetch: []
                     };
                     Object.entries(assets).forEach(([name, value]) => {
-                        if (name.startsWith('RootCmp')) {
+                        if (name.match(/^RootCmp.*\.js$/)) {
                             const filenames = Array.isArray(value)
                                 ? value
                                 : [value];
@@ -241,7 +241,8 @@ async function configureWebpack({
         splitChunks: {
             cacheGroups: {
                 vendor: {
-                    test: vendorTest
+                    test: new RegExp(vendorTest),
+                    chunks: 'all'
                 }
             }
         }
@@ -250,6 +251,7 @@ async function configureWebpack({
         Object.assign(config.optimization, {
             moduleIds: 'named',
             nodeEnv: 'development',
+            minimize: false,
             occurrenceOrder: true,
             usedExports: true,
             concatenateModules: true,
@@ -292,20 +294,20 @@ async function configureWebpack({
         config.optimization.minimizer = [
             new TerserPlugin({
                 parallel: true,
-                sourceMap: true,
+                cache: true,
                 terserOptions: {
                     ecma: 8,
                     parse: {
                         ecma: 8
                     },
-                    compress: false,
-                    mangle: false,
+                    compress: {
+                        drop_console: true
+                    },
                     output: {
-                        beautify: true,
-                        comments: false,
-                        ecma: 8,
-                        indent_level: 2
-                    }
+                        ecma: 7,
+                        semicolons: false
+                    },
+                    keep_fnames: true
                 }
             })
         ];
