@@ -8,7 +8,7 @@ const upward = require('@magento/upward-js');
 // To be used with `node-fetch` in order to allow self-signed certificates.
 const httpsAgent = new https.Agent({ rejectUnauthorized: false });
 
-class UpwardPlugin {
+class UpwardDevServerPlugin {
     constructor(devServer, env, upwardPath) {
         this.env = Object.assign(
             {
@@ -146,4 +146,4 @@ class UpwardPlugin {
     }
 }
 
-module.exports = UpwardPlugin;
+module.exports = UpwardDevServerPlugin;

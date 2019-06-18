@@ -45,7 +45,7 @@ const PWADevServer = {
         } = config;
 
         const webpackDevServerOptions = {
-            contentBase: false, // UpwardPlugin serves static files
+            contentBase: false, // UpwardDevServerPlugin serves static files
             compress: true,
             hot: true,
             watchOptions: {

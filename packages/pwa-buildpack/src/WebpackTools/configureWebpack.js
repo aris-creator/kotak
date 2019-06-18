@@ -9,9 +9,12 @@ const WebpackAssetsManifest = require('webpack-assets-manifest');
 const loadEnvironment = require('../Utilities/loadEnvironment');
 const RootComponentsPlugin = require('./plugins/RootComponentsPlugin');
 const ServiceWorkerPlugin = require('./plugins/ServiceWorkerPlugin');
-const UpwardPlugin = require('./plugins/UpwardPlugin');
+const UpwardDevServerPlugin = require('./plugins/UpwardDevServerPlugin');
+const UpwardIncludePlugin = require('./plugins/UpwardIncludePlugin');
 const PWADevServer = require('./PWADevServer');
 const MagentoResolver = require('./MagentoResolver');
+
+const prettyLogger = require('../util/pretty-logger');
 
 /**
  * We need a root directory for the app in order to build all paths relative to
@@ -58,47 +61,46 @@ function getMode(cliEnv = {}, projectConfig) {
     return 'development';
 }
 
-const getPackagePaths = packageNames =>
-    Promise.all(
-        packageNames.map(packageName =>
-            pkgDir(path.dirname(require.resolve(packageName)))
-        )
-    );
-
-async function configureWebpack({
-    context,
-    common = [],
-    usesPeregrine = [],
-    env
-}) {
+async function configureWebpack({ context, vendor = [], special = {}, env }) {
     await validateRoot(context);
 
     const babelConfigPresent = await checkForBabelConfig(context);
 
-    const projectConfig = loadEnvironment(context);
+    let projectConfig = loadEnvironment(context);
 
     const paths = {
         src: path.resolve(context, 'src'),
         output: path.resolve(context, 'dist')
     };
 
-    const peregrineDeps = await getPackagePaths([
-        '@magento/peregrine',
-        ...usesPeregrine
-    ]);
+    const features = await Promise.all(
+        Object.entries(special).map(async ([packageName, flags]) => [
+            await pkgDir(path.dirname(require.resolve(packageName))),
+            flags
+        ])
+    );
 
-    const peregrineModules = [paths.src, ...peregrineDeps];
-    const isPeregrineModule = resource => {
-        return peregrineModules.some(name => resource.includes(name));
-    };
+    const hasFlag = flag =>
+        features.reduce(
+            (hasIt, [packagePath, flags]) =>
+                flags[flag] ? [...hasIt, packagePath] : hasIt,
+            []
+        );
 
     let mode = getMode(env, projectConfig);
 
     const { debugBundles } = projectConfig.section('developer');
 
     if (debugBundles) {
+        prettyLogger.warn(
+            'Debugging bundles. Large but readable files will be generated.'
+        );
+        projectConfig = loadEnvironment(
+            Object.assign({}, projectConfig.env, {
+                NODE_ENV: 'development'
+            })
+        );
         mode = 'development';
-        projectConfig.env.NODE_ENV = 'development';
     }
 
     const config = {
@@ -118,7 +120,7 @@ async function configureWebpack({
             rules: [
                 {
                     test: /\.graphql$/,
-                    include: isPeregrineModule,
+                    include: hasFlag('graphQLQueries'),
                     use: [
                         {
                             loader: 'graphql-tag/loader'
@@ -127,7 +129,7 @@ async function configureWebpack({
                 },
                 {
                     test: /\.(mjs|js)$/,
-                    include: isPeregrineModule,
+                    include: [paths.src, ...hasFlag('esModules')],
                     sideEffects: false,
                     use: [
                         {
@@ -143,7 +145,7 @@ async function configureWebpack({
                     test: /\.css$/,
                     oneOf: [
                         {
-                            test: isPeregrineModule,
+                            test: [paths.src, ...hasFlag('cssModules')],
                             use: [
                                 'style-loader',
                                 {
@@ -188,7 +190,7 @@ async function configureWebpack({
         }),
         plugins: [
             new RootComponentsPlugin({
-                rootComponentsDirs: peregrineModules.reduce(
+                rootComponentsDirs: hasFlag('rootComponents').reduce(
                     (searchPaths, moduleDir) => [
                         ...searchPaths,
                         path.join(moduleDir, 'RootComponents'),
@@ -199,6 +201,9 @@ async function configureWebpack({
                 context
             }),
             new webpack.EnvironmentPlugin(projectConfig.env),
+            // new webpack.EnvironmentPlugin((({ env}) => {
+            //     const
+            // })(projectConfig.env)),
             new ServiceWorkerPlugin({
                 mode,
                 paths,
@@ -208,6 +213,9 @@ async function configureWebpack({
                     swSrc: './src/sw.js',
                     swDest: 'sw.js'
                 }
+            }),
+            new UpwardIncludePlugin({
+                upwardDirs: hasFlag('upward')
             }),
             new WebpackAssetsManifest({
                 output: 'asset-manifest.json',
@@ -234,8 +242,8 @@ async function configureWebpack({
         ]
     };
     let vendorTest = '[\\/]node_modules[\\/]';
-    if (common.length > 0) {
-        vendorTest += `(${common.join('|')})[\\\/]`;
+    if (vendor.length > 0) {
+        vendorTest += `(${vendor.join('|')})[\\\/]`;
     }
     config.optimization = {
         splitChunks: {
@@ -258,7 +266,7 @@ async function configureWebpack({
             sideEffects: true
         });
     } else if (mode === 'development') {
-        config.devtool = 'eval-source-map';
+        config.devtool = 'cheap-source-map';
 
         config.devServer = await PWADevServer.configure({
             publicPath: config.output.publicPath,
@@ -277,9 +285,9 @@ async function configureWebpack({
 
         config.plugins.push(
             new webpack.HotModuleReplacementPlugin(),
-            new UpwardPlugin(
+            new UpwardDevServerPlugin(
                 config.devServer,
-                projectConfig.env,
+                process.env,
                 path.resolve(
                     context,
                     projectConfig.section('upwardJs').upwardPath
@@ -290,7 +298,7 @@ async function configureWebpack({
         config.performance = {
             hints: 'warning'
         };
-        config.devtool = 'source-map';
+        config.devtool = false;
         config.optimization.minimizer = [
             new TerserPlugin({
                 parallel: true,

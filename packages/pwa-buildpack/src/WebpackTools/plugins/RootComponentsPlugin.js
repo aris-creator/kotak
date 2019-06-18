@@ -1,8 +1,7 @@
-const debug = require('../../util/debug').makeFileLogger(__dirname);
-const { readFile: fsReadFile } = require('fs');
-const readFile = require('util').promisify(fsReadFile);
+const debug = require('../../util/debug').makeFileLogger(__filename);
 const { ProvidePlugin } = require('webpack');
-const readdir = require('readdir-enhanced');
+const { promisify } = require('util');
+const walk = require('klaw');
 const directiveParser = require('@magento/directive-parser');
 const VirtualModulePlugin = require('virtual-module-webpack-plugin');
 const { isAbsolute, join, relative } = require('path');
@@ -11,6 +10,8 @@ const prettyLogger = require('../../util/pretty-logger');
 
 const toRootComponentMapKey = (type, variant = 'default') =>
     `RootCmp_${type}__${variant}`;
+
+const extensionRE = /m?[jt]s$/;
 
 /**
  * @description webpack plugin that creates chunks for each
@@ -27,23 +28,59 @@ class RootComponentsPlugin {
     }
 
     apply(compiler) {
+        this.compiler = compiler;
+        // TODO: klaw calls the stat method out of context, so we need to bind
+        // it to its `this` here. this is a one-line fix in that library; gotta
+        // open a PR to node-klaw
+        this.fs = {};
+        ['stat', 'lstat', 'readFile', 'readdir'].forEach(method => {
+            this.fs[method] = (...args) =>
+                compiler.inputFileSystem[method](...args);
+        });
+        this.readFile = promisify(this.fs.readFile);
         // Provide `fetchRootComponent` as a global: Expose the source as a
         // module, and then use a ProvidePlugin to inline it.
-        compiler.hooks.beforeRun.tapPromise(
-            'RootComponentsPlugin',
-            async () => {
-                await this.buildFetchModule();
-                new VirtualModulePlugin({
-                    moduleName: 'FETCH_ROOT_COMPONENT',
-                    contents: this.contents
-                }).apply(compiler);
-                new ProvidePlugin({
-                    fetchRootComponent: 'FETCH_ROOT_COMPONENT'
-                }).apply(compiler);
-            }
-        );
+        const inject = () => this.injectRootComponentLoader();
+        compiler.hooks.beforeRun.tapPromise('RootComponentsPlugin', inject);
+        compiler.hooks.watchRun.tapPromise('RootComponentsPlugin', inject);
     }
-
+    async injectRootComponentLoader() {
+        await this.buildFetchModule();
+        new VirtualModulePlugin({
+            moduleName: 'FETCH_ROOT_COMPONENT',
+            contents: this.contents
+        }).apply(this.compiler);
+        new ProvidePlugin({
+            fetchRootComponent: 'FETCH_ROOT_COMPONENT'
+        }).apply(this.compiler);
+    }
+    findRootComponentsIn(dir) {
+        return new Promise(resolve => {
+            const jsFiles = [];
+            const done = () => resolve(jsFiles);
+            const fs = this.fs;
+            walk(dir, {
+                fs: {
+                    readdir: fs.readdir.bind(fs),
+                    stat: fs.stat.bind(fs)
+                }
+            })
+                .on('readable', function() {
+                    let item;
+                    while ((item = this.read())) {
+                        if (
+                            item.stats.isFile() &&
+                            extensionRE.test(item.path)
+                        ) {
+                            debug(`will check ${item.path} for RootComponent`);
+                            jsFiles.push(item.path);
+                        }
+                    }
+                })
+                .on('error', done)
+                .on('end', done);
+        });
+    }
     async buildFetchModule() {
         const { context, rootComponentsDirs } = this.opts;
 
@@ -53,50 +90,40 @@ class RootComponentsPlugin {
         const rootComponentsDirsAbs = rootComponentsDirs.map(dir =>
             isAbsolute(dir) ? dir : join(context, dir)
         );
-        debug('absolute root component dirs: %J', rootComponentsDirsAbs);
+        debug('absolute root component dirs: %o', rootComponentsDirsAbs);
         const rootComponentImporters = await rootComponentsDirsAbs.reduce(
             async (importersPromise, rootComponentDir) => {
                 debug('gathering files from %s', rootComponentDir);
-                const importerSources = await importersPromise;
-                let rootComponentFiles;
-                try {
-                    rootComponentFiles = await readdir(rootComponentDir, {
-                        basePath: rootComponentDir,
-                        deep: true,
-                        filter: /m?[jt]s$/
-                    });
-                } catch (e) {
-                    debug(
-                        'it did not work out to readdir("%s"), %s',
-                        rootComponentDir,
-                        e.message
-                    );
-                    if (e.code !== 'ENOENT') {
-                        throw e;
-                    }
-                    return importersPromise;
-                }
+                const [importerSources, rootComponentFiles] = await Promise.all(
+                    [
+                        importersPromise,
+                        this.findRootComponentsIn(rootComponentDir)
+                    ]
+                );
                 debug(
-                    'files from %s: %J',
+                    'files from %s: %o',
                     rootComponentDir,
                     rootComponentFiles
                 );
                 await Promise.all(
                     rootComponentFiles.map(async rootComponentFile => {
                         debug('reading file %s', rootComponentFile);
-                        const rootComponentSource = await readFile(
-                            rootComponentFile,
-                            'utf8'
-                        );
-                        debug(
-                            'parsing %s source for directives',
+                        const fileContents = await this.readFile(
                             rootComponentFile
                         );
+                        const rootComponentSource =
+                            typeof fileContents !== 'string'
+                                ? fileContents
+                                : fileContents.toString('utf8');
+                        debug(
+                            'parsing %s source for directives',
+                            rootComponentSource.slice(0, 80)
+                        );
                         const { directives = [], errors } = directiveParser(
-                            rootComponentSource
+                            '\n' + rootComponentSource + '\n'
                         );
                         debug(
-                            'directive parse found in %s, %J and errors: %J',
+                            'directive parse found in %s, %o and errors: %o',
                             rootComponentFile,
                             directives,
                             errors
@@ -105,12 +132,12 @@ class RootComponentsPlugin {
                             // for now, errors just mean no directive was found
                             return;
                         }
-                        debug('filtering %J for RootComponents', directives);
+                        debug('filtering %o for RootComponents', directives);
                         const rootComponentDirectives = directives.filter(
                             d => d.type === 'RootComponent'
                         );
                         debug(
-                            'found %s directives: %J',
+                            'found %s directives: %o',
                             rootComponentDirectives.length,
                             rootComponentDirectives
                         );

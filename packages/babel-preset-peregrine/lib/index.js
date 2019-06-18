@@ -17,7 +17,6 @@ const plugins = [
 ];
 
 const config = (api, opts = {}) => {
-    debugger;
     // Different environments, different settings for preset-env.
     const targets = Object.assign(
         {},

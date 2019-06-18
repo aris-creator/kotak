@@ -150,21 +150,19 @@ function loadEnvironment(dirOrEnv, log = prettyLogger) {
      */
     try {
         const loadedEnv = envalid.cleanEnv(compatEnv, envalidValidationConfig, {
+            dotEnvPath: null, // we parse dotEnv manually to do custom error msgs
             reporter: throwReport,
-            dotEnvPath: null // we parse dotEnv manually to do custom error msgs
+            strict: true
         });
         if (debug.enabled) {
             // Only do this prettiness if we gotta
             debug(
                 'Current known env',
                 '\n  ' +
-                    inspect(
-                        pick(loadedEnv, Object.keys(envalidValidationConfig)),
-                        {
-                            colors: true,
-                            compact: false
-                        }
-                    )
+                    inspect(loadedEnv, {
+                        colors: true,
+                        compact: false
+                    })
                         .replace(/\s*[\{\}]\s*/gm, '')
                         .replace(/,\n\s+/gm, '\n  ') +
                     '\n'

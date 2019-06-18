@@ -4,7 +4,7 @@ module.exports = async env => {
     process.env.NODE_ENV = 'development';
     const config = await configureWebpack({
         context: __dirname,
-        common: [
+        vendor: [
             'apollo-cache-inmemory',
             'apollo-cache-persist',
             'apollo-client',
@@ -21,7 +21,19 @@ module.exports = async env => {
             'redux-actions',
             'redux-thunk'
         ],
-        usesPeregrine: ['@magento/venia-library'],
+        special: {
+            '@magento/peregrine': {
+                esModules: true,
+                cssModules: true
+            },
+            '@magento/venia-library': {
+                cssModules: true,
+                esModules: true,
+                graphQLQueries: true,
+                rootComponents: true,
+                upward: true
+            }
+        },
         env
     });
 
