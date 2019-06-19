@@ -26,14 +26,14 @@
     "webpack.config.js"
   ],
   "scripts": {
-    "build": "yarn run clean && buildpack load-env . && yarn run validate-queries && yarn run build:prod",
+    "build": "yarn run clean && buildpack load-env --core-dev-mode . && yarn run validate-queries && yarn run build:prod",
     "build:analyze": "yarn run clean && mkdir dist && webpack -p --profile --no-progress --env.mode production --json > dist/build-stats.json && webpack-bundle-analyzer dist/build-stats.json",
     "build:ci": "buildpack load-env . && yarn run -s build:prod",
     "build:dev": " ",
     "build:prod": "webpack --no-progress --env.mode production",
     "buildpack": "buildpack",
     "clean": "rimraf dist",
-    "download-schema": "graphql get-schema --project venia",
+    "download-schema": "graphql get-schema --project venia --insecure",
     "lint": "eslint --ignore-path .gitignore 'src/**/{*.js,package.json}'",
     "now-build": "../../now-build.sh",
     "prettier": "prettier --single-quote --ignore-path .gitignore 'src/**/*.@(js|css)' '*.js'",
