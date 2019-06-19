@@ -31,7 +31,6 @@
     "build:ci": "buildpack load-env . && yarn run -s build:prod",
     "build:dev": " ",
     "build:prod": "webpack --no-progress --env.mode production",
-    "buildpack": "buildpack",
     "clean": "rimraf dist",
     "download-schema": "graphql get-schema --project venia --insecure",
     "lint": "eslint --ignore-path .gitignore 'src/**/{*.js,package.json}'",
