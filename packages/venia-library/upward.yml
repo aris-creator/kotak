@@ -38,13 +38,6 @@ veniaResponse:
     - matches: request.url.pathname
       pattern: '^/create-account'
       use: veniaIndex
-    # Requests for static resources provided by the application project, such
-    # as icons, manifests, and static images, are handled by the top-level
-    # 'veniaStatic' object, which defines a DirectoryResolver that serves
-    # assets from the './static' folder in the project.
-    - matches: request.url.pathname
-      pattern: '^/(icons/.+|favicon.ico$|manifest.json$|veniaClosed.png|robots.txt$)'
-      use: veniaStatic
     # Requests with a URL key are handled by the top-level 'appShell' object.
     # The existence of a URL key is determined using the top-level 'urlKey'
     # object.
@@ -56,10 +49,30 @@ veniaResponse:
     - matches: request.url.pathname
       pattern: '^/$'
       use: appShell
-  # If the none of the tested conditions pass, the default handler for the
-  # request is the top-level 'bundles' object, which is a DirectoryResolver that
-  # serves the Webpack output assets from the './dist' folder.
-  default: bundles
+    # Compiled JavaScript files are served from '/js', except for one: the
+    # ServiceWorker, which must be served from root /sw.js in order to take
+    # scope for the entire site.
+    - matches: request.url.pathname
+      pattern: '^/sw\.js$'
+      use:
+        directory:
+          inline: './js'
+    # Compiled JavaScript files requested from `/js` must be served relative to
+    # the root ./dist folder. We create an inline DirectoryResolver here
+    # because this DirectoryResolver has broad access, and could be a security
+    # risk, so we want to limit its availability to other parts of the UPWARD
+    # definition.
+    - matches: request.url.pathname
+      pattern: '^/js/.+\.js$'
+      use:
+        directory:
+          inline: './'
+  # If the none of the tested conditions pass, the default handler is for
+  # requests for static resources provided by the application project, such
+  # as icons, manifests, and static images. They are handled by the top-level
+  # 'veniaStatic' object, which defines a DirectoryResolver that serves
+  # assets from the './static' folder in the project.
+  default: veniaStatic
 
 # An object that returns true if the NODE_ENV environment variable is set
 # to 'development'. Used as a test in other configurations in this file.
@@ -324,15 +337,6 @@ genericObject:
       inline:
         "Hello world!"
 
-# The bundles object is a DirectoryResolver that allows access to the bundled
-# files in the project's './dist' diretory.
-#
-# NOTE: The UPWARD server is able to interpret this entry as a
-# DirectoryResolver because of the presence of the 'directory' property.
-bundles:
-  directory:
-    inline: './dist'
-
 # The veniaIndex object contains response data for rendering a generic app shell
 veniaIndex:
   inline:
@@ -351,12 +355,9 @@ veniaIndex:
 # inside the project's './static' directory.
 veniaStatic:
   directory:
-    inline: './dist/static'
+    inline: './static'
 
 # This is a no-op in runtime evaluation, but template includes need to be
-# copied over to dist at build time, so this makes them detectable.
+# copied over to dist at build time, so this makes them detectable by the
+# UpwardIncludePlugin.
 veniaTemplateIncludes: './templates'
-
-# This is a no-op in runtime evaluation, but static includes need to be
-# copied over to dist at build time, so this makes them detectable.
-veniaStaticIncludes: './static'

@@ -124,7 +124,7 @@
                     "name": "UPWARD_JS_UPWARD_PATH",
                     "type": "str",
                     "desc": "UPWARD configuration file to use for the PWADevServer and the \"stage:venia\" sample server.",
-                    "default": "dist/upward.yml"
+                    "default": "upward.yml"
                 },
                 {
                     "name": "UPWARD_JS_BIND_LOCAL",

@@ -5,6 +5,7 @@ const devcert = require('devcert');
 const os = require('os');
 const chalk = require('chalk');
 const execa = require('execa');
+const pkgDir = require('pkg-dir');
 const { username } = os.userInfo();
 
 /**
@@ -54,6 +55,7 @@ function getCert(hostname) {
                 ),
             30000
         );
+        debug('set UI timeout for getCert("%s")', hostname);
         try {
             if (!alreadyProvisioned(hostname)) {
                 if (process.stdin.isTTY) {
@@ -64,8 +66,14 @@ Please enter the password for ${chalk.whiteBright(
                                 username
                             )} on ${chalk.whiteBright(os.hostname())}.`)
                         );
+                    } else {
+                        debug('appears to be a sudo session already');
                     }
                 } else {
+                    debug(
+                        'non-interactive! cleared UI timeout for getCert("%s")',
+                        hostname
+                    );
                     clearTimeout(timeout);
                     return reject(
                         new Error(
@@ -75,6 +83,8 @@ Please enter the password for ${chalk.whiteBright(
                 }
             }
             const certBuffers = await devcert.certificateFor(hostname);
+            debug('certBuffers arrived with %s', Object.keys(certBuffers));
+            debug('success! cleared UI timeout for getCert("%s")', hostname);
             clearTimeout(timeout);
             resolve({
                 key: certBuffers.key.toString('utf8'),
@@ -82,17 +92,19 @@ Please enter the password for ${chalk.whiteBright(
             });
         } catch (e) {
             clearTimeout(timeout);
+            debug('failure! cleared UI timeout for getCert("%s")', hostname);
+            debug(e);
             reject(e);
         }
     });
 }
 
-function getUniqueDomainAndPorts(customName, addUniqueHash) {
+function getUniqueDomainAndPorts(directory, customName, addUniqueHash) {
     let name = DEFAULT_NAME;
     if (customName && typeof customName === 'string') {
         name = customName;
     } else {
-        const pkgLoc = join(process.cwd(), 'package.json');
+        const pkgLoc = join(pkgDir.sync(directory), 'package.json');
         try {
             // eslint-disable-next-line node/no-missing-require
             const pkg = require(pkgLoc);
@@ -106,16 +118,16 @@ function getUniqueDomainAndPorts(customName, addUniqueHash) {
             console.warn(
                 debug.errorMsg(
                     `Using default "${name}" prefix. Could not autodetect project name from package.json: `
-                ),
-                e
+                )
             );
+            debug('pkgDir failed %s', e);
         }
     }
     const dirHash = createHash('md4');
     // Using a hash of the current directory is a natural way of preserving
     // the same "unique" ID for each project, and changing it only when its
     // location on disk has changed.
-    dirHash.update(process.cwd());
+    dirHash.update(directory);
     const digest = dirHash.digest('base64');
 
     const subdomain = addUniqueHash ? `${name}-${digest.slice(0, 5)}` : name;
@@ -154,13 +166,12 @@ function getUniqueDomainAndPorts(customName, addUniqueHash) {
     };
 }
 
-async function configureHost({
-    addUniqueHash = true,
-    subdomain,
-    exactDomain,
-    interactive = true
-} = {}) {
+async function configureHost(
+    directory,
+    { addUniqueHash = true, subdomain, exactDomain, interactive = true } = {}
+) {
     const { uniqueSubdomain, ports } = getUniqueDomainAndPorts(
+        directory,
         exactDomain || subdomain,
         addUniqueHash
     );

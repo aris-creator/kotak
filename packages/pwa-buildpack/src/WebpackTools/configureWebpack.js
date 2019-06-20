@@ -177,7 +177,11 @@ async function configureWebpack({ context, vendor = [], special = {}, env }) {
                     use: [
                         {
                             loader: 'file-loader',
-                            options: {}
+                            options: {
+                                name: '[name]-[hash:base58:3].[ext]',
+                                outputPath: 'static',
+                                publicPath: '/'
+                            }
                         }
                     ]
                 }
@@ -201,17 +205,15 @@ async function configureWebpack({ context, vendor = [], special = {}, env }) {
                 context
             }),
             new webpack.EnvironmentPlugin(projectConfig.env),
-            // new webpack.EnvironmentPlugin((({ env}) => {
-            //     const
-            // })(projectConfig.env)),
             new ServiceWorkerPlugin({
                 mode,
                 paths,
                 injectManifest: true,
                 injectManifestConfig: {
+                    importsDirectory: 'js',
                     include: [/\.js$/],
                     swSrc: './src/sw.js',
-                    swDest: 'sw.js'
+                    swDest: './js/sw.js'
                 }
             }),
             new UpwardIncludePlugin({
@@ -268,7 +270,7 @@ async function configureWebpack({ context, vendor = [], special = {}, env }) {
     } else if (mode === 'development') {
         config.devtool = 'cheap-source-map';
 
-        config.devServer = await PWADevServer.configure({
+        config.devServer = await PWADevServer.configure(context, {
             publicPath: config.output.publicPath,
             graphqlPlayground: true,
             ...projectConfig.sections(

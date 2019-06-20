@@ -4,7 +4,6 @@ const path = require('path');
 const dotenv = require('dotenv');
 const envalid = require('envalid');
 const camelspace = require('camelspace');
-const { pick } = require('lodash');
 const prettyLogger = require('../util/pretty-logger');
 
 const buildpackVersion = require('../../package.json').version;

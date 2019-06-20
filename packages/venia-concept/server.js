@@ -6,9 +6,12 @@ const {
     Utilities: { addImgOptMiddleware, loadEnvironment }
 } = require('@magento/pwa-buildpack');
 const { bestPractices, createUpwardServer } = require('@magento/upward-js');
+const path = require('path');
 
 async function serve() {
     const config = loadEnvironment(__dirname);
+
+    process.chdir(path.join(__dirname, 'dist'));
 
     const upwardServerOptions = Object.assign(
         // defaults
@@ -54,6 +57,7 @@ async function serve() {
                 Utilities: { configureHost }
             } = require('@magento/pwa-buildpack');
             const { hostname, ports, ssl } = await configureHost(
+                __dirname,
                 Object.assign(config.section('customOrigin'), {
                     interactive: false
                 })
@@ -63,7 +67,8 @@ async function serve() {
             upwardServerOptions.port = ports.staging;
         } catch (e) {
             console.log(
-                'Could not configure or access custom host. Using loopback...'
+                'Could not configure or access custom host. Using loopback...',
+                e.message
             );
         }
     }

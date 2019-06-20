@@ -14,7 +14,7 @@ import isProductConfigurable from '../../util/isProductConfigurable';
 // TODO: get real currencyCode for cartItem
 const currencyCode = 'USD';
 
-const Options = React.lazy(() => import('./ProductOptions'));
+const Options = React.lazy(() => import('./productOptions'));
 
 class CartOptions extends Component {
     static propTypes = {
