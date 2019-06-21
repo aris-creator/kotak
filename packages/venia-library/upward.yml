@@ -1,22 +1,15 @@
-# This is the UPWARD specification file for the Venia storefront.
-# It is used by an UPWARD server implementation, such as upward-js and
-# upward-php, to describe how the server responds to requests.
-# See: https://magento-research.github.io/pwa-studio/technologies/upward/
-
-# The root properties of an UPWARD spec file are part of a global context
-# that includes request and environment data.
-# These properties are available to other properties and are ultimately
-# populated with Resolvers.
-
-# The root 'status', 'headers', and 'body' properties are required properties
-# in an UPWARD spec file.
-# An UPWARD server uses the resolved values of these properties to create an
-# HTTP response to the client.
-# In this file, these properties get their values from a top-level
-# 'veniaResponse' object, which is a recommended and best practice approach.
-status: veniaResponse.status
-headers: veniaResponse.headers
-body: veniaResponse.body
+# This is the UPWARD definition *partial* for the Venia library.
+# IT IS NOT A COMPLETE, VALID UPWARD FILE.
+# It is meant to be **merged** into the final upward.yml of a Buildpack PWA,
+# using the plugin "UpwardIncludePlugin".
+# The final, compiled upward.yml file must have top-level `status`, `headers`,
+# and `body` properties.
+# To use the logic provided by @magento/venia-library, you would set the
+# following properties in your app's upward.yml file:
+#
+# status: veniaResponse.status
+# headers: veniaResponse.headers
+# body: veniaResponse.body
 
 # This is a top-level object used to set values for the root `status`,
 # `headers`, and `body` properties.
