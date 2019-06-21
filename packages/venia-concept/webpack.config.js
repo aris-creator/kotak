@@ -1,7 +1,6 @@
 const { configureWebpack } = require('@magento/pwa-buildpack');
 
 module.exports = async env => {
-    process.env.NODE_ENV = 'development';
     const config = await configureWebpack({
         context: __dirname,
         vendor: [

@@ -188,7 +188,7 @@ function parseEnvFile(dir, log) {
             `Using environment variables from ${path.relative(
                 process.cwd(),
                 envPath
-            )}: %s`,
+            )}: %o`,
             parsed
         );
     } catch (e) {
