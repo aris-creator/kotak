@@ -291,7 +291,7 @@ async function configureWebpack({ context, vendor = [], special = {}, env }) {
                 config.devServer,
                 process.env,
                 path.resolve(
-                    context,
+                    config.output.path,
                     projectConfig.section('upwardJs').upwardPath
                 )
             )
