@@ -41,11 +41,14 @@ class RootComponentsPlugin {
         // Provide `fetchRootComponent` as a global: Expose the source as a
         // module, and then use a ProvidePlugin to inline it.
         const inject = () => this.injectRootComponentLoader();
+        debug('apply: subscribing to beforeRun and watchRun');
         compiler.hooks.beforeRun.tapPromise('RootComponentsPlugin', inject);
         compiler.hooks.watchRun.tapPromise('RootComponentsPlugin', inject);
     }
     async injectRootComponentLoader() {
+        debug('injectRootComponentLoader: running this.buildFetchModule');
         await this.buildFetchModule();
+        debug('applying VirtualModulePlugin and ProvidePlugin');
         new VirtualModulePlugin({
             moduleName: 'FETCH_ROOT_COMPONENT',
             contents: this.contents
@@ -90,7 +93,10 @@ class RootComponentsPlugin {
         const rootComponentsDirsAbs = rootComponentsDirs.map(dir =>
             isAbsolute(dir) ? dir : join(context, dir)
         );
-        debug('absolute root component dirs: %o', rootComponentsDirsAbs);
+        debug(
+            'buildFetchModule: absolute root component dirs: %o',
+            rootComponentsDirsAbs
+        );
         const rootComponentImporters = await rootComponentsDirsAbs.reduce(
             async (importersPromise, rootComponentDir) => {
                 debug('gathering files from %s', rootComponentDir);

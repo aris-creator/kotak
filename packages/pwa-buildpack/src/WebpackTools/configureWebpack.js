@@ -194,7 +194,7 @@ async function configureWebpack({ context, vendor = [], special = {}, env }) {
         }),
         plugins: [
             new RootComponentsPlugin({
-                rootComponentsDirs: hasFlag('rootComponents').reduce(
+                rootComponentsDirs: [...hasFlag('rootComponents'), context].reduce(
                     (searchPaths, moduleDir) => [
                         ...searchPaths,
                         path.join(moduleDir, 'RootComponents'),
