@@ -29,7 +29,7 @@ module.exports.handler = async function buildpackCli({ directory }) {
             // eslint-disable-next-line no-process-exit
             process.exit(1);
         }
-        const { hostname, ports } = await configureHost(directory, {
+        const { hostname, ports } = await configureHost(projectRoot, {
             ...config,
             interactive: true
         });

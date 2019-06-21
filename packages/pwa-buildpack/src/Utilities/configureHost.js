@@ -39,8 +39,17 @@ const isSudoSession = () =>
         .then(() => true)
         .catch(() => false);
 
-const alreadyProvisioned = hostname =>
-    devcert.configuredDomains().includes(hostname);
+const alreadyProvisioned = hostname => {
+    const configuredDomains = devcert.configuredDomains();
+    debug(
+        'checking for %s in devcert.configuredDomains() === %o',
+        hostname,
+        configuredDomains
+    );
+    const isProvisioned = configuredDomains.includes(hostname);
+    debug('isProvisioned? %s', isProvisioned);
+    return isProvisioned;
+};
 
 function getCert(hostname) {
     // Manually create a Promise here to obtain a "reject" function in closure,
@@ -100,20 +109,35 @@ Please enter the password for ${chalk.whiteBright(
 }
 
 function getUniqueDomainAndPorts(directory, customName, addUniqueHash) {
+    debug(
+        'getUniqueDomainAndPorts(directory %s, customName %s, addUniqueHash %s',
+        directory,
+        customName,
+        addUniqueHash
+    );
     let name = DEFAULT_NAME;
+
     if (customName && typeof customName === 'string') {
         name = customName;
     } else {
-        const pkgLoc = join(pkgDir.sync(directory), 'package.json');
+        const packageDir = pkgDir.sync(directory);
+        debug(
+            'try getting package name from pkgDir.sync(%s), which is %s',
+            directory,
+            packageDir
+        );
+        const pkgLoc = join(packageDir, 'package.json');
         try {
             // eslint-disable-next-line node/no-missing-require
             const pkg = require(pkgLoc);
+            debug('retrieved %s: %O', pkgLoc, pkg);
             if (!pkg.name || typeof pkg.name !== 'string') {
                 throw new Error(
                     `package.json does not have a usable "name" field!`
                 );
             }
             name = pkg.name;
+            debug('retrieved project name %s from %s', name, pkgLoc);
         } catch (e) {
             console.warn(
                 debug.errorMsg(
@@ -129,8 +153,10 @@ function getUniqueDomainAndPorts(directory, customName, addUniqueHash) {
     // location on disk has changed.
     dirHash.update(directory);
     const digest = dirHash.digest('base64');
+    debug('digest created %s', digest);
 
     const subdomain = addUniqueHash ? `${name}-${digest.slice(0, 5)}` : name;
+    debug('subdomain created %s', subdomain);
     // Base64 truncated to 5 characters, stripped of special characters,
     // and lowercased to be a valid domain, is about 36^5 unique values.
     // There is therefore a chance of a duplicate ID and host collision,
@@ -151,6 +177,7 @@ function getUniqueDomainAndPorts(directory, customName, addUniqueHash) {
         development: 8000 + uniquePortOffset,
         staging: 9000 + uniquePortOffset
     };
+    debug('ports created %o', ports);
     // In contrast, port collisions are more likely (1 in 1000), It could be a
     // lower probability if we allowed more possible ports, but for convenience
     // and developer recognition, we limit ports to the 8xxx range for
