@@ -14,6 +14,16 @@
 # HTTP response to the client.
 # In this file, these properties get their values from a top-level
 # 'response' object, which is a recommended and best practice approach.
-status: veniaResponse.status
-headers: veniaResponse.headers
-body: veniaResponse.body
+status: response.status
+headers: response.headers
+body: response.body
+
+# Before delegating to the veniaResponse object, check for our exception case.
+# This is a hack to get around the problem with Venia's route ordering which
+# doesn't support CMS page URLs with no suffix yet.
+response:
+  when:
+    - matches: request.url.pathname
+      pattern: '/zetlen-rich-content-api-test'
+      use: veniaAppShell
+  default: veniaResponse
