@@ -33,12 +33,11 @@ response:
     - matches: request.url.pathname
       pattern: '^/(graphql|rest)(/|$)'
       use: proxy
-    # Requests to AEM go to a different proxy.
+    # Requests to the AEM API go to the AEM backend.
     - matches: request.url.pathname
       pattern: '^/content.*\.json$'
       use:
-        target:
-          inline: http://admin:admin@localhost:4502/
+        target: env.AEM_BACKEND_URL
     # Requests to create an account are handled by the top-level 'index'
     # object, which returns a generic app shell
     - matches: request.url.pathname
@@ -150,6 +149,11 @@ appShell:
 # the page type based on the request URL.
 resource:
   when:
+    # AEM pages are detected via a pathname string for now and shortcut to
+    # unknownResource.
+    - matches: request.url.pathname
+      pattern: 'experience'
+      use: unknownResource
     # As with all other context values, `urlResolver` begins resolving the first
     # time its value is requested. If UPWARD has not yet queried the GraphQL
     # service before evaluating this match clause, then it does so now.
@@ -191,13 +195,8 @@ resource:
     # a generic shell as the template file.
     - matches: urlResolver.type
       pattern: '.'
-      use:
-        inline:
-          model: unknownPageType
-          name: unknownPageType.title
-          entityTypeName:
-            inline: "Page"
-          template: './templates/generic-shell.mst'
+      use: unknownResource
+
     # This entry makes '/search.html' a valid resource path. It uses a simple
     # inline object as its resolve data and uses the generic shell as its
     # template file.
@@ -230,13 +229,25 @@ assetManifest:
       use: ./asset-manifest.json
   default: ./dist/asset-manifest.json
 
+# The unknownResource object is used when the current URL should be loaded
+# dynamically from a backend, but we haven't configured UPWARD to do any
+# special SSR for it.
+unknownResource:
+  inline:
+    model: unknownPageType
+    name: unknownPageType.title
+    entityTypeName:
+      inline: "Page"
+    template: './templates/generic-shell.mst'
+
 # The unknownPageType object contains a single 'title' property that is used
 # in the template file as the page title.
 # The top-level 'resource' object uses this object as the model data for page
 # types it does not support.
 unknownPageType:
   inline:
-    title: 'Unknown page type'
+    title:
+      inline: ''
 
 # The urlResolver object is an object containing only the relevant
 # data from the top-level 'urlResolverResult' object, which is a

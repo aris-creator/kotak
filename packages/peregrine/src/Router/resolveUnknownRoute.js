@@ -100,22 +100,18 @@ function fetchRoute(opts) {
  */
 function fetchAEMRoute(opts) {
     const url = new URL(
-        `/content/we-retail/us/en${opts.route}.json`,
+        `/content/${process.env.AEM_SLUG}/us/en${opts.route}.json`,
         opts.apiBase
     );
-    console.log('fetchAEMRoute', url.href);
     return fetch(url, {
         method: 'GET',
         credentials: 'include'
     })
         .then(res => res.json())
-        .then(json => {
-            console.log(json);
-            return {
-                type: 'AEM_PAGE',
-                id: opts.route
-            };
-        });
+        .then(() => ({
+            type: 'AEM_PAGE',
+            id: opts.route
+        }));
 }
 
 /**

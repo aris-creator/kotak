@@ -150,6 +150,23 @@
                     "default": "sandbox_8yrzsvtm_s2bg8fs563crhqzk"
                 }
             ]
+        },
+        {
+            "name": "Connecting to Adobe Experience Manager",
+            "variables": [
+                {
+                    "name": "AEM_BACKEND_URL",
+                    "type": "url",
+                    "desc": "Connect to an Adobe Experience Manager instance to render pages of AEM content when URLs match",
+                    "default": "http://admin:admin@localhost:4502/"
+                },
+                {
+                    "name": "AEM_SLUG",
+                    "type": "str",
+                    "desc": "URL base 'slug' to use when making AEM API calls. TODO: find out the technical name for this",
+                    "default": "we-retail"
+                }
+            ]
         }
     ],
     "changes": [

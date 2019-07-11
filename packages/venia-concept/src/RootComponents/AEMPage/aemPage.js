@@ -9,7 +9,7 @@ const AEMPage = props => {
     useEffect(() => {
         async function fetchAEM() {
             const url = new URL(
-                `/content/we-retail/us/en/${id}.model.json`,
+                `/content/${process.env.AEM_SLUG}/us/en/${id}.model.json`,
                 window.location
             );
             const res = await fetch(url, {
