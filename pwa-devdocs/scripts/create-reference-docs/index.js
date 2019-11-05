@@ -11,7 +11,7 @@ const config = require('./config');
 const createClassDocs = require('./createClassDocs');
 const createFunctionDocs = require('./createFunctionDocs');
 
-const docsProjectRoot = process.cwd();
+const docsProjectRoot = path.join(__dirname,'..','..');
 
 config.files.forEach(file => {
     let { target, overrides } = file;
