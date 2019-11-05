@@ -13,6 +13,8 @@ const createFunctionDocs = require('./createFunctionDocs');
 
 const docsProjectRoot = path.join(__dirname,'..','..');
 
+console.log("Docs Project Root: "+docsProjectRoot);
+
 config.files.forEach(file => {
     let { target, overrides } = file;
 
