@@ -65,9 +65,9 @@ const writeToFile = (fileDestination, fileContent) => {
                 path.relative(docsProjectRoot, fileDestination)
         );
 
-        fs.mkdirSync(path.dirname(fileDestination), { recursive: true });
+        //fs.mkdirSync(path.dirname(fileDestination), { recursive: true });
 
-        fs.writeFileSync(fileDestination, fileContent);
+        //fs.writeFileSync(fileDestination, fileContent);
     } else {
         console.error('> Skipping empty file content for', target);
     }
