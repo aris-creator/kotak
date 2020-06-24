@@ -45,6 +45,17 @@
     margin-right: 1.625rem;
 }
 
+.chevron {
+    composes: root from '../Icon/icon.css';
+    align-self: center;
+}
+
+.nextButton:focus > .chevron,
+.previousButton:focus > .chevron {
+    box-shadow: 0 0 4px 2px rgb(var(--venia-global-color-teal));
+    border-radius: 0.5rem;
+}
+
 .thumbnailList {
     align-content: stretch;
     display: grid;
