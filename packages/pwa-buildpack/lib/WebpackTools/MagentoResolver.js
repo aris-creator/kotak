@@ -48,10 +48,22 @@ class MagentoResolver {
             this._resolver = ResolverFactory.createResolver({
                 // Typical usage will consume the `fs` + `CachedInputFileSystem`, which wraps Node.js `fs` to add caching.
                 fileSystem: new CachedInputFileSystem(fs, 4000),
+                resolver: this._staleResolver,
                 ...this.config
             });
         }
         return this._resolver;
+    }
+    /**
+     *
+     * Configuration has changed. Next time resolve is called, create a new
+     * resolver with the new config, based on the old resolver.
+     *
+     * @ignore
+     */
+    _invalidate() {
+        this._staleResolver = this._resolver;
+        this._resolver = null;
     }
     /**
      * A MagentoResolver can asynchronously resolve `require` and `import`
@@ -90,6 +102,20 @@ class MagentoResolver {
         this._context = {};
         /** @ignore */
         this._requestContext = {};
+    }
+    /**
+     * Update the configuration of the resolver.
+     *
+     * @param {function} updater Callback function which will receive the
+     * config object and may modify it in place. If updater returns a value, it
+     * is used to _replace_ the current config.
+     * @memberof MagentoResolver
+     */
+    reconfigure(updater) {
+        const newConfig = updater(this.config);
+        if (newConfig) {
+            this.config = newConfig;
+        }
     }
     /**
      * Asynchronously resolve a path the same way Webpack would given the

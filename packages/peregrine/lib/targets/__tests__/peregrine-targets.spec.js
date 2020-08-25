@@ -5,7 +5,7 @@ const {
 const declare = require('../peregrine-declare');
 const intercept = require('../peregrine-intercept');
 
-test('declares a sync target talons and intercepts transformModules', () => {
+test('declares an asyncseries target talons and intercepts transformModules', async () => {
     const targets = mockTargetProvider(
         '@magento/peregrine',
         (_, dep) =>
@@ -15,7 +15,7 @@ test('declares a sync target talons and intercepts transformModules', () => {
                         tap: jest.fn()
                     },
                     transformModules: {
-                        tap: jest.fn()
+                        tapPromise: jest.fn()
                     }
                 }
             }[dep])
@@ -25,12 +25,12 @@ test('declares a sync target talons and intercepts transformModules', () => {
     const hook = jest.fn();
     // no implementation testing in declare phase
     targets.own.talons.tap('test', hook);
-    targets.own.talons.call('woah');
+    await targets.own.talons.promise('woah');
     expect(hook).toHaveBeenCalledWith('woah');
 
     intercept(targets);
     const buildpackTargets = targets.of('@magento/pwa-buildpack');
-    expect(buildpackTargets.transformModules.tap).toHaveBeenCalled();
+    expect(buildpackTargets.transformModules.tapPromise).toHaveBeenCalled();
 });
 
 test('enables third parties to wrap talons', async () => {

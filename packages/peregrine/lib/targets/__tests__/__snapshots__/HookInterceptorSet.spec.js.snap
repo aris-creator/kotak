@@ -1,0 +1,227 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`exposes each hook under namespace hierarchy following directory structure 1`] = `
+Array [
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/hooks/useAwaitQuery.js",
+    "options": Object {
+      "exportName": "useAwaitQuery",
+      "wrapperModule": "frosting",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/hooks/useCarousel.js",
+    "options": Object {
+      "exportName": "useCarousel",
+      "wrapperModule": "wd-40",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/hooks/useDropdown.js",
+    "options": Object {
+      "exportName": "useDropdown",
+      "wrapperModule": "curtains",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/hooks/useEventListener.js",
+    "options": Object {
+      "exportName": "useEventListener",
+      "wrapperModule": "fanfare",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/hooks/usePagination.js",
+    "options": Object {
+      "exportName": "usePagination",
+      "wrapperModule": "knickknacks",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/hooks/useResetForm.js",
+    "options": Object {
+      "exportName": "useResetForm",
+      "wrapperModule": "unsettery",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/hooks/useRestApi.js",
+    "options": Object {
+      "exportName": "useRestApi",
+      "wrapperModule": "en passant",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/hooks/useRestResponse.js",
+    "options": Object {
+      "exportName": "useRestResponse",
+      "wrapperModule": "indolence",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/hooks/useScrollIntoView.js",
+    "options": Object {
+      "exportName": "useScrollIntoView",
+      "wrapperModule": "physics",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/hooks/useScrollLock.js",
+    "options": Object {
+      "exportName": "useScrollLock",
+      "wrapperModule": "crisis",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/hooks/useScrollTopOnChange.js",
+    "options": Object {
+      "exportName": "useScrollTopOnChange",
+      "wrapperModule": "mutability",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/hooks/useSearchParam.js",
+    "options": Object {
+      "exportName": "useSearchParam",
+      "wrapperModule": "optimism",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/hooks/useSort.js",
+    "options": Object {
+      "exportName": "useSort",
+      "wrapperModule": "intent",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/hooks/useWindowSize.js",
+    "options": Object {
+      "exportName": "useWindowSize",
+      "wrapperModule": "disbelief",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+]
+`;
+
+exports[`exposes each talon under namespace hierarchy following directory structure 1`] = `
+Array [
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/talons/Accordion/useAccordion.js",
+    "options": Object {
+      "exportName": "useAccordion",
+      "wrapperModule": "cellophane",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/talons/AccountChip/useAccountChip.js",
+    "options": Object {
+      "exportName": "useAccountChip",
+      "wrapperModule": "dust",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/talons/AccountMenu/useAccountMenuItems.js",
+    "options": Object {
+      "exportName": "useAccountMenuItems",
+      "wrapperModule": "drapes",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/talons/App/useApp.js",
+    "options": Object {
+      "exportName": "useApp",
+      "wrapperModule": "bunting",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/talons/AuthBar/useAuthBar.js",
+    "options": Object {
+      "exportName": "useAuthBar",
+      "wrapperModule": "lace",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/talons/AuthModal/useAuthModal.js",
+    "options": Object {
+      "exportName": "useAuthModal",
+      "wrapperModule": "muslin",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/talons/Breadcrumbs/useBreadcrumbs.js",
+    "options": Object {
+      "exportName": "useBreadcrumbs",
+      "wrapperModule": "egg",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/talons/CartPage/GiftCards/useGiftCard.js",
+    "options": Object {
+      "exportName": "useGiftCard",
+      "wrapperModule": "envelope",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/talons/CartPage/GiftCards/useGiftCards.js",
+    "options": Object {
+      "exportName": "useGiftCards",
+      "wrapperModule": "ribbons",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/talons/CartPage/useCartPage.js",
+    "options": Object {
+      "exportName": "useCartPage",
+      "wrapperModule": "silk",
+    },
+    "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
+    "type": "source",
+  },
+]
+`;

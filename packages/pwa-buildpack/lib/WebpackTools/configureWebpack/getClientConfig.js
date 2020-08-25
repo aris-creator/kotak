@@ -4,20 +4,11 @@
 const debug = require('debug')('pwa-buildpack:createClientConfig');
 const path = require('path');
 const webpack = require('webpack');
-const WebpackAssetsManifest = require('webpack-assets-manifest');
 const TerserPlugin = require('terser-webpack-plugin');
 
 const getModuleRules = require('./getModuleRules');
+const getPlugins = require('./getPlugins');
 const getResolveLoader = require('./getResolveLoader');
-
-const RootComponentsPlugin = require('../plugins/RootComponentsPlugin');
-const ServiceWorkerPlugin = require('../plugins/ServiceWorkerPlugin');
-const UpwardIncludePlugin = require('../plugins/UpwardIncludePlugin');
-const LocalizationPlugin = require('../plugins/LocalizationPlugin');
-
-const VirtualModulesPlugin = require('webpack-virtual-modules');
-
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 function isDevServer() {
     return process.argv.find(v => v.includes('webpack-dev-server'));
@@ -34,12 +25,10 @@ async function getClientConfig(opts) {
         mode,
         context,
         paths,
-        hasFlag,
         vendor,
         projectConfig,
         stats,
-        resolver,
-        bus
+        resolver
     } = opts;
 
     let vendorTest = '[\\/]node_modules[\\/]';
@@ -49,9 +38,6 @@ async function getClientConfig(opts) {
     }
 
     debug('Creating client config');
-
-    // Create an instance of virtual modules enabling any plugin to create new virtual modules
-    const virtualModules = new VirtualModulesPlugin();
 
     const config = {
         mode,
@@ -73,79 +59,7 @@ async function getClientConfig(opts) {
         },
         resolve: resolver.config,
         resolveLoader: getResolveLoader(),
-        plugins: [
-            new RootComponentsPlugin({
-                rootComponentsDirs: [
-                    ...hasFlag('rootComponents'),
-                    context
-                ].reduce(
-                    (searchPaths, moduleDir) => [
-                        ...searchPaths,
-                        path.join(moduleDir, 'RootComponents'),
-                        path.join(moduleDir, 'src', 'RootComponents'),
-                        path.join(moduleDir, 'lib', 'RootComponents')
-                    ],
-                    []
-                ),
-                context
-            }),
-            new webpack.EnvironmentPlugin(projectConfig.env),
-            new UpwardIncludePlugin({
-                bus,
-                upwardDirs: [...hasFlag('upward'), context]
-            }),
-            new WebpackAssetsManifest({
-                output: 'asset-manifest.json',
-                entrypoints: true,
-                publicPath: '/',
-                // Add explicit properties to the asset manifest for
-                // upward.yml to use when evaluating app shell templates.
-                transform(assets) {
-                    // All RootComponents go to prefetch, and all client scripts
-                    // go to load.
-                    assets.bundles = {
-                        load: assets.entrypoints.client.js,
-                        prefetch: []
-                    };
-                    Object.entries(assets).forEach(([name, value]) => {
-                        if (name.match(/^RootCmp.*\.js$/)) {
-                            const filenames = Array.isArray(value)
-                                ? value
-                                : [value];
-                            assets.bundles.prefetch.push(...filenames);
-                        }
-                        const ext = path.extname(name);
-                        const type = ext && ext.replace(/^\./, '');
-                        if (type) {
-                            if (!assets[type]) {
-                                assets[type] = {};
-                            }
-                            assets[type][path.basename(name, ext)] = value;
-                        }
-                    });
-                }
-            }),
-            new ServiceWorkerPlugin({
-                mode,
-                paths,
-                injectManifest: true,
-                enableServiceWorkerDebugging: !!projectConfig.section(
-                    'devServer'
-                ).serviceWorkerEnabled,
-                injectManifestConfig: {
-                    include: [/\.(?:css|js|html|svg)$/],
-                    swSrc: './src/ServiceWorker/sw.js',
-                    swDest: './sw.js'
-                }
-            }),
-            new ReactRefreshWebpackPlugin(),
-            new LocalizationPlugin({
-                virtualModules,
-                context,
-                dirs: [...hasFlag('i18n'), context] // Directories to search for i18n/*.json files
-            }),
-            virtualModules
-        ],
+        plugins: await getPlugins(opts),
         devtool: 'source-map',
         optimization: {
             splitChunks: {

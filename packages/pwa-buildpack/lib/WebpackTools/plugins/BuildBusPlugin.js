@@ -1,5 +1,5 @@
 class BuildBusPlugin {
-    constructor(bus, trackingQueue) {
+    constructor(bus, trackingQueue = []) {
         this.bus = bus;
         this._trackingQueue = trackingQueue;
         this._eventOriginTags = new WeakMap();
@@ -19,25 +19,14 @@ class BuildBusPlugin {
         return tag;
     }
     apply(compiler) {
-        if (this._trackingQueue) {
-            compiler.hooks.thisCompilation.tap(
-                'BuildBusPlugin',
-                compilation => {
-                    const logger = compilation.getLogger('BuildBusPlugin');
-                    const logBusTracking = (origin, eventName, details) => {
-                        logger.info(
-                            eventName,
-                            this._eventOriginTag(origin),
-                            details
-                        );
-                    };
-                    this._trackingQueue.forEach(line =>
-                        logBusTracking(...line)
-                    );
-                    this.bus.attach('BuildBusPlugin', logBusTracking);
-                }
-            );
-        }
+        compiler.hooks.thisCompilation.tap('BuildBusPlugin', compilation => {
+            const logger = compilation.getLogger('BuildBusPlugin');
+            const logBusTracking = (origin, eventName, details) => {
+                logger.info(eventName, this._eventOriginTag(origin), details);
+            };
+            this._trackingQueue.forEach(line => logBusTracking(...line));
+            this.bus.attach('BuildBusPlugin', logBusTracking);
+        });
         this.bus
             .getTargetsOf('@magento/pwa-buildpack')
             .webpackCompiler.call(compiler);

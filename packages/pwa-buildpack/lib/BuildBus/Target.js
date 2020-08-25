@@ -2,7 +2,7 @@
  * @module Buildpack/BuildBus
  */
 
-const Trackable = require('./Trackable');
+const Trackable = require('../Utilities/Trackable');
 
 const interceptionTypes = {
     tap: 'sync',

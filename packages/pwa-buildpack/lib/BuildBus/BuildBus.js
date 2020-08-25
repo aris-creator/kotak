@@ -5,7 +5,7 @@
 const path = require('path');
 const pertain = require('pertain');
 const TargetProvider = require('./TargetProvider');
-const Trackable = require('./Trackable');
+const Trackable = require('../Utilities/Trackable');
 
 /**
  * @ignore

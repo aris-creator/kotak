@@ -201,12 +201,10 @@ module.exports = targets => {
                  * argument. So we expect it and bind it.
                  */
                 ...tapInfo,
-                fn: (requestTransform, ...args) => {
-                    // Ensure the request always has the right `requestor`.
-                    const requestOwnModuleTransform = request =>
-                        requestTransform({ ...request, requestor });
-                    // yoink!
-                    return callback(requestOwnModuleTransform, ...args);
+                fn: (addTransform, ...args) => {
+                    // Tell the transformConfig who the current `requestor` is.
+                    addTransform._setRequestor(requestor);
+                    return callback(addTransform, ...args);
                 }
             };
         }

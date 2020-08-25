@@ -2,7 +2,7 @@
  * @module Buildpack/BuildBus
  */
 const Target = require('./Target');
-const Trackable = require('./Trackable');
+const Trackable = require('../Utilities/Trackable');
 const {
     appearsToBeTapable,
     getTapableType,

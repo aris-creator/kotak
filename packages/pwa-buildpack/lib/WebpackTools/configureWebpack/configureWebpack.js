@@ -6,15 +6,19 @@ const { promisify } = require('util');
 const stat = promisify(require('fs').stat);
 const path = require('path');
 
+const VirtualModulesPlugin = require('webpack-virtual-modules');
+
 const loadEnvironment = require('../../Utilities/loadEnvironment');
 const getClientConfig = require('./getClientConfig');
 const getModuleRules = require('./getModuleRules');
+const getPlugins = require('./getPlugins');
 const getResolveLoader = require('./getResolveLoader');
 const getSpecialFlags = require('./getSpecialFlags');
 const MagentoResolver = require('../MagentoResolver');
 const BuildBus = require('../../BuildBus');
 const BuildBusPlugin = require('../plugins/BuildBusPlugin');
 const ModuleTransformConfig = require('../ModuleTransformConfig');
+const prettyLogger = require('../../util/pretty-logger');
 
 /**
  * Helps convert PWA Studio Buildpack settings and project properties into
@@ -124,9 +128,8 @@ async function configureWebpack(options) {
         };
     }
 
-    const busTrackingQueue = [];
     const bus = BuildBus.for(context);
-    bus.attach('configureWebpack', (...args) => busTrackingQueue.push(args));
+    bus.attach('configureWebpack', prettyLogger.info);
     bus.init();
 
     const babelRootMode = await getBabelRootMode(context);
@@ -159,7 +162,7 @@ async function configureWebpack(options) {
 
     const mode = getMode(options.env, projectConfig);
 
-    const transforms = new ModuleTransformConfig(
+    const transforms = ModuleTransformConfig.create(
         resolver,
         require(path.resolve(context, 'package.json')).name
     );
@@ -168,9 +171,14 @@ async function configureWebpack(options) {
 
     await bus
         .getTargetsOf('@magento/pwa-buildpack')
-        .transformModules.promise(x => transforms.add(x));
+        .transformModules.promise(transforms);
 
-    const transformRequests = await transforms.toLoaderOptions();
+    const transformRequests = await transforms.groupByType();
+
+    const vendor = options.vendor || [];
+
+    // Create an instance of virtual modules enabling any plugin to create new virtual modules
+    const virtualModules = new VirtualModulesPlugin();
 
     const configHelper = {
         mode,
@@ -182,15 +190,14 @@ async function configureWebpack(options) {
         resolver,
         stats,
         transformRequests,
-        bus
+        bus,
+        vendor,
+        virtualModules
     };
 
-    const clientConfig = await getClientConfig({
-        ...configHelper,
-        vendor: options.vendor || []
-    });
+    const clientConfig = await getClientConfig(configHelper);
 
-    const buildBusPlugin = new BuildBusPlugin(bus, busTrackingQueue);
+    const buildBusPlugin = new BuildBusPlugin(bus);
     clientConfig.plugins.unshift(buildBusPlugin);
 
     return clientConfig;
@@ -198,6 +205,7 @@ async function configureWebpack(options) {
 
 configureWebpack.getClientConfig = getClientConfig;
 configureWebpack.getModuleRules = getModuleRules;
+configureWebpack.getPlugins = getPlugins;
 configureWebpack.getResolveLoader = getResolveLoader;
 configureWebpack.getSpecialFlags = getSpecialFlags;
 
