@@ -11,7 +11,7 @@ const TargetableHook = require('./TargetableHook');
  */
 class HookInterceptorSet extends Trackable {
     /** @hideconstructor */
-    constructor(baseDir, trackingOwner = () => {}) {
+    constructor(baseDir, trackingOwner) {
         super();
         this._baseDir = baseDir;
         this._all = [];

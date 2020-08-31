@@ -1,6 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`exposes each hook under namespace hierarchy following directory structure 1`] = `
+exports[`HookInterceptorSet for hooks target API exposes each hook under namespace hierarchy following directory structure 1`] = `
+HookInterceptorSetObject {
+  "base dir": "packages/peregrine/lib/hooks",
+  "useAwaitQuery": TargetableHookObject {
+    "file": "@magento/peregrine/lib/hooks/useAwaitQuery.js",
+  },
+  "useCarousel": TargetableHookObject {
+    "file": "@magento/peregrine/lib/hooks/useCarousel.js",
+  },
+  "useDropdown": TargetableHookObject {
+    "file": "@magento/peregrine/lib/hooks/useDropdown.js",
+  },
+  "useEventListener": TargetableHookObject {
+    "file": "@magento/peregrine/lib/hooks/useEventListener.js",
+  },
+  "usePagination": TargetableHookObject {
+    "file": "@magento/peregrine/lib/hooks/usePagination.js",
+  },
+  "useResetForm": TargetableHookObject {
+    "file": "@magento/peregrine/lib/hooks/useResetForm.js",
+  },
+  "useRestApi": TargetableHookObject {
+    "file": "@magento/peregrine/lib/hooks/useRestApi.js",
+  },
+  "useRestResponse": TargetableHookObject {
+    "file": "@magento/peregrine/lib/hooks/useRestResponse.js",
+  },
+  "useScrollIntoView": TargetableHookObject {
+    "file": "@magento/peregrine/lib/hooks/useScrollIntoView.js",
+  },
+  "useScrollLock": TargetableHookObject {
+    "file": "@magento/peregrine/lib/hooks/useScrollLock.js",
+  },
+  "useScrollTopOnChange": TargetableHookObject {
+    "file": "@magento/peregrine/lib/hooks/useScrollTopOnChange.js",
+  },
+  "useSearchParam": TargetableHookObject {
+    "file": "@magento/peregrine/lib/hooks/useSearchParam.js",
+  },
+  "useSort": TargetableHookObject {
+    "file": "@magento/peregrine/lib/hooks/useSort.js",
+  },
+  "useTypePolicies": TargetableHookObject {
+    "file": "@magento/peregrine/lib/hooks/useTypePolicies.js",
+  },
+  "useWindowSize": TargetableHookObject {
+    "file": "@magento/peregrine/lib/hooks/useWindowSize.js",
+  },
+}
+`;
+
+exports[`HookInterceptorSet for hooks target API stores a queue of transform requests for hook files 1`] = `
 Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/hooks/useAwaitQuery.js",
@@ -131,13 +182,473 @@ Array [
 ]
 `;
 
-exports[`exposes each talon under namespace hierarchy following directory structure 1`] = `
+exports[`HookInterceptorSet for talons target API exposes each talon under namespace hierarchy following directory structure 1`] = `
+HookInterceptorSetObject {
+  "Accordion": Object {
+    "useAccordion": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Accordion/useAccordion.js",
+    },
+  },
+  "AccountChip": Object {
+    "useAccountChip": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/AccountChip/useAccountChip.js",
+    },
+  },
+  "AccountMenu": Object {
+    "useAccountMenuItems": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/AccountMenu/useAccountMenuItems.js",
+    },
+  },
+  "AddressBookPage": Object {
+    "useAddressBookPage": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/AddressBookPage/useAddressBookPage.js",
+    },
+  },
+  "App": Object {
+    "useApp": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/App/useApp.js",
+    },
+  },
+  "AuthBar": Object {
+    "useAuthBar": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/AuthBar/useAuthBar.js",
+    },
+  },
+  "AuthModal": Object {
+    "useAuthModal": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/AuthModal/useAuthModal.js",
+    },
+  },
+  "Breadcrumbs": Object {
+    "useBreadcrumbs": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Breadcrumbs/useBreadcrumbs.js",
+    },
+  },
+  "CartPage": Object {
+    "GiftCards": Object {
+      "useGiftCard": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/CartPage/GiftCards/useGiftCard.js",
+      },
+      "useGiftCards": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/CartPage/GiftCards/useGiftCards.js",
+      },
+    },
+    "GiftOptions": Object {
+      "useGiftOptions": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/CartPage/GiftOptions/useGiftOptions.js",
+      },
+    },
+    "PriceAdjustments": Object {
+      "ShippingMethods": Object {
+        "useShippingForm": TargetableHookObject {
+          "file": "@magento/peregrine/lib/talons/CartPage/PriceAdjustments/ShippingMethods/useShippingForm.js",
+        },
+        "useShippingMethods": TargetableHookObject {
+          "file": "@magento/peregrine/lib/talons/CartPage/PriceAdjustments/ShippingMethods/useShippingMethods.js",
+        },
+        "useShippingRadios": TargetableHookObject {
+          "file": "@magento/peregrine/lib/talons/CartPage/PriceAdjustments/ShippingMethods/useShippingRadios.js",
+        },
+      },
+      "useCouponCode": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/CartPage/PriceAdjustments/useCouponCode.js",
+      },
+    },
+    "PriceSummary": Object {
+      "usePriceSummary": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/CartPage/PriceSummary/usePriceSummary.js",
+      },
+    },
+    "ProductListing": Object {
+      "EditModal": Object {
+        "useEditModal": TargetableHookObject {
+          "file": "@magento/peregrine/lib/talons/CartPage/ProductListing/EditModal/useEditModal.js",
+        },
+        "useProductForm": TargetableHookObject {
+          "file": "@magento/peregrine/lib/talons/CartPage/ProductListing/EditModal/useProductForm.js",
+        },
+      },
+      "useProduct": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/CartPage/ProductListing/useProduct.js",
+      },
+      "useProductListing": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/CartPage/ProductListing/useProductListing.js",
+      },
+      "useQuantity": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/CartPage/ProductListing/useQuantity.js",
+      },
+    },
+    "useCartPage": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/CartPage/useCartPage.js",
+    },
+  },
+  "CategoryList": Object {
+    "useCategoryList": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/CategoryList/useCategoryList.js",
+    },
+    "useCategoryTile": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/CategoryList/useCategoryTile.js",
+    },
+  },
+  "CategoryTree": Object {
+    "useCategoryBranch": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/CategoryTree/useCategoryBranch.js",
+    },
+    "useCategoryLeaf": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/CategoryTree/useCategoryLeaf.js",
+    },
+    "useCategoryTree": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/CategoryTree/useCategoryTree.js",
+    },
+  },
+  "Checkout": Object {
+    "Receipt": Object {
+      "useReceipt": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/Checkout/Receipt/useReceipt.js",
+      },
+    },
+    "useAddressForm": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Checkout/useAddressForm.js",
+    },
+    "useEditableForm": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Checkout/useEditableForm.js",
+    },
+    "useFlow": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Checkout/useFlow.js",
+    },
+    "useForm": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Checkout/useForm.js",
+    },
+    "useOverview": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Checkout/useOverview.js",
+    },
+    "usePaymentsForm": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Checkout/usePaymentsForm.js",
+    },
+    "usePaymentsFormItems": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Checkout/usePaymentsFormItems.js",
+    },
+    "useShippingForm": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Checkout/useShippingForm.js",
+    },
+  },
+  "CheckoutPage": Object {
+    "AddressBook": Object {
+      "useAddressBook": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/CheckoutPage/AddressBook/useAddressBook.js",
+      },
+      "useAddressCard": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/CheckoutPage/AddressBook/useAddressCard.js",
+      },
+    },
+    "ItemsReview": Object {
+      "useItemsReview": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/CheckoutPage/ItemsReview/useItemsReview.js",
+      },
+    },
+    "OrderConfirmationPage": Object {
+      "useCreateAccount": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/CheckoutPage/OrderConfirmationPage/useCreateAccount.js",
+      },
+      "useOrderConfirmationPage": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/CheckoutPage/OrderConfirmationPage/useOrderConfirmationPage.js",
+      },
+    },
+    "PaymentInformation": Object {
+      "useCreditCard": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/CheckoutPage/PaymentInformation/useCreditCard.js",
+      },
+      "useEditModal": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/CheckoutPage/PaymentInformation/useEditModal.js",
+      },
+      "usePaymentInformation": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/CheckoutPage/PaymentInformation/usePaymentInformation.js",
+      },
+      "usePaymentMethods": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/CheckoutPage/PaymentInformation/usePaymentMethods.js",
+      },
+      "useSummary": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/CheckoutPage/PaymentInformation/useSummary.js",
+      },
+    },
+    "ShippingInformation": Object {
+      "AddressForm": Object {
+        "useCustomerForm": TargetableHookObject {
+          "file": "@magento/peregrine/lib/talons/CheckoutPage/ShippingInformation/AddressForm/useCustomerForm.js",
+        },
+        "useGuestForm": TargetableHookObject {
+          "file": "@magento/peregrine/lib/talons/CheckoutPage/ShippingInformation/AddressForm/useGuestForm.js",
+        },
+      },
+      "useEditModal": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/CheckoutPage/ShippingInformation/useEditModal.js",
+      },
+      "useShippingInformation": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/CheckoutPage/ShippingInformation/useShippingInformation.js",
+      },
+    },
+    "useCheckoutPage": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/CheckoutPage/useCheckoutPage.js",
+    },
+    "useShippingMethod": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/CheckoutPage/useShippingMethod.js",
+    },
+  },
+  "Country": Object {
+    "useCountry": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Country/useCountry.js",
+    },
+  },
+  "CreateAccount": Object {
+    "useCreateAccount": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/CreateAccount/useCreateAccount.js",
+    },
+  },
+  "CreateAccountPage": Object {
+    "useCreateAccountPage": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/CreateAccountPage/useCreateAccountPage.js",
+    },
+  },
+  "FilterModal": Object {
+    "useFilterBlock": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/FilterModal/useFilterBlock.js",
+    },
+    "useFilterFooter": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/FilterModal/useFilterFooter.js",
+    },
+    "useFilterModal": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/FilterModal/useFilterModal.js",
+    },
+    "useFilterState": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/FilterModal/useFilterState.js",
+    },
+  },
+  "Footer": Object {
+    "useFooter": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Footer/useFooter.js",
+    },
+  },
+  "ForgotPassword": Object {
+    "useForgotPassword": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/ForgotPassword/useForgotPassword.js",
+    },
+  },
+  "FormError": Object {
+    "useFormError": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/FormError/useFormError.js",
+    },
+  },
+  "Header": Object {
+    "useAccountMenu": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Header/useAccountMenu.js",
+    },
+    "useAccountTrigger": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Header/useAccountTrigger.js",
+    },
+    "useCartTrigger": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Header/useCartTrigger.js",
+    },
+    "useHeader": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Header/useHeader.js",
+    },
+    "useNavigationTrigger": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Header/useNavigationTrigger.js",
+    },
+    "useSearchTrigger": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Header/useSearchTrigger.js",
+    },
+  },
+  "Image": Object {
+    "useImage": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Image/useImage.js",
+    },
+    "usePlaceholderImage": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Image/usePlaceholderImage.js",
+    },
+    "useResourceImage": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Image/useResourceImage.js",
+    },
+  },
+  "LegacyMiniCart": Object {
+    "useBody": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/LegacyMiniCart/useBody.js",
+    },
+    "useCartOptions": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/LegacyMiniCart/useCartOptions.js",
+    },
+    "useEditItem": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/LegacyMiniCart/useEditItem.js",
+    },
+    "useEmptyMiniCart": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/LegacyMiniCart/useEmptyMiniCart.js",
+    },
+    "useHeader": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/LegacyMiniCart/useHeader.js",
+    },
+    "useKebab": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/LegacyMiniCart/useKebab.js",
+    },
+    "useLegacyMiniCart": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/LegacyMiniCart/useLegacyMiniCart.js",
+    },
+    "useProduct": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/LegacyMiniCart/useProduct.js",
+    },
+  },
+  "MagentoRoute": Object {
+    "useMagentoRoute": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/MagentoRoute/useMagentoRoute.js",
+    },
+  },
+  "MiniCart": Object {
+    "useItem": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/MiniCart/useItem.js",
+    },
+    "useMiniCart": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/MiniCart/useMiniCart.js",
+    },
+  },
+  "MyAccount": Object {
+    "useCommunicationsPage": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/MyAccount/useCommunicationsPage.js",
+    },
+    "useMyAccount": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/MyAccount/useMyAccount.js",
+    },
+    "useResetPassword": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/MyAccount/useResetPassword.js",
+    },
+  },
+  "Navigation": Object {
+    "useNavigation": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Navigation/useNavigation.js",
+    },
+    "useNavigationHeader": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Navigation/useNavigationHeader.js",
+    },
+  },
+  "OrderHistoryPage": Object {
+    "useOrderHistoryPage": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/OrderHistoryPage/useOrderHistoryPage.js",
+    },
+  },
+  "Pagination": Object {
+    "usePagination": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Pagination/usePagination.js",
+    },
+  },
+  "Password": Object {
+    "usePassword": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Password/usePassword.js",
+    },
+  },
+  "ProductFullDetail": Object {
+    "useProductFullDetail": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/ProductFullDetail/useProductFullDetail.js",
+    },
+  },
+  "ProductImageCarousel": Object {
+    "useProductImageCarousel": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/ProductImageCarousel/useProductImageCarousel.js",
+    },
+    "useThumbnail": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/ProductImageCarousel/useThumbnail.js",
+    },
+  },
+  "ProductOptions": Object {
+    "useOption": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/ProductOptions/useOption.js",
+    },
+    "useOptions": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/ProductOptions/useOptions.js",
+    },
+    "useSwatch": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/ProductOptions/useSwatch.js",
+    },
+    "useTile": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/ProductOptions/useTile.js",
+    },
+  },
+  "Region": Object {
+    "useRegion": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Region/useRegion.js",
+    },
+  },
+  "RootComponents": Object {
+    "Category": Object {
+      "useCategoryContent": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/RootComponents/Category/useCategoryContent.js",
+      },
+      "useNoProductsFound": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/RootComponents/Category/useNoProductsFound.js",
+      },
+    },
+    "Product": Object {
+      "useProduct": TargetableHookObject {
+        "file": "@magento/peregrine/lib/talons/RootComponents/Product/useProduct.js",
+      },
+    },
+  },
+  "SearchBar": Object {
+    "useAutocomplete": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/SearchBar/useAutocomplete.js",
+    },
+    "useSearchBar": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/SearchBar/useSearchBar.js",
+    },
+    "useSearchField": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/SearchBar/useSearchField.js",
+    },
+    "useSuggestedCategory": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/SearchBar/useSuggestedCategory.js",
+    },
+    "useSuggestions": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/SearchBar/useSuggestions.js",
+    },
+  },
+  "SearchPage": Object {
+    "useSearchPage": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/SearchPage/useSearchPage.js",
+    },
+  },
+  "SignIn": Object {
+    "useSignIn": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/SignIn/useSignIn.js",
+    },
+  },
+  "StockStatusMessage": Object {
+    "useStockStatusMessage": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/StockStatusMessage/useStockStatusMessage.js",
+    },
+  },
+  "WishlistPage": Object {
+    "useWishlist": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/WishlistPage/useWishlist.js",
+    },
+    "useWishlistPage": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/WishlistPage/useWishlistPage.js",
+    },
+  },
+  "base dir": "packages/peregrine/lib/talons",
+}
+`;
+
+exports[`HookInterceptorSet for talons target API stores a queue of transform requests for talon files 1`] = `
 Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/talons/Accordion/useAccordion.js",
     "options": Object {
+      "contents": "export default () => 'an inline function!'",
+      "virtualFilePath": "@magento/peregrine/lib/talons/Accordion/useAccordion__VIRTUAL__0.js",
+    },
+    "transformModule": "/Volumes/CaseSensitive/pwa-studio/packages/pwa-buildpack/lib/WebpackTools/plugins/VirtualModulesPlugin.js",
+    "type": "plugin",
+  },
+  Object {
+    "fileToTransform": "@magento/peregrine/lib/talons/Accordion/useAccordion.js",
+    "options": Object {
       "exportName": "useAccordion",
-      "wrapperModule": "cellophane",
+      "wrapperModule": "@magento/peregrine/lib/talons/Accordion/useAccordion__VIRTUAL__0.js",
     },
     "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
     "type": "source",

@@ -1,6 +1,6 @@
 const { TargetableESModule } = require('@magento/pwa-buildpack');
 
-class TargetableTalon {
+class TargetableHook {
     constructor(talonPath, talonConfig, { exportName }) {
         this._exportName = exportName;
         this._talonModule = new TargetableESModule(talonPath, talonConfig);
@@ -29,4 +29,4 @@ class TargetableTalon {
     }
 }
 
-module.exports = TargetableTalon;
+module.exports = TargetableHook;
