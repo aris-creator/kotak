@@ -1,11 +1,4 @@
-const path = require('path');
 const Trackable = require('../../Utilities/Trackable');
-const virtualModulePluginPath = require.resolve(
-    '../plugins/VirtualModulesPlugin'
-);
-
-let ids = 0;
-
 /**
  * A module that can be changed by a third party.
  *
@@ -22,30 +15,6 @@ class TargetableModule extends Trackable {
         this._queuedTransforms = [];
         this.attach(this.file, trackingOwner);
     }
-    _addVirtualFile(contents) {
-        const extension = path.extname(this.file);
-        const virtualFilePath = path.join(
-            path.dirname(this.file),
-            `${path.basename(
-                this.file,
-                extension
-            )}__VIRTUAL__${ids++}${extension}`
-        );
-        const request = {
-            type: 'plugin',
-            fileToTransform: this.file,
-            transformModule: virtualModulePluginPath,
-            options: { contents, virtualFilePath }
-        };
-        this._queuedTransforms.push(request);
-        this.track('addVirtualFile', { from: this.file, to: virtualFilePath });
-        return virtualFilePath;
-    }
-    _normalizeOptionalFirstArg(arg1, arg2, defaultFirstArg) {
-        return arg2 === undefined
-            ? [defaultFirstArg, arg1]
-            : [arg1 || defaultFirstArg, arg2];
-    }
     addTransform(type, transformModule, options) {
         const request = {
             type,
@@ -59,19 +28,6 @@ class TargetableModule extends Trackable {
     }
     flush() {
         return this._queuedTransforms.splice(0, this._queuedTransforms.length);
-    }
-    /**
-     * Replace this module with the source code provided.
-     *
-     * All transforms registered so far on this module are canceled.
-     * The new module has no access to the old module, unlike with `.wrap`.
-     *
-     * @param {string} newSource Source text of the new module, as a string.
-     */
-    replace(source) {
-        this.reset();
-        const virtualSourcePath = this._addVirtualFile(source.toString());
-        return this.addTransform('replace', virtualSourcePath);
     }
     /**
      * Replace this module with another module.

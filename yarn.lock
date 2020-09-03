@@ -3404,6 +3404,11 @@ acorn@^7.1.0, acorn@^7.1.1:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.1.1.tgz#e35668de0b402f359de515c5482a1ab9f89a69bf"
   integrity sha512-add7dgA5ppRPxCFJoAGfMDi7PIBXq1RtGo7BhbLaxwrXPOmw8gq48Y9ozT01hUKy9byMjlR20EJhu5zlkErEkg==
 
+acorn@~8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.0.1.tgz#d7e8eca9b71d5840db0e7e415b3b2b20e250f938"
+  integrity sha512-dmKn4pqZ29iQl2Pvze1zTrps2luvls2PBY//neO2WJ0s10B3AxJXshN+Ph7B4GrhfGhHXrl4dnUwyNNXQcnWGQ==
+
 address@1.1.2, address@^1.0.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/address/-/address-1.1.2.tgz#bf1116c9c758c51b7a933d296b72c221ed9428b6"
@@ -17825,7 +17830,7 @@ z-schema@^3.18.2:
   optionalDependencies:
     commander "^2.7.1"
 
-zen-observable-ts@^0.8.20:
+zen-observable-ts@^0.8.21:
   version "0.8.21"
   resolved "https://registry.yarnpkg.com/zen-observable-ts/-/zen-observable-ts-0.8.21.tgz#85d0031fbbde1eba3cd07d3ba90da241215f421d"
   integrity sha512-Yj3yXweRc8LdRMrCC8nIc4kkjWecPAUVh0TI0OUrWXx6aX790vLcDlWca6I4vsyCGH3LpWxq0dJRcMOFoVqmeg==

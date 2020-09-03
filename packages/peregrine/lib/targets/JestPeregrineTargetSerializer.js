@@ -35,7 +35,7 @@ const serializeInterceptorSet = (
 ) => {
     const sanitized = {
         // display but relativize base directory
-        'base dir': path.relative(process.cwd(), val._baseDir)
+        'base dir': path.relative(process.cwd(), val._hookDir)
     };
     // omit private properties
     for (const [key, value] of Object.entries(val)) {

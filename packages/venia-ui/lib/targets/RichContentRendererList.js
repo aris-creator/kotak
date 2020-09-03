@@ -1,10 +1,7 @@
-const path = require('path');
-const loader = require.resolve('./rendererCollectionLoader');
+const TargetableESModuleArray = require('@magento/pwa-buildpack/lib/WebpackTools/transform/TargetableESModuleArray');
 
-const renderersListPath = path.resolve(
-    __dirname,
-    '../components/RichContent/richContentRenderers.js'
-);
+const renderersListPath =
+    '@magento/venia-ui/lib/components/RichContent/richContentRenderers.js';
 
 /**
  * A registry of rich content renderering strategies used by the Venia
@@ -13,9 +10,12 @@ const renderersListPath = path.resolve(
  */
 class RichContentRendererList {
     /** @hideconstructor */
-    constructor() {
-        this._list = [];
-        this.ident = this.constructor.name;
+    constructor(transformModulesTarget) {
+        this._list = new TargetableESModuleArray(
+            renderersListPath,
+            transformModulesTarget
+        );
+        this.transformModulesTarget = transformModulesTarget;
     }
     /**
      * Add a rendering strategy to the RichContent component.
@@ -35,38 +35,25 @@ class RichContentRendererList {
                 `richContentRenderers target: Argument is not a valid rich content renderer strategy. A valid strategy must have a JSX element name as "componentName" and a resolvable path to the renderer module as "importPath".`
             );
         }
-        this._list.push(renderer);
+        this._list.prepend(
+            `import * as ${renderer.componentName} from '${
+                renderer.importPath
+            }';`
+        );
     }
-    /**
-     * Inject the loader which generates the list of renderers as an array.
-     * @ignore
-     * @param {Object} module - Webpack Module of the renderers list.
-     */
-    inject(mod) {
-        mod.loaders.push({
-            ident: this.ident,
-            loader,
-            options: {
-                renderers: this._list.reverse()
-            }
+    useTarget(target) {
+        this.transformModulesTarget.tapPromise(async transformConfig => {
+            await target.promise(this);
+            transformConfig.addModule(this._list);
+            this._destroy();
         });
     }
-    /**
-     * Returns true if the provided module should have renderers injected.
-     * Should be true for only one module per compilation!
-     * @ignore
-     * @param {Object} module - Webpack Module
-     */
-    shouldInject(mod) {
-        return this._isRendererModule(mod) && !this._loaderIsInstalled(mod);
-    }
-    /** @ignore */
-    _isRendererModule(mod) {
-        return mod.resource === renderersListPath;
-    }
-    /** @ignore */
-    _loaderIsInstalled(mod) {
-        return mod.loaders.some(l => l.ident === this.ident);
+    _destroy() {
+        this.add = () => {
+            throw new Error(
+                'Cannot add renderer: builtins.transformModules has already been called and its interceptors have already run.'
+            );
+        };
     }
 }
 

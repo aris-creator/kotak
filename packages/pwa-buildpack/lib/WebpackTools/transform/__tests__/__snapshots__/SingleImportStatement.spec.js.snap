@@ -1,0 +1,188 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`contains parsed node, statement, and binding, adding import keyword and semicolon if necessary 1`] = `
+SingleImportStatement {
+  "binding": "LongMatches",
+  "imported": "default",
+  "node": Node {
+    "end": 47,
+    "source": Node {
+      "end": 46,
+      "raw": "\\"@vandelay/industries\\"",
+      "start": 24,
+      "type": "Literal",
+      "value": "@vandelay/industries",
+    },
+    "specifiers": Array [
+      Node {
+        "end": 18,
+        "local": Node {
+          "end": 18,
+          "name": "LongMatches",
+          "start": 7,
+          "type": "Identifier",
+        },
+        "start": 7,
+        "type": "ImportDefaultSpecifier",
+      },
+    ],
+    "start": 0,
+    "type": "ImportDeclaration",
+  },
+  "originalStatement": "LongMatches from \\"@vandelay/industries\\";",
+  "source": "@vandelay/industries",
+  "statement": "import LongMatches from \\"@vandelay/industries\\";",
+}
+`;
+
+exports[`contains parsed node, statement, and binding, adding import keyword and semicolon if necessary 2`] = `
+SingleImportStatement {
+  "binding": "Chips",
+  "imported": "default",
+  "node": Node {
+    "end": 47,
+    "source": Node {
+      "end": 46,
+      "raw": "\\"@vandelay/industries.chips\\"",
+      "start": 18,
+      "type": "Literal",
+      "value": "@vandelay/industries.chips",
+    },
+    "specifiers": Array [
+      Node {
+        "end": 12,
+        "local": Node {
+          "end": 12,
+          "name": "Chips",
+          "start": 7,
+          "type": "Identifier",
+        },
+        "start": 7,
+        "type": "ImportDefaultSpecifier",
+      },
+    ],
+    "start": 0,
+    "type": "ImportDeclaration",
+  },
+  "originalStatement": "import Chips from \\"@vandelay/industries.chips\\";",
+  "source": "@vandelay/industries.chips",
+  "statement": "import Chips from \\"@vandelay/industries.chips\\";",
+}
+`;
+
+exports[`contains parsed node, statement, and binding, adding import keyword and semicolon if necessary 3`] = `
+SingleImportStatement {
+  "binding": "Chips",
+  "imported": "Potato",
+  "node": Node {
+    "end": 61,
+    "source": Node {
+      "end": 60,
+      "raw": "\\"@vandelay/industries.chips\\"",
+      "start": 32,
+      "type": "Literal",
+      "value": "@vandelay/industries.chips",
+    },
+    "specifiers": Array [
+      Node {
+        "end": 24,
+        "imported": Node {
+          "end": 15,
+          "name": "Potato",
+          "start": 9,
+          "type": "Identifier",
+        },
+        "local": Node {
+          "end": 24,
+          "name": "Chips",
+          "start": 19,
+          "type": "Identifier",
+        },
+        "start": 9,
+        "type": "ImportSpecifier",
+      },
+    ],
+    "start": 0,
+    "type": "ImportDeclaration",
+  },
+  "originalStatement": "import { Potato as Chips } from \\"@vandelay/industries.chips\\"",
+  "source": "@vandelay/industries.chips",
+  "statement": "import { Potato as Chips } from \\"@vandelay/industries.chips\\";",
+}
+`;
+
+exports[`contains parsed node, statement, and binding, adding import keyword and semicolon if necessary 4`] = `
+SingleImportStatement {
+  "binding": "Corn",
+  "imported": "Corn",
+  "node": Node {
+    "end": 50,
+    "source": Node {
+      "end": 49,
+      "raw": "\\"@vandelay/industries.chips\\"",
+      "start": 21,
+      "type": "Literal",
+      "value": "@vandelay/industries.chips",
+    },
+    "specifiers": Array [
+      Node {
+        "end": 13,
+        "imported": Node {
+          "end": 13,
+          "name": "Corn",
+          "start": 9,
+          "type": "Identifier",
+        },
+        "local": Node {
+          "end": 13,
+          "name": "Corn",
+          "start": 9,
+          "type": "Identifier",
+        },
+        "start": 9,
+        "type": "ImportSpecifier",
+      },
+    ],
+    "start": 0,
+    "type": "ImportDeclaration",
+  },
+  "originalStatement": "import { Corn } from \\"@vandelay/industries.chips\\"",
+  "source": "@vandelay/industries.chips",
+  "statement": "import { Corn } from \\"@vandelay/industries.chips\\";",
+}
+`;
+
+exports[`contains parsed node, statement, and binding, adding import keyword and semicolon if necessary 5`] = `
+SingleImportStatement {
+  "binding": "Latex",
+  "imported": "*",
+  "node": Node {
+    "end": 44,
+    "source": Node {
+      "end": 43,
+      "raw": "\\"./vandelay/exports\\"",
+      "start": 23,
+      "type": "Literal",
+      "value": "./vandelay/exports",
+    },
+    "specifiers": Array [
+      Node {
+        "end": 17,
+        "local": Node {
+          "end": 17,
+          "name": "Latex",
+          "start": 12,
+          "type": "Identifier",
+        },
+        "start": 7,
+        "type": "ImportNamespaceSpecifier",
+      },
+    ],
+    "start": 0,
+    "type": "ImportDeclaration",
+  },
+  "originalStatement": "* as Latex from \\"./vandelay/exports\\"",
+  "source": "./vandelay/exports",
+  "statement": "import * as Latex from \\"./vandelay/exports\\";",
+}
+`;

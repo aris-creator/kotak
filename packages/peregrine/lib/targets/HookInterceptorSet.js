@@ -10,12 +10,16 @@ const TargetableHook = require('./TargetableHook');
  * @private
  */
 class HookInterceptorSet extends Trackable {
+    get allModules() {
+        return this._all;
+    }
     /** @hideconstructor */
-    constructor(baseDir, trackingOwner) {
+    constructor(hookFolder, target) {
         super();
-        this._baseDir = baseDir;
+        this._hookDir = hookFolder;
         this._all = [];
-        this.attach(this.constructor.name, trackingOwner);
+        this._target = target;
+        this.attach(this.constructor.name, target);
     }
     _getNamespace(segments) {
         let current = this;
@@ -25,9 +29,9 @@ class HookInterceptorSet extends Trackable {
         return current;
     }
     async populate() {
-        this.track('prepopulate', { status: `reading ${this._baseDir}` });
+        this.track('prepopulate', { status: `reading ${this._hookDir}` });
         const hookPaths = await glob('**/use*.{mjs,js,mts,ts}', {
-            cwd: this._baseDir,
+            cwd: this._hookDir,
             ignore: ['**/__*__/**'],
             suppressErrors: true,
             onlyFiles: true
@@ -45,7 +49,7 @@ class HookInterceptorSet extends Trackable {
                     '@magento/peregrine',
                     path.relative(
                         packageRoot,
-                        path.resolve(this._baseDir, hookPath)
+                        path.resolve(this._hookDir, hookPath)
                     )
                 ),
                 this,
@@ -55,12 +59,11 @@ class HookInterceptorSet extends Trackable {
             this._all.push(targetedHook);
         }
     }
-    flush() {
-        const flushed = [].concat(
-            ...this._all.map(targeted => targeted.flush())
-        );
-        this.track('flush', { count: flushed.length });
-        return flushed;
+    async runAll() {
+        if (this._all.length === 0) {
+            await this.populate();
+        }
+        await this._target.promise(this);
     }
 }
 

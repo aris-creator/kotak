@@ -20,12 +20,10 @@ class TargetableHook {
      * serialized and injected as a virtual module.
      */
     wrapWith(wrapperModuleOrFunction) {
-        return typeof wrapperModuleOrFunction === 'string'
-            ? this._talonModule.wrapWithFile(
-                  this._exportName,
-                  wrapperModuleOrFunction
-              )
-            : this._talonModule.wrap(this._exportName, wrapperModuleOrFunction);
+        return this._talonModule.wrapWithFile(
+            this._exportName,
+            wrapperModuleOrFunction
+        );
     }
 }
 

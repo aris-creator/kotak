@@ -1,5 +1,5 @@
-const { inspect } = require('util');
 const path = require('path');
+const { AsyncParallelHook } = require('tapable');
 const HookInterceptorSet = require('../HookInterceptorSet');
 const targetSerializer = require('../JestPeregrineTargetSerializer');
 
@@ -14,61 +14,79 @@ const sortByFilename = (a, b) =>
     0;
 
 describe('HookInterceptorSet for talons target API', () => {
-    let wrappers;
+    let talonInterceptors;
+    const talonTarget = new AsyncParallelHook(['wrappers']);
     beforeAll(async () => {
-        wrappers = new HookInterceptorSet(
-            path.resolve(__dirname, '../../talons/')
+        talonInterceptors = new HookInterceptorSet(
+            path.resolve(__dirname, '../../talons/'),
+            talonTarget
         );
-        await wrappers.populate();
+        await talonInterceptors.populate();
     });
     test('exposes each talon under namespace hierarchy following directory structure', () => {
-        expect(wrappers).toMatchSnapshot();
+        expect(talonInterceptors).toMatchSnapshot();
     });
 
-    test('stores a queue of transform requests for talon files', () => {
-        wrappers.Accordion.useAccordion.wrapWith(() => 'an inline function!');
-        wrappers.AccountChip.useAccountChip.wrapWith('dust');
-        wrappers.AccountMenu.useAccountMenuItems.wrapWith('drapes');
-        wrappers.App.useApp.wrapWith('bunting');
-        wrappers.AuthBar.useAuthBar.wrapWith('lace');
-        wrappers.AuthModal.useAuthModal.wrapWith('muslin');
-        wrappers.Breadcrumbs.useBreadcrumbs.wrapWith('egg');
-        wrappers.CartPage.useCartPage.wrapWith('silk');
-        wrappers.CartPage.GiftCards.useGiftCard.wrapWith('envelope');
-        wrappers.CartPage.GiftCards.useGiftCards.wrapWith('ribbons');
+    test('stores a queue of transform requests for talon files', async () => {
+        talonTarget.tap('unittests', talons => {
+            talons.Accordion.useAccordion.wrapWith('metal');
+            talons.AccountChip.useAccountChip.wrapWith('dust');
+            talons.AccountMenu.useAccountMenuItems.wrapWith('drapes');
+            talons.App.useApp.wrapWith('bunting');
+            talons.AuthBar.useAuthBar.wrapWith('lace');
+            talons.AuthModal.useAuthModal.wrapWith('muslin');
+            talons.Breadcrumbs.useBreadcrumbs.wrapWith('egg');
+            talons.CartPage.useCartPage.wrapWith('silk');
+            talons.CartPage.GiftCards.useGiftCard.wrapWith('envelope');
+            talons.CartPage.GiftCards.useGiftCards.wrapWith('ribbons');
+        });
 
-        expect(wrappers.flush().sort(sortByFilename)).toMatchSnapshot();
+        await talonInterceptors.runAll();
+
+        // flatten out the transforms
+        const allTransforms = []
+            .concat(...talonInterceptors.allModules.map(mod => mod.flush()))
+            .sort(sortByFilename);
+        expect(allTransforms).toMatchSnapshot();
     });
 });
 
 describe('HookInterceptorSet for hooks target API', () => {
-    let wrappers;
+    let hookInterceptors;
+    const hookTarget = new AsyncParallelHook(['wrappers']);
     beforeAll(async () => {
-        wrappers = new HookInterceptorSet(
-            path.resolve(__dirname, '../../hooks/')
+        hookInterceptors = new HookInterceptorSet(
+            path.resolve(__dirname, '../../hooks/'),
+            hookTarget
         );
-        await wrappers.populate();
+        // do not run populate this time, to test that .runAll will run it
     });
-    test('exposes each hook under namespace hierarchy following directory structure', () => {
-        expect(wrappers).toMatchSnapshot();
-    });
+    test('stores a queue of transform requests for hook files', async () => {
+        hookTarget.tapPromise('unittests', async hooks => {
+            hooks.useAwaitQuery.wrapWith('frosting');
+            hooks.useCarousel.wrapWith('wd-40');
+            hooks.useDropdown.wrapWith('curtains');
+            hooks.useEventListener.wrapWith('fanfare');
+            hooks.usePagination.wrapWith('knickknacks');
+            hooks.useResetForm.wrapWith('unsettery');
+            hooks.useRestApi.wrapWith('en passant');
+            hooks.useRestResponse.wrapWith('indolence');
+            hooks.useScrollIntoView.wrapWith('physics');
+            hooks.useScrollLock.wrapWith('crisis');
+            hooks.useScrollTopOnChange.wrapWith('mutability');
+            hooks.useSearchParam.wrapWith('optimism');
+            hooks.useSort.wrapWith('intent');
+            hooks.useWindowSize.wrapWith('disbelief');
+        });
 
-    test('stores a queue of transform requests for hook files', () => {
-        wrappers.useAwaitQuery.wrapWith('frosting');
-        wrappers.useCarousel.wrapWith('wd-40');
-        wrappers.useDropdown.wrapWith('curtains');
-        wrappers.useEventListener.wrapWith('fanfare');
-        wrappers.usePagination.wrapWith('knickknacks');
-        wrappers.useResetForm.wrapWith('unsettery');
-        wrappers.useRestApi.wrapWith('en passant');
-        wrappers.useRestResponse.wrapWith('indolence');
-        wrappers.useScrollIntoView.wrapWith('physics');
-        wrappers.useScrollLock.wrapWith('crisis');
-        wrappers.useScrollTopOnChange.wrapWith('mutability');
-        wrappers.useSearchParam.wrapWith('optimism');
-        wrappers.useSort.wrapWith('intent');
-        wrappers.useWindowSize.wrapWith('disbelief');
+        await hookInterceptors.runAll();
 
-        expect(wrappers.flush().sort(sortByFilename)).toMatchSnapshot();
+        expect(hookInterceptors).toMatchSnapshot();
+
+        // flatten out the transforms
+        const allTransforms = []
+            .concat(...hookInterceptors.allModules.map(mod => mod.flush()))
+            .sort(sortByFilename);
+        expect(allTransforms).toMatchSnapshot();
     });
 });

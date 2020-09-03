@@ -9,8 +9,6 @@ const RichContentRendererList = require('./RichContentRendererList');
  * a utility function.
  */
 
-const name = '@magento/venia-ui';
-
 module.exports = targets => {
     const builtins = targets.of('@magento/pwa-buildpack');
 
@@ -25,19 +23,15 @@ module.exports = targets => {
         };
     });
 
-    builtins.webpackCompiler.tap(compiler =>
-        compiler.hooks.compilation.tap(name, compilation => {
-            const renderers = new RichContentRendererList();
-            compilation.hooks.normalModuleLoader.tap(
-                `${name}:RichContentRendererInjector`,
-                (loaderContext, mod) => {
-                    if (renderers.shouldInject(mod)) {
-                        targets.own.richContentRenderers.call(renderers);
-                        renderers.inject(mod);
-                    }
-                }
-            );
-        })
+    /**
+     * Implementation of our 'richContentRenderers' target. This will gather
+     * RichContentRenderer declarations { importPath, componentName } from all
+     * interceptors, and then tap `builtins.transformModules` to inject a
+     * module transform into the build which is configured to generate an array
+     * of modules to be imported and then exported.
+     */
+    new RichContentRendererList(builtins.transformModules).useTarget(
+        targets.own.richContentRenderers
     );
 
     // Dogfood our own richContentRenderer hook to insert the fallback renderer.

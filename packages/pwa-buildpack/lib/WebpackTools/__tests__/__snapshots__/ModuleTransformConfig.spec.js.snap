@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`has static create methods and types enum 1`] = `
+Object {
+  "babel": "babel",
+  "plugin": "plugin",
+  "replace": "replace",
+  "source": "source",
+}
+`;

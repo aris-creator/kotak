@@ -111,11 +111,12 @@ class MagentoResolver {
      * is used to _replace_ the current config.
      * @memberof MagentoResolver
      */
-    reconfigure(updater) {
-        const newConfig = updater(this.config);
+    async reconfigure(updater) {
+        const newConfig = await updater(this.config);
         if (newConfig) {
             this.config = newConfig;
         }
+        this._invalidate();
     }
     /**
      * Asynchronously resolve a path the same way Webpack would given the

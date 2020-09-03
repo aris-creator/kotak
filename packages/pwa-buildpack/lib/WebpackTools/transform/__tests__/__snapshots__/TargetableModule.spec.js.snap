@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`.replaceWithFile(file) empties the queue and queues a replace transform 1`] = `
+Object {
+  "fileToTransform": "./to/be/replaced",
+  "options": undefined,
+  "transformModule": "./to/do/the/replacing",
+  "type": "replace",
+}
+`;

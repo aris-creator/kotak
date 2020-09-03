@@ -23,17 +23,15 @@ module.exports = targets => {
      * without tapping the `transformModules` config themselves.
      */
     const publicHookSets = ['hooks', 'talons'];
-    builtins.transformModules.tapPromise(async addTransform => {
+    builtins.transformModules.tapPromise(async transformConfig => {
         await Promise.all(
             publicHookSets.map(async name => {
                 const hookInterceptors = new HookInterceptorSet(
                     path.resolve(packageDir, 'lib', name),
-                    targets
+                    targets.own[name]
                 );
-                await hookInterceptors.populate();
-
-                await targets.own[name].promise(hookInterceptors);
-                hookInterceptors.flush().forEach(addTransform);
+                await hookInterceptors.runAll();
+                transformConfig.addModules(hookInterceptors.allModules);
             })
         );
     });

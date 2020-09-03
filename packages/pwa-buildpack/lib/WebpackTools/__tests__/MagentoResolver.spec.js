@@ -118,3 +118,20 @@ test('uses *.ee.js or *.ce.js depending on isEE boolean', async () => {
         path.resolve(context, 'node_modules/depModule1/someFeature.ee.js')
     );
 });
+
+test('accepts configuration changes and honors them on next resolve', async () => {
+    const resolver = new MagentoResolver({
+        paths: {
+            root: context
+        }
+    });
+    await expect(resolver.resolve('aliasToLocal1')).rejects.toThrowError();
+
+    await resolver.reconfigure(async config => {
+        config.alias['aliasToLocal1'] = await resolver.resolve('localModule1');
+    });
+
+    await expect(resolver.resolve('aliasToLocal1')).resolves.toBe(
+        path.resolve(context, './localModule1/index.wasm')
+    );
+});

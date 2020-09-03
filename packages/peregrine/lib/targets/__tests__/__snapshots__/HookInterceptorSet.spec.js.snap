@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HookInterceptorSet for hooks target API exposes each hook under namespace hierarchy following directory structure 1`] = `
+exports[`HookInterceptorSet for hooks target API stores a queue of transform requests for hook files 1`] = `
 HookInterceptorSetObject {
   "base dir": "packages/peregrine/lib/hooks",
   "useAwaitQuery": TargetableHookObject {
@@ -51,11 +51,12 @@ HookInterceptorSetObject {
 }
 `;
 
-exports[`HookInterceptorSet for hooks target API stores a queue of transform requests for hook files 1`] = `
+exports[`HookInterceptorSet for hooks target API stores a queue of transform requests for hook files 2`] = `
 Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/hooks/useAwaitQuery.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "useAwaitQuery",
       "wrapperModule": "frosting",
     },
@@ -65,6 +66,7 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/hooks/useCarousel.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "useCarousel",
       "wrapperModule": "wd-40",
     },
@@ -74,6 +76,7 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/hooks/useDropdown.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "useDropdown",
       "wrapperModule": "curtains",
     },
@@ -83,6 +86,7 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/hooks/useEventListener.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "useEventListener",
       "wrapperModule": "fanfare",
     },
@@ -92,6 +96,7 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/hooks/usePagination.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "usePagination",
       "wrapperModule": "knickknacks",
     },
@@ -101,6 +106,7 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/hooks/useResetForm.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "useResetForm",
       "wrapperModule": "unsettery",
     },
@@ -110,6 +116,7 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/hooks/useRestApi.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "useRestApi",
       "wrapperModule": "en passant",
     },
@@ -119,6 +126,7 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/hooks/useRestResponse.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "useRestResponse",
       "wrapperModule": "indolence",
     },
@@ -128,6 +136,7 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/hooks/useScrollIntoView.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "useScrollIntoView",
       "wrapperModule": "physics",
     },
@@ -137,6 +146,7 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/hooks/useScrollLock.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "useScrollLock",
       "wrapperModule": "crisis",
     },
@@ -146,6 +156,7 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/hooks/useScrollTopOnChange.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "useScrollTopOnChange",
       "wrapperModule": "mutability",
     },
@@ -155,6 +166,7 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/hooks/useSearchParam.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "useSearchParam",
       "wrapperModule": "optimism",
     },
@@ -164,6 +176,7 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/hooks/useSort.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "useSort",
       "wrapperModule": "intent",
     },
@@ -173,6 +186,7 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/hooks/useWindowSize.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "useWindowSize",
       "wrapperModule": "disbelief",
     },
@@ -394,6 +408,11 @@ HookInterceptorSetObject {
       "file": "@magento/peregrine/lib/talons/CheckoutPage/useShippingMethod.js",
     },
   },
+  "Cms": Object {
+    "useCmsPage": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/Cms/useCmsPage.js",
+    },
+  },
   "Country": Object {
     "useCountry": TargetableHookObject {
       "file": "@magento/peregrine/lib/talons/Country/useCountry.js",
@@ -528,8 +547,14 @@ HookInterceptorSetObject {
     },
   },
   "OrderHistoryPage": Object {
+    "useCollapsedImageGallery": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/OrderHistoryPage/useCollapsedImageGallery.js",
+    },
     "useOrderHistoryPage": TargetableHookObject {
       "file": "@magento/peregrine/lib/talons/OrderHistoryPage/useOrderHistoryPage.js",
+    },
+    "useOrderRow": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/OrderHistoryPage/useOrderRow.js",
     },
   },
   "Pagination": Object {
@@ -625,6 +650,9 @@ HookInterceptorSetObject {
     "useWishlist": TargetableHookObject {
       "file": "@magento/peregrine/lib/talons/WishlistPage/useWishlist.js",
     },
+    "useWishlistItem": TargetableHookObject {
+      "file": "@magento/peregrine/lib/talons/WishlistPage/useWishlistItem.js",
+    },
     "useWishlistPage": TargetableHookObject {
       "file": "@magento/peregrine/lib/talons/WishlistPage/useWishlistPage.js",
     },
@@ -638,17 +666,9 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/talons/Accordion/useAccordion.js",
     "options": Object {
-      "contents": "export default () => 'an inline function!'",
-      "virtualFilePath": "@magento/peregrine/lib/talons/Accordion/useAccordion__VIRTUAL__0.js",
-    },
-    "transformModule": "/Volumes/CaseSensitive/pwa-studio/packages/pwa-buildpack/lib/WebpackTools/plugins/VirtualModulesPlugin.js",
-    "type": "plugin",
-  },
-  Object {
-    "fileToTransform": "@magento/peregrine/lib/talons/Accordion/useAccordion.js",
-    "options": Object {
+      "defaultExport": false,
       "exportName": "useAccordion",
-      "wrapperModule": "@magento/peregrine/lib/talons/Accordion/useAccordion__VIRTUAL__0.js",
+      "wrapperModule": "metal",
     },
     "transformModule": "@magento/pwa-buildpack/lib/WebpackTools/loaders/wrap-esm-loader",
     "type": "source",
@@ -656,6 +676,7 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/talons/AccountChip/useAccountChip.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "useAccountChip",
       "wrapperModule": "dust",
     },
@@ -665,6 +686,7 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/talons/AccountMenu/useAccountMenuItems.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "useAccountMenuItems",
       "wrapperModule": "drapes",
     },
@@ -674,6 +696,7 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/talons/App/useApp.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "useApp",
       "wrapperModule": "bunting",
     },
@@ -683,6 +706,7 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/talons/AuthBar/useAuthBar.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "useAuthBar",
       "wrapperModule": "lace",
     },
@@ -692,6 +716,7 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/talons/AuthModal/useAuthModal.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "useAuthModal",
       "wrapperModule": "muslin",
     },
@@ -701,6 +726,7 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/talons/Breadcrumbs/useBreadcrumbs.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "useBreadcrumbs",
       "wrapperModule": "egg",
     },
@@ -710,6 +736,7 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/talons/CartPage/GiftCards/useGiftCard.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "useGiftCard",
       "wrapperModule": "envelope",
     },
@@ -719,6 +746,7 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/talons/CartPage/GiftCards/useGiftCards.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "useGiftCards",
       "wrapperModule": "ribbons",
     },
@@ -728,6 +756,7 @@ Array [
   Object {
     "fileToTransform": "@magento/peregrine/lib/talons/CartPage/useCartPage.js",
     "options": Object {
+      "defaultExport": false,
       "exportName": "useCartPage",
       "wrapperModule": "silk",
     },
