@@ -58,8 +58,8 @@
 }
 
 .addButton:focus {
-    outline: none;
-    box-shadow: -6px 6px rgb(var(--venia-global-color-blue-700) / 0.3);
+    outline-color: rgb(var(--venia-global-color-focus));
+    outline-offset: 4px;
 }
 .addButton:hover {
     border-color: rgb(var(--venia-brand-color-1-600));

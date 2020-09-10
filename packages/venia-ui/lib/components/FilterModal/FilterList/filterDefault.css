@@ -13,8 +13,8 @@
 
 .root:active .icon,
 .root:focus .icon {
-    box-shadow: -3px 3px rgb(var(--venia-brand-color-1-100));
-    outline: none;
+    outline-color: rgb(var(--venia-global-color-focus));
+    outline-offset: 4px;
 }
 
 .root.checked .icon svg {

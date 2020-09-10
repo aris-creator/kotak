@@ -26,7 +26,8 @@
 }
 
 .root:focus {
-    box-shadow: -6px 6px rgb(var(--stroke) / 0.3);
+    outline-color: rgb(var(--venia-global-color-focus));
+    outline-offset: 4px;
 }
 
 .root--priority-high {

@@ -8,6 +8,11 @@
     max-width: 100%;
 }
 
+.root:focus {
+    outline-color: rgb(var(--venia-global-color-focus));
+    outline-offset: 4px;
+}
+
 .root:hover {
     color: rgb(var(--venia-global-color-gray-900));
 }

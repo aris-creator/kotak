@@ -13,7 +13,6 @@
     max-width: 100%;
     min-width: 10rem;
     min-height: 2.5rem;
-    outline: none;
     padding: calc(0.5rem + 1px) 1.5rem calc(0.5rem - 1px);
     text-transform: uppercase;
     transition-duration: 256ms;
@@ -26,7 +25,8 @@
 }
 
 .root:focus {
-    box-shadow: -6px 6px rgb(var(--venia-brand-color-1-100));
+    outline-color: rgb(var(--venia-global-color-focus));
+    outline-offset: 4px;
 }
 
 .root:active {

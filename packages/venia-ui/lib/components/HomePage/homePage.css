@@ -32,8 +32,8 @@
 }
 :global(.venia-home-row-1 a:active),
 :global(.venia-home-row-1 a:focus) {
-    box-shadow: -6px 6px hsl(var(--brightBlue) / 0.3);
-    outline: none;
+    outline-color: rgb(var(--venia-global-color-focus));
+    outline-offset: 4px;
 }
 
 /*

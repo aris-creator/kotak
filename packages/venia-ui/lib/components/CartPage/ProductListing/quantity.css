@@ -52,7 +52,8 @@
 }
 
 .button:focus {
-    outline: none;
+    outline-color: rgb(var(--venia-global-color-focus));
+    outline-offset: 4px;
 }
 
 .button_decrement {

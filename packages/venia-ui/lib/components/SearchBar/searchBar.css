@@ -28,14 +28,3 @@
     position: relative;
     width: 100%;
 }
-
-.search {
-    display: grid;
-    position: relative;
-}
-
-.autocomplete {
-    display: grid;
-    position: relative;
-    z-index: 1;
-}

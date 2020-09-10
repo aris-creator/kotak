@@ -50,6 +50,6 @@
 
 .input:active,
 .input:focus {
-    box-shadow: -3px 3px rgb(var(--venia-brand-color-1-700) / 0.3);
-    outline: none;
+    outline-color: rgb(var(--venia-global-color-focus));
+    outline-offset: 4px;
 }

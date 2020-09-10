@@ -24,7 +24,8 @@
 }
 
 .input:focus {
-    box-shadow: -6px 6px rgb(var(--venia-brand-color-1-700) / 0.3);
+    outline-color: rgb(var(--venia-global-color-focus));
+    outline-offset: 4px;
 }
 
 .before,

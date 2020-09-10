@@ -7,6 +7,11 @@
     padding: 0 0.5rem;
 }
 
+.root:focus {
+    outline-color: rgb(var(--venia-global-color-focus));
+    outline-offset: 4px;
+}
+
 .root_selected {
     composes: root;
     background-color: rgb(var(--venia-global-color-text));
