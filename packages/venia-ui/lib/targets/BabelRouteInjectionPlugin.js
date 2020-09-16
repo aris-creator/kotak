@@ -1,9 +1,7 @@
-const babelTemplate = require('@babel/template');
-
 function BabelRouteInjectionPlugin(babel) {
     const { types: t } = babel;
 
-    const lazyRouteImport = babelTemplate.statement(
+    const lazyRouteImport = babel.template.statement(
         `const %%id%% = React.lazy(() => import(%%path%%));`,
         {
             plugins: ['dynamicImport']
@@ -82,7 +80,7 @@ function BabelRouteInjectionPlugin(babel) {
                             })
                         );
                         state.routeElements.push(
-                            babelTemplate.expression.ast(
+                            babel.template.expression.ast(
                                 `<Route ${route.exact ? 'exact ' : ''}path="${
                                     route.pattern
                                 }"><${id.name}/></Route>`,

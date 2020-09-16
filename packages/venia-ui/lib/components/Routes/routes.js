@@ -17,7 +17,7 @@ const Routes = () => {
                  * Client-side routes are injected by BabelRouteInjectionPlugin here.
                  * Venia's are defined in packages/venia-ui/lib/targets/venia-ui-intercept.js
                  */}
-                <Route>
+                <Route data-transform="insertBefore">
                     <MagentoRoute />
                     {/*
                      * The Route below is purposefully nested with the MagentoRoute above.

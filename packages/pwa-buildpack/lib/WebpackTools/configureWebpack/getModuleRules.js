@@ -55,7 +55,7 @@ getModuleRules.js = async ({
 
     const astLoaders = [
         {
-            loader: 'babel-loader',
+            loader: 'buildbus-babel-loader',
             options: {
                 sourceMaps: mode === 'development' && 'inline',
                 envName: mode,

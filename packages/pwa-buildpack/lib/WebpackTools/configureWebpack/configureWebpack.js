@@ -24,7 +24,7 @@ const prettyLogger = require('../../util/pretty-logger');
  * Helps convert PWA Studio Buildpack settings and project properties into
  * Webpack configuration.
  * @typedef {Object} WebpackConfigHelper
- * @property {boolean} mode - Webpack mode derived from env:
+ * @property {string} mode - Webpack mode derived from env:
  *   'development'|'production'|'none'
  * @property {string} context - Root directory of project
  * @property {boolean} babelRootMode - Babel config search mode:

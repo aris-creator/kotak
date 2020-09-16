@@ -2,6 +2,9 @@
  * @module VeniaUI/Targets
  */
 const RichContentRendererList = require('./RichContentRendererList');
+const {
+    TargetableReactComponent
+} = require('@magento/pwa-buildpack/lib/WebpackTools/transform');
 
 /**
  * TODO: This code intercepts the Webpack module for a specific file in this
@@ -60,6 +63,45 @@ module.exports = targets => {
                 routes: await targets.own.routes.promise([])
             }
         });
+        const MainComponent = new TargetableReactComponent(
+            '@magento/venia-ui/lib/components/Main/main.js',
+            builtins.transformModules
+        );
+        MainComponent.appendJSX(
+            'div className={pageClass}',
+            '<span>appendJSX succeeded!</span>'
+        )
+            .insertAfterJSX(
+                '<Footer/>',
+                '<article>insertAfterJSX succeeded!</article>'
+            )
+            .insertBeforeJSX(
+                '<Header />',
+                '<span>insertBeforeJSX succeeded!</span>'
+            )
+            .insertAfterJSX(
+                'Header',
+                '<span id={`${dot.path}`}>replaceJSX did NOT work, it did NAAAAHT!!</span>'
+            )
+            .replaceJSX(
+                'span id={`${dot.path}`}',
+                '<span>replaceJSX worked</span>'
+            )
+            .prependJSX('div', '<>prependJSX succeeded!</>')
+            .removeJSX('span className="busted"')
+            .setJSXProps('Footer', {
+                'aria-role': '"footer"',
+                'data-set-jsx-props-succeeded': true
+            })
+            .surroundJSX(
+                'Header',
+                `div style={{ filter: "blur(1px)", outline: "2px dashed red" }}`
+            )
+            .insertBeforeJSX(
+                'Footer aria-role="footer"',
+                '<span>Cumulative select worrrrrked</span>'
+            );
+        addTransform.addModule(MainComponent);
     });
 
     // The paths below are relative to packages/venia-ui/lib/components/Routes/routes.js.
