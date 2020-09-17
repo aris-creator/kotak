@@ -1,22 +1,26 @@
 import { useCallback, useMemo } from 'react';
-import { useMutation, useQuery } from '@apollo/client';
 
 import { useUserContext } from '../../context/user';
 import DEFAULT_OPERATIONS from './communicationsPage.gql';
+import { useOperationFactory } from '../../hooks/useOperationFactory';
 
 export const useCommunicationsPage = props => {
     const { afterSubmit, operations = DEFAULT_OPERATIONS } = props;
-    const {
-        getCustomerSubscriptionQuery,
-        setNewsletterSubscriptionMutation
-    } = operations;
 
     const [{ isSignedIn }] = useUserContext();
 
-    const { data: subscriptionData, error: subscriptionDataError } = useQuery(
-        getCustomerSubscriptionQuery,
-        { skip: !isSignedIn }
+    const operationResults = useOperationFactory(operations);
+    const getCustomerSubscriptionResult = operationResults.get(
+        'getCustomerSubscriptionQuery'
     );
+    const setNewsletterSubscriptionResult = operationResults.get(
+        'setNewsletterSubscriptionMutation'
+    );
+
+    const {
+        data: subscriptionData,
+        error: subscriptionDataError
+    } = getCustomerSubscriptionResult;
 
     const initialValues = useMemo(() => {
         if (subscriptionData) {
@@ -27,7 +31,7 @@ export const useCommunicationsPage = props => {
     const [
         setNewsletterSubscription,
         { error: setNewsletterSubscriptionError, loading: isSubmitting }
-    ] = useMutation(setNewsletterSubscriptionMutation);
+    ] = setNewsletterSubscriptionResult;
 
     const handleSubmit = useCallback(
         async formValues => {
@@ -52,6 +56,7 @@ export const useCommunicationsPage = props => {
         initialValues,
         handleSubmit,
         isDisabled: isSubmitting,
-        isSignedIn
+        isSignedIn,
+        operationResults
     };
 };
