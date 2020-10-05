@@ -1,0 +1,435 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`contains parsed node, statement, and binding, adding import keyword and semicolon if necessary 1`] = `
+SingleImportStatement {
+  "binding": "LongMatches",
+  "imported": "default",
+  "node": Node {
+    "end": 47,
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 47,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+    "source": Node {
+      "end": 46,
+      "extra": Object {
+        "raw": "\\"@vandelay/industries\\"",
+        "rawValue": "@vandelay/industries",
+      },
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 46,
+          "line": 1,
+        },
+        "start": Position {
+          "column": 24,
+          "line": 1,
+        },
+      },
+      "start": 24,
+      "type": "StringLiteral",
+      "value": "@vandelay/industries",
+    },
+    "specifiers": Array [
+      Node {
+        "end": 18,
+        "loc": SourceLocation {
+          "end": Position {
+            "column": 18,
+            "line": 1,
+          },
+          "start": Position {
+            "column": 7,
+            "line": 1,
+          },
+        },
+        "local": Node {
+          "end": 18,
+          "loc": SourceLocation {
+            "end": Position {
+              "column": 18,
+              "line": 1,
+            },
+            "identifierName": "LongMatches",
+            "start": Position {
+              "column": 7,
+              "line": 1,
+            },
+          },
+          "name": "LongMatches",
+          "start": 7,
+          "type": "Identifier",
+        },
+        "start": 7,
+        "type": "ImportDefaultSpecifier",
+      },
+    ],
+    "start": 0,
+    "type": "ImportDeclaration",
+  },
+  "originalStatement": "LongMatches from \\"@vandelay/industries\\";",
+  "source": "@vandelay/industries",
+  "statement": "import LongMatches from \\"@vandelay/industries\\";
+",
+}
+`;
+
+exports[`contains parsed node, statement, and binding, adding import keyword and semicolon if necessary 2`] = `
+SingleImportStatement {
+  "binding": "Chips",
+  "imported": "default",
+  "node": Node {
+    "end": 47,
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 47,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+    "source": Node {
+      "end": 46,
+      "extra": Object {
+        "raw": "\\"@vandelay/industries.chips\\"",
+        "rawValue": "@vandelay/industries.chips",
+      },
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 46,
+          "line": 1,
+        },
+        "start": Position {
+          "column": 18,
+          "line": 1,
+        },
+      },
+      "start": 18,
+      "type": "StringLiteral",
+      "value": "@vandelay/industries.chips",
+    },
+    "specifiers": Array [
+      Node {
+        "end": 12,
+        "loc": SourceLocation {
+          "end": Position {
+            "column": 12,
+            "line": 1,
+          },
+          "start": Position {
+            "column": 7,
+            "line": 1,
+          },
+        },
+        "local": Node {
+          "end": 12,
+          "loc": SourceLocation {
+            "end": Position {
+              "column": 12,
+              "line": 1,
+            },
+            "identifierName": "Chips",
+            "start": Position {
+              "column": 7,
+              "line": 1,
+            },
+          },
+          "name": "Chips",
+          "start": 7,
+          "type": "Identifier",
+        },
+        "start": 7,
+        "type": "ImportDefaultSpecifier",
+      },
+    ],
+    "start": 0,
+    "type": "ImportDeclaration",
+  },
+  "originalStatement": "import Chips from \\"@vandelay/industries.chips\\";",
+  "source": "@vandelay/industries.chips",
+  "statement": "import Chips from \\"@vandelay/industries.chips\\";
+",
+}
+`;
+
+exports[`contains parsed node, statement, and binding, adding import keyword and semicolon if necessary 3`] = `
+SingleImportStatement {
+  "binding": "Chips",
+  "imported": "Potato",
+  "node": Node {
+    "end": 61,
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 61,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+    "source": Node {
+      "end": 60,
+      "extra": Object {
+        "raw": "\\"@vandelay/industries.chips\\"",
+        "rawValue": "@vandelay/industries.chips",
+      },
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 60,
+          "line": 1,
+        },
+        "start": Position {
+          "column": 32,
+          "line": 1,
+        },
+      },
+      "start": 32,
+      "type": "StringLiteral",
+      "value": "@vandelay/industries.chips",
+    },
+    "specifiers": Array [
+      Node {
+        "end": 24,
+        "imported": Node {
+          "end": 15,
+          "loc": SourceLocation {
+            "end": Position {
+              "column": 15,
+              "line": 1,
+            },
+            "identifierName": "Potato",
+            "start": Position {
+              "column": 9,
+              "line": 1,
+            },
+          },
+          "name": "Potato",
+          "start": 9,
+          "type": "Identifier",
+        },
+        "loc": SourceLocation {
+          "end": Position {
+            "column": 24,
+            "line": 1,
+          },
+          "start": Position {
+            "column": 9,
+            "line": 1,
+          },
+        },
+        "local": Node {
+          "end": 24,
+          "loc": SourceLocation {
+            "end": Position {
+              "column": 24,
+              "line": 1,
+            },
+            "identifierName": "Chips",
+            "start": Position {
+              "column": 19,
+              "line": 1,
+            },
+          },
+          "name": "Chips",
+          "start": 19,
+          "type": "Identifier",
+        },
+        "start": 9,
+        "type": "ImportSpecifier",
+      },
+    ],
+    "start": 0,
+    "type": "ImportDeclaration",
+  },
+  "originalStatement": "import { Potato as Chips } from \\"@vandelay/industries.chips\\"",
+  "source": "@vandelay/industries.chips",
+  "statement": "import { Potato as Chips } from \\"@vandelay/industries.chips\\";
+",
+}
+`;
+
+exports[`contains parsed node, statement, and binding, adding import keyword and semicolon if necessary 4`] = `
+SingleImportStatement {
+  "binding": "Corn",
+  "imported": "Corn",
+  "node": Node {
+    "end": 50,
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 50,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+    "source": Node {
+      "end": 49,
+      "extra": Object {
+        "raw": "\\"@vandelay/industries.chips\\"",
+        "rawValue": "@vandelay/industries.chips",
+      },
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 49,
+          "line": 1,
+        },
+        "start": Position {
+          "column": 21,
+          "line": 1,
+        },
+      },
+      "start": 21,
+      "type": "StringLiteral",
+      "value": "@vandelay/industries.chips",
+    },
+    "specifiers": Array [
+      Node {
+        "end": 13,
+        "imported": Node {
+          "end": 13,
+          "loc": SourceLocation {
+            "end": Position {
+              "column": 13,
+              "line": 1,
+            },
+            "identifierName": "Corn",
+            "start": Position {
+              "column": 9,
+              "line": 1,
+            },
+          },
+          "name": "Corn",
+          "start": 9,
+          "type": "Identifier",
+        },
+        "loc": SourceLocation {
+          "end": Position {
+            "column": 13,
+            "line": 1,
+          },
+          "start": Position {
+            "column": 9,
+            "line": 1,
+          },
+        },
+        "local": Node {
+          "end": 13,
+          "loc": SourceLocation {
+            "end": Position {
+              "column": 13,
+              "line": 1,
+            },
+            "identifierName": "Corn",
+            "start": Position {
+              "column": 9,
+              "line": 1,
+            },
+          },
+          "name": "Corn",
+          "start": 9,
+          "type": "Identifier",
+        },
+        "start": 9,
+        "type": "ImportSpecifier",
+      },
+    ],
+    "start": 0,
+    "type": "ImportDeclaration",
+  },
+  "originalStatement": "import { Corn } from \\"@vandelay/industries.chips\\"",
+  "source": "@vandelay/industries.chips",
+  "statement": "import { Corn } from \\"@vandelay/industries.chips\\";
+",
+}
+`;
+
+exports[`contains parsed node, statement, and binding, adding import keyword and semicolon if necessary 5`] = `
+SingleImportStatement {
+  "binding": "Latex",
+  "imported": "*",
+  "node": Node {
+    "end": 44,
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 44,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+    "source": Node {
+      "end": 43,
+      "extra": Object {
+        "raw": "\\"./vandelay/exports\\"",
+        "rawValue": "./vandelay/exports",
+      },
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 43,
+          "line": 1,
+        },
+        "start": Position {
+          "column": 23,
+          "line": 1,
+        },
+      },
+      "start": 23,
+      "type": "StringLiteral",
+      "value": "./vandelay/exports",
+    },
+    "specifiers": Array [
+      Node {
+        "end": 17,
+        "loc": SourceLocation {
+          "end": Position {
+            "column": 17,
+            "line": 1,
+          },
+          "start": Position {
+            "column": 7,
+            "line": 1,
+          },
+        },
+        "local": Node {
+          "end": 17,
+          "loc": SourceLocation {
+            "end": Position {
+              "column": 17,
+              "line": 1,
+            },
+            "identifierName": "Latex",
+            "start": Position {
+              "column": 12,
+              "line": 1,
+            },
+          },
+          "name": "Latex",
+          "start": 12,
+          "type": "Identifier",
+        },
+        "start": 7,
+        "type": "ImportNamespaceSpecifier",
+      },
+    ],
+    "start": 0,
+    "type": "ImportDeclaration",
+  },
+  "originalStatement": "* as Latex from \\"./vandelay/exports\\"",
+  "source": "./vandelay/exports",
+  "statement": "import * as Latex from \\"./vandelay/exports\\";
+",
+}
+`;

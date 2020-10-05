@@ -2,14 +2,13 @@
  * @module VeniaUI/Targets
  */
 const RichContentRendererList = require('./RichContentRendererList');
+const RouteList = require('./RouteList');
 
 /**
  * TODO: This code intercepts the Webpack module for a specific file in this
  * package. That will be a common enough pattern that it should be turned into
  * a utility function.
  */
-
-const name = '@magento/venia-ui';
 
 module.exports = targets => {
     const builtins = targets.of('@magento/pwa-buildpack');
@@ -25,52 +24,15 @@ module.exports = targets => {
         };
     });
 
-    builtins.webpackCompiler.tap(compiler =>
-        compiler.hooks.compilation.tap(name, compilation => {
-            const renderers = new RichContentRendererList();
-            compilation.hooks.normalModuleLoader.tap(
-                `${name}:RichContentRendererInjector`,
-                (loaderContext, mod) => {
-                    if (renderers.shouldInject(mod)) {
-                        targets.own.richContentRenderers.call(renderers);
-                        renderers.inject(mod);
-                    }
-                }
-            );
-        })
-    );
-
-    // Dogfood our own richContentRenderer hook to insert the fallback renderer.
-    targets.own.richContentRenderers.tap(rendererInjector =>
-        rendererInjector.add({
-            componentName: 'PlainHtmlRenderer',
-            importPath: './plainHtmlRenderer'
-        })
-    );
-
-    /**
-     * Implementation of our `routes` target. When Buildpack runs
-     * `transformModules`, this interceptor will provide a nice API to
-     * consumers of `routes`: instead of specifying the transform file
-     * and the path to the routes component, you can just push route
-     * requests into a neat little array.
-     */
-    builtins.transformModules.tapPromise(async addTransform => {
-        addTransform({
-            type: 'babel',
-            fileToTransform:
-                '@magento/venia-ui/lib/components/Routes/routes.js',
-            transformModule:
-                '@magento/venia-ui/lib/targets/BabelRouteInjectionPlugin',
-            options: {
-                routes: await targets.own.routes.promise([])
-            }
-        });
+    const richContentRenderers = RichContentRendererList.connect(targets);
+    richContentRenderers.add({
+        componentName: 'PlainHtmlRenderer',
+        importPath: './plainHtmlRenderer'
     });
 
-    // The paths below are relative to packages/venia-ui/lib/components/Routes/routes.js.
-    targets.own.routes.tap(routes => [
-        ...routes,
+    const routes = RouteList.connect(targets);
+    routes.add([
+        // The paths below are relative to lib/components/Routes/routes.js.
         {
             name: 'AddressBook',
             pattern: '/address-book',

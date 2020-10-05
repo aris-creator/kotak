@@ -1,0 +1,566 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parses JSX query into a JSXElement AST 1`] = `
+Node {
+  "children": Array [],
+  "closingElement": null,
+  "end": 25,
+  "loc": SourceLocation {
+    "end": Position {
+      "column": 25,
+      "line": 1,
+    },
+    "start": Position {
+      "column": 0,
+      "line": 1,
+    },
+  },
+  "openingElement": Node {
+    "attributes": Array [
+      Node {
+        "end": 8,
+        "loc": SourceLocation {
+          "end": Position {
+            "column": 8,
+            "line": 1,
+          },
+          "start": Position {
+            "column": 3,
+            "line": 1,
+          },
+        },
+        "name": Node {
+          "end": 4,
+          "loc": SourceLocation {
+            "end": Position {
+              "column": 4,
+              "line": 1,
+            },
+            "start": Position {
+              "column": 3,
+              "line": 1,
+            },
+          },
+          "name": "b",
+          "start": 3,
+          "type": "JSXIdentifier",
+        },
+        "start": 3,
+        "type": "JSXAttribute",
+        "value": Node {
+          "end": 8,
+          "expression": Node {
+            "end": 7,
+            "loc": SourceLocation {
+              "end": Position {
+                "column": 7,
+                "line": 1,
+              },
+              "identifierName": "c",
+              "start": Position {
+                "column": 6,
+                "line": 1,
+              },
+            },
+            "name": "c",
+            "start": 6,
+            "type": "Identifier",
+          },
+          "loc": SourceLocation {
+            "end": Position {
+              "column": 8,
+              "line": 1,
+            },
+            "start": Position {
+              "column": 5,
+              "line": 1,
+            },
+          },
+          "start": 5,
+          "type": "JSXExpressionContainer",
+        },
+      },
+      Node {
+        "end": 14,
+        "loc": SourceLocation {
+          "end": Position {
+            "column": 14,
+            "line": 1,
+          },
+          "start": Position {
+            "column": 9,
+            "line": 1,
+          },
+        },
+        "name": Node {
+          "end": 10,
+          "loc": SourceLocation {
+            "end": Position {
+              "column": 10,
+              "line": 1,
+            },
+            "start": Position {
+              "column": 9,
+              "line": 1,
+            },
+          },
+          "name": "d",
+          "start": 9,
+          "type": "JSXIdentifier",
+        },
+        "start": 9,
+        "type": "JSXAttribute",
+        "value": Node {
+          "end": 14,
+          "extra": Object {
+            "raw": "\\"e\\"",
+            "rawValue": "e",
+          },
+          "loc": SourceLocation {
+            "end": Position {
+              "column": 14,
+              "line": 1,
+            },
+            "start": Position {
+              "column": 11,
+              "line": 1,
+            },
+          },
+          "start": 11,
+          "type": "StringLiteral",
+          "value": "e",
+        },
+      },
+      Node {
+        "end": 22,
+        "loc": SourceLocation {
+          "end": Position {
+            "column": 22,
+            "line": 1,
+          },
+          "start": Position {
+            "column": 15,
+            "line": 1,
+          },
+        },
+        "name": Node {
+          "end": 16,
+          "loc": SourceLocation {
+            "end": Position {
+              "column": 16,
+              "line": 1,
+            },
+            "start": Position {
+              "column": 15,
+              "line": 1,
+            },
+          },
+          "name": "f",
+          "start": 15,
+          "type": "JSXIdentifier",
+        },
+        "start": 15,
+        "type": "JSXAttribute",
+        "value": Node {
+          "end": 22,
+          "expression": Node {
+            "computed": false,
+            "end": 21,
+            "loc": SourceLocation {
+              "end": Position {
+                "column": 21,
+                "line": 1,
+              },
+              "start": Position {
+                "column": 18,
+                "line": 1,
+              },
+            },
+            "object": Node {
+              "end": 19,
+              "loc": SourceLocation {
+                "end": Position {
+                  "column": 19,
+                  "line": 1,
+                },
+                "identifierName": "g",
+                "start": Position {
+                  "column": 18,
+                  "line": 1,
+                },
+              },
+              "name": "g",
+              "start": 18,
+              "type": "Identifier",
+            },
+            "property": Node {
+              "end": 21,
+              "loc": SourceLocation {
+                "end": Position {
+                  "column": 21,
+                  "line": 1,
+                },
+                "identifierName": "h",
+                "start": Position {
+                  "column": 20,
+                  "line": 1,
+                },
+              },
+              "name": "h",
+              "start": 20,
+              "type": "Identifier",
+            },
+            "start": 18,
+            "type": "MemberExpression",
+          },
+          "loc": SourceLocation {
+            "end": Position {
+              "column": 22,
+              "line": 1,
+            },
+            "start": Position {
+              "column": 17,
+              "line": 1,
+            },
+          },
+          "start": 17,
+          "type": "JSXExpressionContainer",
+        },
+      },
+    ],
+    "end": 25,
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 25,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+    "name": Node {
+      "end": 2,
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 2,
+          "line": 1,
+        },
+        "start": Position {
+          "column": 1,
+          "line": 1,
+        },
+      },
+      "name": "A",
+      "start": 1,
+      "type": "JSXIdentifier",
+    },
+    "selfClosing": true,
+    "start": 0,
+    "type": "JSXOpeningElement",
+  },
+  "start": 0,
+  "type": "JSXElement",
+}
+`;
+
+exports[`parses JSX query into a JSXElement AST 2`] = `
+Node {
+  "children": Array [
+    Node {
+      "end": 6,
+      "extra": Object {
+        "raw": "frag",
+        "rawValue": "frag",
+      },
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 6,
+          "line": 1,
+        },
+        "start": Position {
+          "column": 2,
+          "line": 1,
+        },
+      },
+      "start": 2,
+      "type": "JSXText",
+      "value": "frag",
+    },
+  ],
+  "closingFragment": Node {
+    "end": 9,
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 9,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 6,
+        "line": 1,
+      },
+    },
+    "start": 6,
+    "type": "JSXClosingFragment",
+  },
+  "end": 9,
+  "loc": SourceLocation {
+    "end": Position {
+      "column": 9,
+      "line": 1,
+    },
+    "start": Position {
+      "column": 0,
+      "line": 1,
+    },
+  },
+  "openingFragment": Node {
+    "end": 2,
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 2,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+    "start": 0,
+    "type": "JSXOpeningFragment",
+  },
+  "start": 0,
+  "type": "JSXFragment",
+}
+`;
+
+exports[`parses JSXAttributes provided as an array of source code 1`] = `
+Array [
+  Node {
+    "end": 25,
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 25,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 3,
+        "line": 1,
+      },
+    },
+    "name": Node {
+      "end": 12,
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 12,
+          "line": 1,
+        },
+        "start": Position {
+          "column": 3,
+          "line": 1,
+        },
+      },
+      "name": "className",
+      "start": 3,
+      "type": "JSXIdentifier",
+    },
+    "start": 3,
+    "type": "JSXAttribute",
+    "value": Node {
+      "end": 25,
+      "extra": Object {
+        "raw": "\\"Dinosauria\\"",
+        "rawValue": "Dinosauria",
+      },
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 25,
+          "line": 1,
+        },
+        "start": Position {
+          "column": 13,
+          "line": 1,
+        },
+      },
+      "start": 13,
+      "type": "StringLiteral",
+      "value": "Dinosauria",
+    },
+  },
+  Node {
+    "end": 43,
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 43,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 26,
+        "line": 1,
+      },
+    },
+    "name": Node {
+      "end": 32,
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 32,
+          "line": 1,
+        },
+        "start": Position {
+          "column": 26,
+          "line": 1,
+        },
+      },
+      "name": "phylum",
+      "start": 26,
+      "type": "JSXIdentifier",
+    },
+    "start": 26,
+    "type": "JSXAttribute",
+    "value": Node {
+      "end": 43,
+      "expression": Node {
+        "end": 42,
+        "loc": SourceLocation {
+          "end": Position {
+            "column": 42,
+            "line": 1,
+          },
+          "identifierName": "Chordata",
+          "start": Position {
+            "column": 34,
+            "line": 1,
+          },
+        },
+        "name": "Chordata",
+        "start": 34,
+        "type": "Identifier",
+      },
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 43,
+          "line": 1,
+        },
+        "start": Position {
+          "column": 33,
+          "line": 1,
+        },
+      },
+      "start": 33,
+      "type": "JSXExpressionContainer",
+    },
+  },
+  Node {
+    "end": 76,
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 76,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 44,
+        "line": 1,
+      },
+    },
+    "name": Node {
+      "end": 50,
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 50,
+          "line": 1,
+        },
+        "start": Position {
+          "column": 44,
+          "line": 1,
+        },
+      },
+      "name": "family",
+      "start": 44,
+      "type": "JSXIdentifier",
+    },
+    "start": 44,
+    "type": "JSXAttribute",
+    "value": Node {
+      "children": Array [],
+      "closingElement": null,
+      "end": 76,
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 76,
+          "line": 1,
+        },
+        "start": Position {
+          "column": 51,
+          "line": 1,
+        },
+      },
+      "openingElement": Node {
+        "attributes": Array [],
+        "end": 76,
+        "loc": SourceLocation {
+          "end": Position {
+            "column": 76,
+            "line": 1,
+          },
+          "start": Position {
+            "column": 51,
+            "line": 1,
+          },
+        },
+        "name": Node {
+          "end": 74,
+          "loc": SourceLocation {
+            "end": Position {
+              "column": 74,
+              "line": 1,
+            },
+            "start": Position {
+              "column": 52,
+              "line": 1,
+            },
+          },
+          "object": Node {
+            "end": 61,
+            "loc": SourceLocation {
+              "end": Position {
+                "column": 61,
+                "line": 1,
+              },
+              "start": Position {
+                "column": 52,
+                "line": 1,
+              },
+            },
+            "name": "Theropoda",
+            "start": 52,
+            "type": "JSXIdentifier",
+          },
+          "property": Node {
+            "end": 74,
+            "loc": SourceLocation {
+              "end": Position {
+                "column": 74,
+                "line": 1,
+              },
+              "start": Position {
+                "column": 62,
+                "line": 1,
+              },
+            },
+            "name": "Allosauridae",
+            "start": 62,
+            "type": "JSXIdentifier",
+          },
+          "start": 52,
+          "type": "JSXMemberExpression",
+        },
+        "selfClosing": true,
+        "start": 51,
+        "type": "JSXOpeningElement",
+      },
+      "start": 51,
+      "type": "JSXElement",
+    },
+  },
+]
+`;
