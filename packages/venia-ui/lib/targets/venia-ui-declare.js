@@ -63,7 +63,8 @@ module.exports = targets => {
          *      return routesArray;
          *   })
          */
-        routes: new targets.types.AsyncSeriesWaterfall(['routes'])
+        routes: new targets.types.AsyncSeriesWaterfall(['routes']),
+        buttonActions: new targets.types.AsyncSeriesWaterfall(['actions'])
     });
 };
 

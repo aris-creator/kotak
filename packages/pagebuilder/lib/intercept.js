@@ -30,4 +30,8 @@ module.exports = targets => {
                 importPath: myName
             });
         });
+
+    targets
+        .of('@magento/venia-ui')
+        .buttonActions.tap(t => [...t, '<Button> Temp Button </Button>']);
 };

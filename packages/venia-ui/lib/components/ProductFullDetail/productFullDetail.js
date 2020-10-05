@@ -149,7 +149,10 @@ const ProductFullDetail = props => {
                         message={errors.get('quantity')}
                     />
                 </section>
-                <section className={classes.cartActions}>
+                <section
+                    className={classes.cartActions}
+                    data-targetable-id="actions"
+                >
                     <Button
                         disabled={isAddToCartDisabled}
                         priority="high"

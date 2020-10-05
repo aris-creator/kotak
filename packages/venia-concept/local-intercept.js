@@ -18,9 +18,9 @@
  */
 
 function localIntercept(targets) {
-    // const { transformModules } = targets.of('@magento/pwa-buildpack');
-    // const { Targetables } = require('@magento/pwa-buildpack');
-    // const targetables = Targetables.using(targets);
+    const { transformModules } = targets.of('@magento/pwa-buildpack');
+    const { Targetables } = require('@magento/pwa-buildpack');
+    const targetables = Targetables.using(targets);
     // const Paginator = targetables.reactComponent(
     //     '@magento/venia-ui/lib/components/Pagination/pagination.js'
     // );
@@ -68,10 +68,16 @@ function localIntercept(targets) {
     //         'Footer aria-role="footer"',
     //         '<span>Cumulative select worrrrrked</span>'
     //     );
-    // transformModules.tap(addTransform => {
-    //     MainComponent.flush().forEach(addTransform);
-    //     Paginator.flush().forEach(addTransform);
-    // });
+
+    targets
+        .of('@magento/venia-ui')
+        .buttonActions.tap(t => [...t, '<Button> Add to List 1 </Button>']);
+
+    transformModules.tap(addTransform => {
+        // MainComponent.flush().forEach(addTransform);
+        // Paginator.flush().forEach(addTransform);
+        // ProductDetail.flush().forEach(addTransform);
+    });
 }
 
 module.exports = localIntercept;

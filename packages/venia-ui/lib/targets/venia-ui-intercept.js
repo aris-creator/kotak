@@ -104,4 +104,25 @@ module.exports = targets => {
             path: '../AccountInformationPage'
         }
     ]);
+
+    const { transformModules } = targets.of('@magento/pwa-buildpack');
+    const { Targetables } = require('@magento/pwa-buildpack');
+    const targetables = Targetables.using(targets);
+
+    const ProductDetail = targetables.reactComponent(
+        '@magento/venia-ui/lib/components/ProductFullDetail/productFullDetail.js'
+    );
+    ProductDetail.prependJSX(
+        'section data-targetable-id="actions"',
+        '<Button> Add to List </Button>'
+    );
+
+    transformModules.tap(async addTransform => {
+        const list = await targets.own.buttonActions.promise([]);
+        list.forEach(t =>
+            ProductDetail.prependJSX('section data-targetable-id="actions"', t)
+        );
+
+        ProductDetail.flush().forEach(addTransform);
+    });
 };
