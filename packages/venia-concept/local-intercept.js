@@ -1,22 +1,23 @@
-/* eslint-disable */
-/**
- * Custom interceptors for the project.
- *
- * This project has a section in its package.json:
- *    "pwa-studio": {
- *        "targets": {
- *            "intercept": "./local-intercept.js"
- *        }
- *    }
- *
- * This instructs Buildpack to invoke this file during the intercept phase,
- * as the very last intercept to run.
- *
- * A project can intercept targets from any of its dependencies. In a project
- * with many customizations, this function would tap those targets and add
- * or modify functionality from its dependencies.
- */
+function localIntercept(targets) {
+    const { Targetables } = require("@magento/pwa-buildpack")
+    const targetables = Targetables.using(targets)
 
-function localIntercept() {}
+    // target a component
+    const main = targetables.reactComponent(
+        "@magento/venia-ui/lib/components/Main/main.js"
+    )
+
+    // add imports to it
+    const Demo = main.addImport(
+        "Demo from '@magento/venia-concept/src/components/Demo'"
+    )
+
+    // remove its existing children, then add new ones
+    main
+        .removeJSX("Header")
+        .removeJSX("Footer")
+        .removeJSX("div className={pageClass}")
+        .prependJSX("main", `<${Demo} />`)
+}
 
 module.exports = localIntercept;

@@ -1,0 +1,41 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@import :global("./foo.css");
+
+.menu {
+    align-items: center;
+    display: grid;
+    grid-auto-flow: column;
+    gap: 2rem;
+    height: 3rem;
+    justify-content: center;
+    width: 100%;
+}
+
+.placeholder {
+    animation-direction: alternate;
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+    animation-name: fadeIn;
+    animation-play-state: running;
+    animation-timing-function: linear;
+    background-color: blue;
+    height: 1rem;
+    width: 10ch;
+}
+
+.category {
+    align-items: center;
+    display: grid;
+    font-size: var(--venia-global-fontSize-200);
+    height: 3rem;
+    justify-items: center;
+}
