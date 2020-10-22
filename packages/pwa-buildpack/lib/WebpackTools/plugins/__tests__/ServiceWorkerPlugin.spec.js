@@ -61,7 +61,7 @@ test('.apply calls WorkboxPlugin.GenerateSW in prod', () => {
         expect.objectContaining({
             globDirectory: 'path/to/assets',
             globPatterns: expect.arrayContaining([expect.any(String)]),
-            swDest: 'sw.js'
+            swDest: 'path/to/assets/sw.js'
         })
     );
     expect(workboxApply).toHaveBeenCalledWith(fakeCompiler);
@@ -126,7 +126,7 @@ test('.apply generates and writes out a serviceworker when enableServiceWorkerDe
         expect.objectContaining({
             globDirectory: 'path/to/assets',
             globPatterns: expect.arrayContaining([expect.any(String)]),
-            swDest: 'sw.js'
+            swDest: 'path/to/assets/sw.js'
         })
     );
 });

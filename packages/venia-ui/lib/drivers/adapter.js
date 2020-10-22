@@ -91,7 +91,9 @@ const VeniaAdapter = props => {
     }
 
     let storeCodeRouteHandler = null;
-    const browserRouterProps = {};
+    const browserRouterProps = {
+        basename: __webpack_public_path__
+    };
     if (process.env.USE_STORE_CODE_IN_URL === 'true') {
         const storeCode = storage.getItem('store_view_code') || STORE_VIEW_CODE;
         browserRouterProps.basename = `/${storeCode}`;

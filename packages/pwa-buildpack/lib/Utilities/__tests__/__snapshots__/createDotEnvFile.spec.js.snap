@@ -98,6 +98,10 @@ DEV_SERVER_HOST=
 #   - Default when not set: 0
 DEV_SERVER_PORT=0
 #
+#   If the dev server should serve the PWA at a base location other than root '/', specify it here. It will be used as the Webpack \`publicPath\`, and the mount point for the PWADevServer.
+#   - Default when not set: /
+DEV_SERVER_PUBLIC_PATH=/
+#
 #   Use a service worker in developer mode (PWADevServer), which are disabled in dev mode normally to simplify cache. Good for debugging.
 #   - Default when not set: false
 DEV_SERVER_SERVICE_WORKER_ENABLED=false
@@ -117,6 +121,10 @@ STAGING_SERVER_HOST=
 #   Specify the port the staging server should bind to. If this is set, it overrides the port chosen by custom origin settings.
 #   - Default when not set: 0
 STAGING_SERVER_PORT=0
+#
+#   If the staging server should serve the PWA at a base location other than root '/', specify it here. It will be used as the Webpack \`publicPath\`, and the mount point for \`buildpack serve\`.
+#   - Default when not set: /
+STAGING_SERVER_PUBLIC_PATH=/
 #
 #   Specify the id which Buildpack will put in a comment above all generated bundle files and the index.html file
 #   - Default when not set: 

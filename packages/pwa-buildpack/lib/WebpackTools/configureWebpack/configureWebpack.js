@@ -22,6 +22,10 @@ const ModuleTransformConfig = require('../ModuleTransformConfig');
  * @typedef {Object} WebpackConfigHelper
  * @property {boolean} mode - Webpack mode derived from env:
  *   'development'|'production'|'none'
+ * @property {string} publicPath - Override the Webpack `publicPath`, the real
+ * URL path from which the app will expect to be served. Defaults to env var
+ * DEV_SERVER_PUBLIC_PATH in development mode, and STAGING_SERVER_PUBLIC_PATH
+ * in production mode.
  * @property {string} context - Root directory of project
  * @property {boolean} babelRootMode - Babel config search mode:
  *   'root'|'upward'|'upward-optional
@@ -41,8 +45,11 @@ const ModuleTransformConfig = require('../ModuleTransformConfig');
  *   transforms to individual modules.
  * @property {Object} transformRequests.babel - Map of individual ES modules to
  *   requests to transform them via Babel.
- * @property {Buildpack/BuildBus.BuildBus} bus - {@link BuildBus} for the currently running task.
- *   Will be used to call build-specific targets.
+ * @property {Buildpack/BuildBus.BuildBus} bus - {@link BuildBus} for the
+ * currently running task. Will be used to call build-specific targets.
+ * @property {string[]} vendor - List of modules to force into the "vendor"
+ * bundle that loads before entry points. Fundamental modules in the framework
+ * such as 'react'.
  */
 
 /**
@@ -136,10 +143,13 @@ async function configureWebpack(options) {
         throw projectConfig.error;
     }
 
-    const paths = {
-        src: path.resolve(context, 'src'),
-        output: path.resolve(context, 'dist')
-    };
+    const paths = Object.assign(
+        {
+            src: path.resolve(context, 'src'),
+            output: path.resolve(context, 'dist')
+        },
+        options.paths || {}
+    );
 
     const isEE = projectConfig.env.MAGENTO_BACKEND_EDITION === 'EE';
 
@@ -182,13 +192,22 @@ async function configureWebpack(options) {
         resolver,
         stats,
         transformRequests,
-        bus
+        bus,
+        vendor: options.vendor || []
     };
 
-    const clientConfig = await getClientConfig({
-        ...configHelper,
-        vendor: options.vendor || []
-    });
+    if (options.publicPath) {
+        configHelper.publicPath = options.publicPath;
+    } else {
+        const publicPathSettings = projectConfig.section(
+            mode === 'development' ? 'devServer' : 'stagingServer'
+        );
+        if (publicPathSettings && publicPathSettings.publicPath) {
+            configHelper.publicPath = publicPathSettings.publicPath;
+        }
+    }
+
+    const clientConfig = await getClientConfig(configHelper);
 
     const buildBusPlugin = new BuildBusPlugin(bus, busTrackingQueue);
     clientConfig.plugins.unshift(buildBusPlugin);

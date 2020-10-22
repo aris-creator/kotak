@@ -5,11 +5,12 @@ const { zipObject } = require('lodash');
 const isPrimitive = require('./isPrimitive');
 
 class ResolverVisitor {
-    constructor(io, rootDefinition, context, upwardPath) {
+    constructor(io, rootDefinition, context, upwardPath, publicPath) {
         this.io = io;
         this.rootDefinition = rootDefinition;
         this.context = context;
         this.upwardPath = upwardPath;
+        this.publicPath = publicPath;
         this.context.setVisitor(this);
     }
     async downward(contextNames) {

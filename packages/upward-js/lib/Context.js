@@ -86,7 +86,19 @@ class Context {
                         );
                         this.set(base, value);
                     } else {
-                        debug('%s assigned: %o', base, value[base]);
+                        const propValue = value[base];
+                        if (debug.enabled && propValue.hasOwnProperty('body')) {
+                            // don't pollute logs with huge response bodies
+                            const toLog = { ...propValue };
+                            if (
+                                toLog.body &&
+                                typeof propValue.body.length === 'number' &&
+                                propValue.body.length > 80
+                            ) {
+                                toLog.body = toLog.body.slice(0, 80);
+                            }
+                            debug('%s assigned: %o', base, toLog);
+                        }
                         this.set(base, value[base]);
                     }
                 });

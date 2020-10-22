@@ -45,6 +45,7 @@ const PWADevServer = {
             host: devServer.host || '0.0.0.0',
             port:
                 devServer.port || (await portscanner.findAPortNotInUse(10000)),
+            publicPath: webpackConfig.output.publicPath,
             stats: webpackConfig.stats || 'minimal',
             after(app, server) {
                 server.middleware.waitUntilValid(() => {

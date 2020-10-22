@@ -8,31 +8,41 @@ const UpwardDevServerPlugin = require('../UpwardDevServerPlugin');
 const mockContext = require('path').resolve(__dirname, '../../../../../../');
 
 test('creates a devServer.after function if it does not exist', () => {
-    const devServer = {};
+    const devServer = {
+        publicPath: '/test-public-path/'
+    };
     const app = {
         use: jest.fn()
     };
     new UpwardDevServerPlugin(devServer, process.env);
     expect(devServer.after).toBeInstanceOf(Function);
     devServer.after(app);
-    expect(app.use).toHaveBeenCalledWith(expect.any(Function));
+    expect(app.use).toHaveBeenCalledWith(
+        '/test-public-path/',
+        expect.any(Function)
+    );
 });
 
 test('composes with an existing devServer.after function', () => {
     const after = jest.fn();
-    const devServer = { after };
+    const devServer = { after, publicPath: '/test-public-path/' };
     const app = {
         use: jest.fn()
     };
     new UpwardDevServerPlugin(devServer, process.env);
     expect(devServer.after).not.toBe(after);
     devServer.after(app);
-    expect(app.use).toHaveBeenCalledWith(expect.any(Function));
+    expect(app.use).toHaveBeenCalledWith(
+        '/test-public-path/',
+        expect.any(Function)
+    );
     expect(after).toHaveBeenCalledWith(app);
 });
 
 test('applies to a Webpack compiler and resolves any existing devServer requests', async () => {
-    const devServer = {};
+    const devServer = {
+        publicPath: '/test-public-path/'
+    };
     const compiler = {};
     const req = {};
     const res = {};
@@ -50,11 +60,11 @@ test('applies to a Webpack compiler and resolves any existing devServer requests
 
     const hasRequestsWaiting = new UpwardDevServerPlugin(
         devServer,
-        process.env,
+        {},
         'path/to/upward'
     );
     devServer.after(app);
-    const handler = app.use.mock.calls[0][0];
+    const handler = app.use.mock.calls[0][1];
 
     handler(req, res, next);
     expect(upward.IOAdapter.default).not.toHaveBeenCalled();
@@ -66,11 +76,13 @@ test('applies to a Webpack compiler and resolves any existing devServer requests
 
     expect(upward.IOAdapter.default).toHaveBeenCalledWith('path/to/upward');
     expect(upward.middleware).toHaveBeenCalledWith(
-        'path/to/upward',
-        process.env,
         expect.objectContaining({
-            readFile: expect.any(Function),
-            networkFetch: expect.any(Function)
+            upwardPath: 'path/to/upward',
+            publicPath: '/test-public-path/',
+            io: expect.objectContaining({
+                readFile: expect.any(Function),
+                networkFetch: expect.any(Function)
+            })
         })
     );
     expect(upwardHandler).toHaveBeenCalledWith(req, res, next);
@@ -115,7 +127,7 @@ test('shares middleware promise so as not to create multiple middlewares', async
         'path/to/upward'
     );
     devServer.after(app);
-    const handler = app.use.mock.calls[0][0];
+    const handler = app.use.mock.calls[0][1];
 
     handler(req, res, next);
     handler('some', 'other', 'stuff');
@@ -155,11 +167,11 @@ test('supplies a dev-mode IOAdapter with webpack fs integration', async () => {
     const plugin = new UpwardDevServerPlugin(devServer, process.env);
     plugin.apply(compiler);
     devServer.after(app);
-    const handler = app.use.mock.calls[0][0];
+    const handler = app.use.mock.calls[0][1];
     handler();
     await plugin.middlewarePromise;
 
-    const io = upward.middleware.mock.calls[0][2];
+    const { io } = upward.middleware.mock.calls[0][0];
 
     compiler.outputFileSystem.readFileSync.mockImplementationOnce(() => {
         return 'from output file system';
@@ -230,11 +242,11 @@ test('dev-mode IOAdapter uses fetch', async () => {
     plugin.apply({});
     devServer.after(app);
 
-    const handler = app.use.mock.calls[0][0];
+    const handler = app.use.mock.calls[0][1];
     handler();
     await plugin.middlewarePromise;
 
-    const io = upward.middleware.mock.calls[0][2];
+    const { io } = upward.middleware.mock.calls[0][0];
 
     io.networkFetch('https://example.com', { method: 'POST' });
 
@@ -259,11 +271,11 @@ test('dev-mode IOAdapter can fetch unsecure URLs', async () => {
     plugin.apply({});
     devServer.after(app);
 
-    const handler = app.use.mock.calls[0][0];
+    const handler = app.use.mock.calls[0][1];
     handler();
     await plugin.middlewarePromise;
 
-    const io = upward.middleware.mock.calls[0][2];
+    const { io } = upward.middleware.mock.calls[0][0];
 
     io.networkFetch('http://example.com', { method: 'POST' });
 

@@ -65,6 +65,13 @@ class ProxyResolver extends AbstractResolver {
                 autoRewrite: true,
                 cookieDomainRewrite: ''
             };
+            const { publicPath } = this.visitor;
+            if (publicPath && publicPath !== '/') {
+                debug(`publicPath is "%s", adding pathRewrite to remove it`);
+                opts.pathRewrite = {
+                    [`^${publicPath}`]: '/'
+                };
+            }
             if (target.username) {
                 debug(`target URL contains a username, adding auth to proxy`);
                 opts.auth = [target.username, target.password].join(':');

@@ -1,6 +1,7 @@
 // If the root template supplies the backend URL at runtime, use it directly
 const htmlDataset = document.querySelector('html').dataset;
 const { imageOptimizingOrigin } = htmlDataset;
+const publicPath = __webpack_public_path__;
 // Protect against potential falsy values for `mediaBackend`.
 let mediaBackend = htmlDataset.mediaBackend;
 if (!mediaBackend) {
@@ -98,7 +99,10 @@ const makeOptimizedUrl = (path, { type, ...opts } = {}) => {
     });
     baseURL.search = params.toString();
     if (baseURL.origin === origin) {
-        return baseURL.href.slice(baseURL.origin.length);
+        const rootRelative = baseURL.href.slice(baseURL.origin.length);
+        return rootRelative.startsWith(publicPath)
+            ? rootRelative
+            : joinUrls(publicPath, rootRelative);
     }
     return baseURL.href;
 };

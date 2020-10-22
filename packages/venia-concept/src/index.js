@@ -19,7 +19,8 @@ import App, { AppContextProvider } from '@magento/venia-ui/lib/components/App';
 import { registerSW } from './registerSW';
 
 const { BrowserPersistence } = Util;
-const apiBase = new URL('/graphql', location.origin).toString();
+const appScope = new URL(__webpack_public_path__, location.origin);
+const apiBase = new URL('graphql', appScope).toString();
 
 /**
  * The Venia adapter provides basic context objects: a router, a store, a

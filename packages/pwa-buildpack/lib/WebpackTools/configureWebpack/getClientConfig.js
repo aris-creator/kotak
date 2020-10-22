@@ -30,6 +30,7 @@ function isDevServer() {
 async function getClientConfig(opts) {
     const {
         mode,
+        publicPath,
         context,
         paths,
         hasFlag,
@@ -60,7 +61,7 @@ async function getClientConfig(opts) {
         },
         output: {
             path: paths.output,
-            publicPath: '/',
+            publicPath,
             filename:
                 mode === 'production' ? '[name].[contenthash].js' : '[name].js',
             strictModuleExceptionHandling: true,

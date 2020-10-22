@@ -5,11 +5,11 @@ const IOAdapter = require('./IOAdapter');
 const buildResponse = require('./buildResponse');
 
 class UpwardMiddleware {
-    constructor(upwardPath, env, io) {
+    constructor({ upwardPath, env, io, publicPath }) {
         this.env = env;
         this.upwardPath = upwardPath;
-        debug(`created for path ${upwardPath}`);
-        this.io = io;
+        this.io = io || IOAdapter.default(upwardPath);
+        this.publicPath = publicPath || '/';
     }
     async load() {
         const { upwardPath } = this;
@@ -39,7 +39,8 @@ class UpwardMiddleware {
                     this.env,
                     this.definition,
                     req,
-                    this.upwardPath
+                    this.upwardPath,
+                    this.publicPath
                 );
                 if (typeof response === 'function') {
                     debug('buildResponse returned function');
@@ -122,12 +123,11 @@ class UpwardMiddleware {
     }
 }
 
-async function upwardJSMiddlewareFactory(
-    upwardPath,
-    env,
-    io = IOAdapter.default(upwardPath)
-) {
-    const middleware = new UpwardMiddleware(upwardPath, env, io);
+async function upwardJSMiddlewareFactory(upwardPath, env, io) {
+    // backwards compatibility with old signature
+    const middlewareOpts =
+        typeof upwardPath === 'object' ? upwardPath : { upwardPath, env, io };
+    const middleware = new UpwardMiddleware(middlewareOpts);
     await middleware.load();
     return middleware.getHandler();
 }

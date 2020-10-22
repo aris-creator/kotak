@@ -71,12 +71,7 @@ class ContextPath {
                 break;
             }
         }
-        debug(
-            'traverse %j yielded %j from %j',
-            this._segments,
-            current,
-            obj[this.base()]
-        );
+        debug('traverse %j yielded %j', this._segments, current);
         return current;
     }
     // contains(otherPath) {

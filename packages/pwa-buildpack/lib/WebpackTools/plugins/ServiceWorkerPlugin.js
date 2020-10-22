@@ -1,4 +1,5 @@
 const WorkboxPlugin = require('workbox-webpack-plugin');
+const path = require('path');
 const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 
 const optionsValidator = require('../../util/options-validator');
@@ -27,7 +28,7 @@ class ServiceWorkerPlugin {
             // activate the worker as soon as it reaches the waiting phase
             skipWaiting: true,
             // the max scope of a worker is its location
-            swDest: SW_FILENAME
+            swDest: path.join(this.config.paths.output, SW_FILENAME)
         };
 
         if (this.config.runtimeCacheConfig) {
@@ -51,8 +52,8 @@ class ServiceWorkerPlugin {
             );
         } else {
             injectManifest = new WorkboxPlugin.InjectManifest({
-                swSrc: this.config.paths.src + '/sw.js',
-                swDest: this.config.paths.dest + '/sw.js'
+                swSrc: path.join(this.config.paths.src, SW_FILENAME),
+                swDest: path.join(this.config.paths.output, SW_FILENAME)
             });
         }
         injectManifest.apply(compiler);

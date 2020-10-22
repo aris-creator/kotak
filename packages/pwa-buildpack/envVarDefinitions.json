@@ -101,6 +101,12 @@
                     "default": 0
                 },
                 {
+                    "name": "DEV_SERVER_PUBLIC_PATH",
+                    "type": "str",
+                    "desc": "If the dev server should serve the PWA at a base location other than root '/', specify it here. It will be used as the Webpack `publicPath`, and the mount point for the PWADevServer.",
+                    "default": "/"
+                },
+                {
                     "name": "DEV_SERVER_SERVICE_WORKER_ENABLED",
                     "type": "bool",
                     "desc": "Use a service worker in developer mode (PWADevServer), which are disabled in dev mode normally to simplify cache. Good for debugging.",
@@ -128,6 +134,12 @@
                     "type": "num",
                     "desc": "Specify the port the staging server should bind to. If this is set, it overrides the port chosen by custom origin settings.",
                     "default": 0
+                },
+                {
+                    "name": "STAGING_SERVER_PUBLIC_PATH",
+                    "type": "str",
+                    "desc": "If the staging server should serve the PWA at a base location other than root '/', specify it here. It will be used as the Webpack `publicPath`, and the mount point for `buildpack serve`.",
+                    "default": "/"
                 },
                 {
                     "name": "STAGING_BUILD_ID",

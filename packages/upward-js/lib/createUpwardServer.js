@@ -3,7 +3,7 @@
  * binds it according to configuration, and applies the upward-js middleware.
  */
 
-const { resolve } = require('path');
+const { join, resolve } = require('path');
 const express = require('express');
 const middleware = require('./middleware');
 const errorhandler = require('errorhandler');
@@ -25,6 +25,7 @@ const morgan = require('morgan');
  * |`host` | `string` | `0.0.0.0` | Specify the host on which to listen. `0.0.0.0` means all local IPv4 requests.
  * |`https` | `object` |  | To bind an HTTPS server instead of HTTP, pass a valid `{ key, cert }` object here.
  * |`logUrl` | `boolean` | `false` | Log the bound URL to stdout (mostly used for testing against upward-spec)
+ * |`publicPath` | `string` | `"/"` | Mount point for the UPWARD app. Used if `bindLocal` is true.
  *
  * Returns a plain object with the following properties:
  * an `app` property. This is an Express
@@ -39,6 +40,7 @@ async function createUpwardServer({
     host = '0.0.0.0',
     https,
     logUrl = false,
+    publicPath = '/',
     upwardPath,
     env = process.env,
     before = () => {}
@@ -48,7 +50,11 @@ async function createUpwardServer({
     }
     const app = express();
     before(app);
-    const upward = await middleware(resolve(upwardPath), env);
+    const upward = await middleware({
+        upwardPath: resolve(upwardPath),
+        env,
+        publicPath
+    });
     if (env.NODE_ENV === 'production') {
         app.use(morgan('combined'));
         app.use(upward);
@@ -61,18 +67,28 @@ async function createUpwardServer({
     if (bindLocal) {
         return new Promise((resolve, reject) => {
             try {
+                let rootApp = app;
+                if (publicPath && publicPath !== '/') {
+                    rootApp = express();
+                    rootApp.use(publicPath, app);
+                    rootApp.use((req, res) =>
+                        res.redirect(join(publicPath, req.url))
+                    );
+                }
                 const protocol = https ? 'https' : 'http';
                 const server = https
-                    ? require('https').createServer(https, app)
-                    : require('http').createServer(app);
+                    ? require('https').createServer(https, rootApp)
+                    : require('http').createServer(rootApp);
 
                 server.listen(port, host);
 
                 server.on('listening', () => {
                     if (logUrl) {
-                        console.log(
+                        const url = new URL(
                             `${protocol}://${host}:${server.address().port}/`
                         );
+                        url.pathname = publicPath;
+                        console.log(url.href);
                     }
                     resolve({
                         app,

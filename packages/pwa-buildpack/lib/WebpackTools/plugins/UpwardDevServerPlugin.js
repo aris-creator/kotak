@@ -18,11 +18,14 @@ class UpwardDevServerPlugin {
             env
         );
         this.upwardPath = upwardPath;
+        this.publicPath = devServer.publicPath;
         // Compose `after` function if something else has defined it.
         const oldAfter = devServer.after;
         devServer.after = (app, ...rest) => {
             if (oldAfter) oldAfter(app, ...rest);
-            app.use((req, res, next) => this.handleRequest(req, res, next));
+            app.use(devServer.publicPath, (req, res, next) =>
+                this.handleRequest(req, res, next)
+            );
         };
     }
     apply(compiler) {
@@ -124,11 +127,12 @@ class UpwardDevServerPlugin {
             }
         };
 
-        this.middleware = await upward.middleware(
-            this.upwardPath,
-            this.env,
+        this.middleware = await upward.middleware({
+            upwardPath: this.upwardPath,
+            env: this.env,
+            publicPath: this.publicPath,
             io
-        );
+        });
     }
     async getCompiler() {
         if (this.compiler) {

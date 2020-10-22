@@ -1,7 +1,7 @@
 const loadEnvironment = require('../Utilities/loadEnvironment');
 const path = require('path');
 
-module.exports = async function serve(dirname) {
+module.exports = async function serve(dirname, options = {}) {
     const config = loadEnvironment(dirname);
     if (config.error) {
         // loadEnvironment takes care of logging it
@@ -12,7 +12,7 @@ module.exports = async function serve(dirname) {
     const addImgOptMiddleware = require('./addImgOptMiddleware');
     const stagingServerSettings = config.section('stagingServer');
 
-    process.chdir(path.join(dirname, 'dist'));
+    process.chdir(path.join(dirname, options.webroot || 'dist'));
 
     const upwardServerOptions = Object.assign(
         // defaults

@@ -3,7 +3,14 @@ const { isPlainObject } = require('lodash');
 const ResolverVisitor = require('./ResolverVisitor');
 const Context = require('./Context');
 
-async function buildResponse(io, env, rootDefinition, request, upwardPath) {
+async function buildResponse(
+    io,
+    env,
+    rootDefinition,
+    request,
+    upwardPath,
+    publicPath
+) {
     debug('creating Context');
     const requestContext = Context.fromRequest(env, request);
     debug('creating ResolverVisitor');
@@ -11,7 +18,8 @@ async function buildResponse(io, env, rootDefinition, request, upwardPath) {
         io,
         rootDefinition,
         requestContext,
-        upwardPath
+        upwardPath,
+        publicPath
     );
     debug('visiting for status, headers, and body');
     try {

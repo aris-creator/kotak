@@ -6,7 +6,7 @@ import {
 export const registerSW = () => {
     if (VALID_SERVICE_WORKER_ENVIRONMENT) {
         navigator.serviceWorker
-            .register('/sw.js')
+            .register(`${__webpack_public_path__}sw.js`)
             .then(() => {
                 console.log('SW Registered');
             })
