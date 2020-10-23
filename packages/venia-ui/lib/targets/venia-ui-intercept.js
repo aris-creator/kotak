@@ -5,6 +5,12 @@ const { Targetables } = require('@magento/pwa-buildpack');
 const RichContentRendererList = require('./RichContentRendererList');
 const makeRoutesTarget = require('./makeRoutesTarget');
 
+function makeFooTarget(venia) {
+    const foo = venia.esModuleObject('@magento/venia-ui/lib/foo.js');
+
+    foo.add("import FooComponent from '@magento/venia-ui/lib/FooComponent.js'");
+}
+
 module.exports = veniaTargets => {
     const venia = Targetables.using(veniaTargets);
 
@@ -18,6 +24,7 @@ module.exports = veniaTargets => {
     );
 
     makeRoutesTarget(venia);
+    makeFooTarget(venia);
 
     const renderers = new RichContentRendererList(venia);
 

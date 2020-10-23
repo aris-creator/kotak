@@ -6,6 +6,9 @@ import { mergeClasses } from '../../classify';
 import Footer from '../Footer';
 import Header from '../Header';
 import defaultClasses from './main.css';
+import foo from '../../foo';
+
+console.log({ foo });
 
 const Main = props => {
     const { children, isMasked } = props;
