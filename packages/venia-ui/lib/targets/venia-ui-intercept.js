@@ -5,10 +5,20 @@ const { Targetables } = require('@magento/pwa-buildpack');
 const RichContentRendererList = require('./RichContentRendererList');
 const makeRoutesTarget = require('./makeRoutesTarget');
 
-function makeFooTarget(venia) {
-    const foo = venia.esModuleObject('@magento/venia-ui/lib/foo.js');
+class PaymentMethodList {
+    constructor(venia) {
+        const registry = this;
+        this._methods = venia.esModuleObject({
+            module: '@magento/venia-ui/lib/foo.js',
+            publish(targets) {
+                targets.foo.call(registry);
+            }
+        });
+    }
 
-    foo.add("import FooComponent from '@magento/venia-ui/lib/FooComponent.js'");
+    add({ componentName, importPath }) {
+        this._methods.add(`import ${componentName} from '${importPath}'`);
+    }
 }
 
 module.exports = veniaTargets => {
@@ -24,12 +34,18 @@ module.exports = veniaTargets => {
     );
 
     makeRoutesTarget(venia);
-    makeFooTarget(venia);
 
     const renderers = new RichContentRendererList(venia);
 
     renderers.add({
         componentName: 'PlainHtmlRenderer',
         importPath: './plainHtmlRenderer'
+    });
+
+    const methods = new PaymentMethodList(venia);
+
+    methods.add({
+        componentName: 'FooComponent',
+        importPath: '@magento/venia-ui/lib/FooComponent.js'
     });
 };
