@@ -43,5 +43,9 @@ const styles = {
         borderColor: 'rgb(var(--venia-global-color-gray-600))',
         borderRadius: 6,
         borderWidth: 2
+    }),
+    menu: base => ({
+        ...base,
+        zIndex: 5
     })
 };
