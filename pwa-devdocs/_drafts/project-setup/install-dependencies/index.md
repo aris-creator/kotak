@@ -80,7 +80,7 @@ Now that you have your project dependencies installed, your `package.json` file 
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "dotenv": "^5.0.1",
-    "webpack": "^3.11.0",
+    "webpack": "^5.6.0",
     "webpack-dev-server": "^2.11.0"
   }
 }

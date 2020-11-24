@@ -18,7 +18,7 @@ const LocalizationPlugin = require('../plugins/LocalizationPlugin');
 const VirtualModulesPlugin = require('webpack-virtual-modules');
 
 function isDevServer() {
-    return process.argv.find(v => v.includes('webpack-dev-server'));
+    return process.argv.find(v => v.includes('webpack serve'));
 }
 
 /**

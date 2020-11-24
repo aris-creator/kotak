@@ -54,7 +54,7 @@ Edit the `packages.json` file so it looks like the following:
     "apollo-client": "2.6.4",
     "graphql-tag": "~2.10.1",
     "react": "~16.9.0",
-    "webpack": "~4.38.0"
+    "webpack": "~5.6.0"
   },
 }
 ```
@@ -72,7 +72,7 @@ Set the value for `pwa-studio.targets.intercept` in your project's `package.json
 
 ```diff
     "react": "~16.9.0",
-    "webpack": "~4.38.0"
+    "webpack": "~5.6.0"
   },
 + "pwa-studio": {
 +   "targets": {
@@ -272,4 +272,4 @@ To test the new props data the wrapped talon returns, you will need to create a 
 
 [`npm init`]: https://docs.npmjs.com/cli/init
 [`yarn init`]: https://classic.yarnpkg.com/en/docs/cli/init/
-[plugins (interceptors)]: https://devdocs.magento.com/guides/v2.4/extension-dev-guide/plugins.html 
+[plugins (interceptors)]: https://devdocs.magento.com/guides/v2.4/extension-dev-guide/plugins.html

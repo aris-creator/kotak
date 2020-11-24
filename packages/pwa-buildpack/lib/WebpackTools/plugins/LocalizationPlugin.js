@@ -2,6 +2,7 @@ const debug = require('../../util/debug').makeFileLogger(__filename);
 const path = require('path');
 const walk = require('../../util/klaw-bound-fs');
 const merge = require('merge');
+const { Compilation } = require("webpack")
 const InjectPlugin = require('webpack-inject-plugin').default;
 
 const i18nDir = 'i18n';
@@ -106,11 +107,14 @@ class LocalizationPlugin {
             }
         }`;
 
-        hooks.afterCompile.tap('LocalizationPlugin', compilation => {
+        hooks.processAssets.tap({
+            name: 'LocalizationPlugin',
+            stage: Compilation.PROCESS_ASSETS_STAGE_ADDITIONAL
+        }, assets => {
             // Add global file dependencies for all the found translation files
             Object.values(locales).forEach(localePaths => {
                 localePaths.forEach(localePath => {
-                    compilation.fileDependencies.add(localePath);
+                    assets.fileDependencies.add(localePath);
                 });
             });
         });
