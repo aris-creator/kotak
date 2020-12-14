@@ -14,6 +14,7 @@ import { Util } from '@magento/peregrine';
 import { Adapter } from '@magento/venia-drivers';
 import store from './store';
 import app from '@magento/peregrine/lib/store/actions/app';
+import { signOut } from '@magento/peregrine/lib/store/actions/user';
 import App, { AppContextProvider } from '@magento/venia-ui/lib/components/App';
 
 import { registerSW } from './registerSW';
@@ -69,6 +70,13 @@ const errorLink = onError(({ graphQLErrors, networkError, response }) => {
 
                 // Set the error to null to be cleaned up later
                 response.errors[index] = null;
+            }
+
+            if (message.includes("The current customer isn't authorized")) {
+                store.dispatch(signOut()).then(() => {
+                    // refresh the page, important for checkout
+                    history.go(0);
+                });
             }
         });
 
